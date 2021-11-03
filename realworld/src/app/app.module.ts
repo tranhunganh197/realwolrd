@@ -20,6 +20,8 @@ import { FeedYourComponent } from './feed/feed-your/feed-your.component';
 import { MyFavoriteComponent } from './profile/my-favorite/my-favorite.component';
 import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 import { MyArticleComponent } from './profile/my-article/my-article.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { MyArticleComponent } from './profile/my-article/my-article.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
