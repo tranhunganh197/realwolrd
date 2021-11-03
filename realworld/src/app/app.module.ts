@@ -22,7 +22,10 @@ import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 import { MyArticleComponent } from './profile/my-article/my-article.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,16 +46,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NotfoundComponent,
     FeedGlobalComponent,
     FeedTagsComponent,
-    FeedYourComponent
-
+    FeedYourComponent,
   ],
   imports: [
+    RouterModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
+    MatIconModule,
     NgbModule,
-    BrowserAnimationsModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
