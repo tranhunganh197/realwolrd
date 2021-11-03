@@ -13,9 +13,12 @@ import { FeedTagsComponent } from './feed/feed-tags/feed-tags.component';
 import { ArticleDetailComponent } from './article/article-detail/article-detail.component';
 import { ArticleEditComponent } from './article/article-edit/article-edit.component';
 import { ArticleNewComponent } from './article/article-new/article-new.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/home', pathMatch: 'full'},
+  { path: '**', redirectTo: '/notfound' },
+  {path:'/notfound', component:NotfoundComponent},
   {path:'/home', component: HomeComponent,
     children: [
       {path: 'your-feed', component: FeedYourComponent},

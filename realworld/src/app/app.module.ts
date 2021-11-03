@@ -22,6 +22,7 @@ import { MyFavoriteComponent } from './profile/my-favorite/my-favorite.component
 import { FeedYourComponent } from './feed/feed-your/feed-your.component';
 import { FeedGlobalComponent } from './feed/feed-global/feed-global.component';
 import { FeedTagsComponent } from './feed/feed-tags/feed-tags.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { FeedTagsComponent } from './feed/feed-tags/feed-tags.component';
     MyFavoriteComponent,
     FeedYourComponent,
     FeedGlobalComponent,
-    FeedTagsComponent
+    FeedTagsComponent,
+    NotfoundComponent
   ],
   imports: [
     BrowserModule,
