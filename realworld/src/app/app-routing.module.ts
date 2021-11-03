@@ -22,7 +22,7 @@ const routes: Routes = [
       {path: 'global-feed', component: FeedGlobalComponent},
     ]
   },
-  {path:'/tags', component: FeedTagsComponent},
+  {path:'/home/tags', component: FeedTagsComponent},
   {path:'/signin', component: SigninComponent},
   {path:'/signup', component: SignupComponent},
   {path:'/settings', component: SettingsComponent},
