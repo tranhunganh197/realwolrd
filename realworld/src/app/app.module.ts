@@ -23,6 +23,7 @@ import { FeedYourComponent } from './feed/feed-your/feed-your.component';
 import { FeedGlobalComponent } from './feed/feed-global/feed-global.component';
 import { FeedTagsComponent } from './feed/feed-tags/feed-tags.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { FeedComponent } from './services/feed/feed.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
     FeedYourComponent,
     FeedGlobalComponent,
     FeedTagsComponent,
-    NotfoundComponent
+    NotfoundComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,
