@@ -21,6 +21,12 @@ import { MyFavoriteComponent } from './profile/my-favorite/my-favorite.component
 import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 import { MyArticleComponent } from './profile/my-article/my-article.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,15 +48,21 @@ import { HttpClientModule } from '@angular/common/http';
     NotfoundComponent,
     FeedGlobalComponent,
     FeedTagsComponent,
-    FeedYourComponent
-
+    FeedYourComponent,
   ],
   imports: [
+    RouterModule,
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule,
+    NgbModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
