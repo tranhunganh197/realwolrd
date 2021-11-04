@@ -19,4 +19,16 @@ export class ArticleService {
       this.dataActicles.next(data);
     })
   }
+
+  getMyArticles(username:string) {
+    return this.http.get(`http://localhost:3000/api/articles/?author=${username}`)
+  }
+
+  getFavoriteArticles(username:string) {
+    return this.http.get(`http://localhost:3000/api/articles/?favorited=${username}`)
+  }
+
+  getTagsArticles(tagname:string) {
+    return this.http.get(`http://localhost3000/api/articles/?tag=${tagname}`)
+  }
 }

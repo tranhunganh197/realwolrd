@@ -18,11 +18,15 @@ export class UserService {
     this.http.post('http://localhost:3000/api/users',user)
   }
 
+  setUser(user:any) {
+    this.user = user;
+  }
+
   signin(user:any) {
     this.http.post('http://localhost:3000/api/users/login',user).subscribe(data => {
       this.setUser(data);
       this.userData.next(this.user?.user);
-      localStorage.setItem("token",this.user.user.token)
+      localStorage.setItem("token",this.user?.user?.token);
     })
   }
 
@@ -46,7 +50,7 @@ export class UserService {
     return this.http.get('http://localhost:3000/api/user',httpOptions);
   } 
 
-  setUser(user:any) {
-    this.user = user;
+  getProfile(username:string) {
+    return this.http.get(`http://localhost:3000/api/profiles/${username}`)
   }
 }
