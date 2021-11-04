@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticleService } from 'src/app/services/article.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-my-favorite',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyFavoriteComponent implements OnInit {
 
-  constructor() { }
+  dataFavorite:any;
+
+  constructor(
+    private articleService:ArticleService,
+    private userService:UserService
+  ) { }
 
   ngOnInit(): void {
+    this.articleService.getFavoriteArticles('username').subscribe(data => {
+      this.dataFavorite = data;
+    })
   }
 
 }
