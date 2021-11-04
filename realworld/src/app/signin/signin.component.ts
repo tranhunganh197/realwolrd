@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -7,18 +10,19 @@ import { NgForm } from '@angular/forms';
 })
 export class SigninComponent implements OnInit {
   public name!: string;
+  public email!: string;
+  public user: any;
   public password!: string;
 
-  constructor() {}
+  constructor(private http: HttpClient, private userService: UserService, private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   handleLogin(ngForm: NgForm): void {
-    console.log(ngForm);
-    if (ngForm.form.status == 'INVALID') {
-      return;
-    } else {
-      alert('Login successfully!');
-    }
-  }
+    console.log(ngForm.value?.username);
+    console.log(ngForm.value?.password);
+    this.userService.signin({ user: { email: ngForm.value?.username, password: ngForm.value?.password } });
+  };
+
+
 }
