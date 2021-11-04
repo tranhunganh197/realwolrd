@@ -20,6 +20,7 @@ import { FeedYourComponent } from './feed/feed-your/feed-your.component';
 import { MyFavoriteComponent } from './profile/my-favorite/my-favorite.component';
 import { MyProfileComponent } from './profile/my-profile/my-profile.component';
 import { MyArticleComponent } from './profile/my-article/my-article.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MyArticleComponent } from './profile/my-article/my-article.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

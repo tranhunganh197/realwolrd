@@ -17,7 +17,6 @@ import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
   {path: '', redirectTo:'/home', pathMatch: 'full'},
-  { path: '**', redirectTo: '/notfound' },
   {path:'notfound', component:NotfoundComponent},
   {path:'home', component: HomeComponent,
     children: [
