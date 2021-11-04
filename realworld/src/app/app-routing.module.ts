@@ -16,36 +16,32 @@ import { ArticleNewComponent } from './article/article-new/article-new.component
 import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'notfound', component: NotfoundComponent },
-  {
-    path: 'home',
-    component: HomeComponent,
+  {path: '', redirectTo:'/home', pathMatch: 'full'},
+  // { path: '**', redirectTo: '/notfound' },
+  {path:'notfound', component:NotfoundComponent},
+  {path:'home', component: HomeComponent,
     children: [
-      { path: 'your-feed', component: FeedYourComponent },
-      { path: 'global-feed', component: FeedGlobalComponent },
-    ],
+      {path: 'your-feed', component: FeedYourComponent},
+      {path: 'global-feed', component: FeedGlobalComponent},
+    ]
   },
-  { path: 'home/tags', component: FeedTagsComponent },
-  { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'settings', component: SettingsComponent },
-  {
-    path: 'profiles/:id',
-    component: MyProfileComponent,
+  {path:'settings', component: SettingsComponent},
+  {path:'tags', component: FeedTagsComponent},
+  {path:'signin', component: SigninComponent},
+  {path:'signup', component: SignupComponent},
+  {path:'profiles/:id', component: MyProfileComponent,
     children: [
-      { path: 'my-article', component: MyArticleComponent },
-      { path: 'my-favorite', component: MyFavoriteComponent },
-    ],
+      {path:'my-article', component: MyArticleComponent},
+      {path:'my-favorite', component: MyFavoriteComponent},
+    ]
   },
-  { path: 'article/detail/:id', component: ArticleDetailComponent },
-  { path: 'article/edit/:id', component: ArticleEditComponent },
-  { path: 'article/new/:id', component: ArticleNewComponent },
-  { path: '**', redirectTo: '/notfound' },
+  {path:'article/detail/:id', component:ArticleDetailComponent},
+  {path:'article/edit/:id', component:ArticleEditComponent},
+  {path:'article/new/:id', component:ArticleNewComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

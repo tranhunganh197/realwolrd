@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject } from 'rxjs';
 
@@ -10,10 +10,9 @@ export class UserService {
   constructor(private http:HttpClient ) { }
 
   user:any;
-  userData:any = new ReplaySubject();
+  token:any;
+  userData:any = new ReplaySubject(1);
   currentUser : Observable<any> = this.userData.asObservable();
-  tokenData:any = new ReplaySubject();
-  currentToken : Observable<any> = this.tokenData.asObservable();
 
   signup(user:any) {
     this.http.post('http://localhost:3000/api/users',user)
@@ -23,13 +22,29 @@ export class UserService {
     this.http.post('http://localhost:3000/api/users/login',user).subscribe(data => {
       this.setUser(data);
       this.userData.next(this.user?.user);
-      this.tokenData.next(this.user?.user?.token);
+      localStorage.setItem("token",this.user.user.token)
     })
   }
 
   settingsUser(user:any) {
-    this.http.post('http://localhost:3000/api/users',user);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      })
+    };
+    return this.http.put('http://localhost:3000/api/user',user,httpOptions)
   }
+
+  getUser() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      })
+    };
+    return this.http.get('http://localhost:3000/api/user',httpOptions);
+  } 
 
   setUser(user:any) {
     this.user = user;
