@@ -27,6 +27,10 @@ export class UserService {
     })
   }
 
+  settingsUser(user:any) {
+    this.http.post('http://localhost:3000/api/users',user);
+  }
+
   setUser(user:any) {
     this.user = user;
   }
