@@ -20,4 +20,8 @@ export class ArticleNewComponent implements OnInit {
       }
     })
   }
+
+  createArticle() {
+    
+  }
 }
