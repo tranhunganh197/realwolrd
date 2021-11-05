@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< HEAD
 import { NgForm } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+=======
+import { ArticleService } from 'src/app/services/article.service';
+>>>>>>> 69cadf1b6666f8dfd32c26c66e434ccf8aa4b3bf
 
 @Component({
   selector: 'app-article-new',
@@ -14,6 +18,7 @@ export class ArticleNewComponent implements OnInit {
   about!: any;
   tags!: any;
 
+<<<<<<< HEAD
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -48,4 +53,22 @@ export class ArticleNewComponent implements OnInit {
     }
   }
   ngOnInit(): void {}
+=======
+  constructor(private articleService:ArticleService) { }
+
+  ngOnInit(): void {
+    this.articleService.createArticle({
+      article: {
+      title: "How to train your dragon",
+      description: "Ever wonder how?",
+      body: "You have to believe",
+      tagList: ["reactjs", "angular", "dragons"]
+      }
+    })
+  }
+
+  createArticle() {
+    
+  }
+>>>>>>> 69cadf1b6666f8dfd32c26c66e434ccf8aa4b3bf
 }

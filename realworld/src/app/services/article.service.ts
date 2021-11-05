@@ -30,7 +30,7 @@ export class ArticleService {
   }
 
   getTagsArticles(tagname:string) {
-    return this.http.get(`http://localhost3000/api/articles/?tag=${tagname}`)
+    return this.http.get(`http://localhost:3000/api/articles/?tag=${tagname}`)
   }
 
   createArticle(article:any) {
@@ -40,14 +40,14 @@ export class ArticleService {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    this.http.post('http://localhost3000/api/articles',article,httpOptions).subscribe(data => {
+    this.http.post('http://localhost:3000/api/articles',article,httpOptions).subscribe(data => {
       console.log(data);
       this.article = data;
     })
   }
 
   getArticle(id:any) {
-    return this.http.get(`http://localhost3000/api/articles/${id}`)
+    return this.http.get(`http://localhost:3000/api/articles/${id}`)
   }
 
   editArticle(id:any,article:any) {
@@ -57,7 +57,7 @@ export class ArticleService {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    this.http.put(`http://localhost3000/api/articles/${id}`,article,httpOptions).subscribe(data => {
+    this.http.put(`http://localhost:3000/api/articles/${id}`,article,httpOptions).subscribe(data => {
       console.log(data);
     })
   }
@@ -69,6 +69,6 @@ export class ArticleService {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    this.http.delete(`http://localhost3000/api/articles/${id}`,httpOptions)
+    this.http.delete(`http://localhost:3000/api/articles/${id}`,httpOptions)
   }
 }
