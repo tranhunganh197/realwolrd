@@ -13,15 +13,25 @@ export class SigninComponent implements OnInit {
   public email!: string;
   public user: any;
   public password!: string;
+  public err!: string;
 
   constructor(private http: HttpClient, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void { }
 
   handleLogin(ngForm: NgForm): void {
-    console.log(ngForm.value?.username);
-    console.log(ngForm.value?.password);
+
     this.userService.signin({ user: { email: ngForm.value?.username, password: ngForm.value?.password } });
+    this.userService.currentUser.subscribe(data => {
+      if (data !== 'undefined') {
+        localStorage.setItem("token", data?.token);
+        this.router.navigate(["/home"])
+      } else {
+        this.err = 'email or password is invalid';
+
+      }
+
+    })
   };
 
 
