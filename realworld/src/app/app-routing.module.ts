@@ -37,7 +37,7 @@ const routes: Routes = [
   },
   {path:'article/detail/:id', component:ArticleDetailComponent},
   {path:'article/edit/:id', component:ArticleEditComponent},
-  {path:'article/new/:id', component:ArticleNewComponent},
+  {path:'article/new', component:ArticleNewComponent},
 ];
 
 @NgModule({
