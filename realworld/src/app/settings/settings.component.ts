@@ -17,7 +17,9 @@ export class SettingsComponent implements OnInit {
   constructor(private userService:UserService) { }
 
   ngOnInit(): void {
-    
+    this.userService.getProfile().subscribe(data => {
+      console.log(data);
+    })
   }
 
   handleUpdate(ngForm: NgForm) {
@@ -33,8 +35,5 @@ export class SettingsComponent implements OnInit {
   }
 
   getUser() {
-    this.userService.getUser().subscribe(data => {
-      console.log(data);
-    })
   }
 }

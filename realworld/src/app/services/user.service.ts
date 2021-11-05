@@ -15,7 +15,7 @@ export class UserService {
   currentUser: Observable<any> = this.userData.asObservable();
 
   signup(user: any) {
-    this.http.post('http://localhost:3000/api/users', user)
+    this.http.post('http://localhost:3000/api/users',user)
   }
 
   setUser(user: any) {
@@ -24,6 +24,7 @@ export class UserService {
 
   signin(user: any) {
     this.http.post('http://localhost:3000/api/users/login', user).subscribe(data => {
+      console.log(data);
       this.setUser(data);
       this.userData.next(this.user?.user);
       localStorage.setItem("token", this.user?.user?.token);
@@ -50,7 +51,8 @@ export class UserService {
     return this.http.get('http://localhost:3000/api/user', httpOptions);
   }
 
-  getProfile(username: string) {
-    return this.http.get(`http://localhost:3000/api/profiles/${username}`)
+  getProfile() {
+    console.log(this.user?.user?.name);
+    return this.http.get(`http://localhost:3000/api/profiles/${this.user?.user?.name}`)
   }
 }
