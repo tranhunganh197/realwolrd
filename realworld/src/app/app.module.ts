@@ -27,6 +27,8 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { HttpClientModule } from '@angular/common/http';
     FeedGlobalComponent,
     FeedTagsComponent,
     FeedYourComponent,
+    SafePipe,
   ],
   imports: [
     RouterModule,
@@ -58,6 +61,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     NgbModule,
     FormsModule,
+    AngularEditorModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
