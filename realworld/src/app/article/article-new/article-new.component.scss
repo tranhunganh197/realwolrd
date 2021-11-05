@@ -6,6 +6,7 @@
     padding-top: 50px;
     flex-direction: column;
     background-color: #fff;
+    animation: showForm 1s ease-in-out;
     h3 {
         padding: 50px 0 20px 0;
         font-weight: 500;
@@ -41,5 +42,16 @@
                 width: 100%;
             }
         }
+    }
+}
+
+@keyframes showForm {
+    from {
+        transform: translateY(-300%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0%);
+        opacity: 1;
     }
 }
