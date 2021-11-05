@@ -16,7 +16,9 @@ export class SignupComponent implements OnInit {
   public err!:string;
   constructor(private http: HttpClient, private userService: UserService, private router: Router) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    localStorage.removeItem('token');
+   }
 
   handleSignup(ngForm: NgForm): void {
     this.userService.signup({ user: { 
@@ -30,6 +32,7 @@ export class SignupComponent implements OnInit {
         this.err = 'email or password is invalid';
         return;
       } else {
+        localStorage.setItem('token',data?.token);
         this.router.navigateByUrl('/');
       }
     })
