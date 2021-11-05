@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
   selector: 'app-article-new',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArticleNewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private articleService:ArticleService) { }
 
   ngOnInit(): void {
+    this.articleService.createArticle({
+      article: {
+      title: "How to train your dragon",
+      description: "Ever wonder how?",
+      body: "You have to believe",
+      tagList: ["reactjs", "angular", "dragons"]
+      }
+    })
   }
-
 }
