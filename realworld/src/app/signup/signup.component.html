@@ -3,32 +3,69 @@
     <h2>SIGNUP</h2>
     <form #signupForm="ngForm" (ngSubmit)="handleSignup(signupForm)">
       <div class="form-group item-input">
-        <input type="text" name="username" [(ngModel)]="username" #nameControl="ngModel" class="form-control"
-          id="username" autofocus autocomplete="false" placeholder="Enter username..." required />
+        <input
+          type="text"
+          name="username"
+          [(ngModel)]="username"
+          #nameControl="ngModel"
+          class="form-control"
+          id="username"
+          autocomplete="false"
+          placeholder="Enter username..."
+          required
+        />
       </div>
-      <div *ngIf="
+      <div
+        *ngIf="
           signupForm.submitted || (nameControl.invalid && nameControl.touched)
-        " class="notice_err">
+        "
+        class="notice_err"
+      >
         <p *ngIf="nameControl.hasError('required')">Name is required.</p>
       </div>
       <div class="form-group">
-        <input type="email" name="email" [(ngModel)]="email" #emailControl="ngModel" class="form-control" id="email"
-          autofocus pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" autocomplete="false" placeholder="Enter email..."
-          required />
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="email"
+          #emailControl="ngModel"
+          class="form-control"
+          id="email"
+          autofocus
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          autocomplete="false"
+          placeholder="Enter email..."
+          required
+        />
       </div>
-      <div *ngIf="
+      <div
+        *ngIf="
           signupForm.submitted || (emailControl.invalid && emailControl.touched)
-        " class="notice_err">
+        "
+        class="notice_err"
+      >
         <p *ngIf="emailControl.hasError('required')">Email is required.</p>
         <p *ngIf="emailControl.errors?.pattern">This is not a valid Email!!!</p>
       </div>
       <div class="form-group item-input">
-        <input type="password" name="password" [(ngModel)]="password" #passControl="ngModel" class="form-control"
-          id="password" autocomplete="false" placeholder="Password..." required />
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="password"
+          #passControl="ngModel"
+          class="form-control"
+          id="password"
+          autocomplete="false"
+          placeholder="Password..."
+          required
+        />
       </div>
-      <div *ngIf="
+      <div
+        *ngIf="
           signupForm.submitted || (passControl.invalid && passControl.touched)
-        " class="notice_err">
+        "
+        class="notice_err"
+      >
         <p *ngIf="passControl.hasError('required')">Password is required.</p>
       </div>
       <button type="submit" class="btn btn-info" [disabled]="!signupForm.valid">

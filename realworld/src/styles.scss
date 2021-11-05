@@ -14,7 +14,9 @@ html {
     font-family: "Poppins", sans-serif;
     background-color: rgb(255, 255, 255);
 }
-
+body {
+    scroll-behavior: smooth;
+}
 ::-webkit-scrollbar-track {
     background-color: #f5f5f5;
 }

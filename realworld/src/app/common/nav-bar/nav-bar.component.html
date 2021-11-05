@@ -4,13 +4,22 @@
     <div class="container-logined" *ngIf="isLogin">
       <ul>
         <li class="nav-item">
-          <a class="nav-link selected">
+          <a
+            class="nav-link"
+            routerLink="/article/new"
+            routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <mat-icon class="nav-icon">drive_file_rename_outline</mat-icon>New
             Article</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link"
+          <a
+            class="nav-link"
+            routerLink="/settings"
+            routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }"
             ><mat-icon class="nav-icon">settings</mat-icon>Settings</a
           >
         </li>
@@ -37,6 +46,64 @@
           >
         </li>
         <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="signup"
+            routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Register</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="menu-tab">
+    <mat-icon>reorder</mat-icon>
+  </div>
+  <div class="hide-tabs" *ngIf="hideTabs">
+    <div class="logined" *ngIf="isLogin">
+      <ul>
+        <li class="nav-item">
+          <a class="nav-link user"
+            ><mat-icon class="nav-icon">person</mat-icon
+            ><span>TungTran</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link add"
+            routerLink="/article/new"
+            routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <mat-icon class="nav-icon">drive_file_rename_outline</mat-icon
+            ><span>New Article</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link setting"
+            routerLink="/settings"
+            routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }"
+            ><mat-icon class="nav-icon">settings</mat-icon
+            ><span>Settings</span></a
+          >
+        </li>
+      </ul>
+    </div>
+    <div class="notlogined" *ngIf="!isLogin">
+      <ul>
+        <li class="nav-item">
+          <a
+            class="nav-link login"
+            routerLink="signin"
+            routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Login</a
+          >
+        </li>
+        <li class="nav-item regis">
           <a
             class="nav-link"
             routerLink="signup"

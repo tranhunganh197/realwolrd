@@ -1,4 +1,9 @@
 <div class="container-fluid container-login">
+  <div class="video">
+    <video autoplay loop id="myVideo">
+      <source src="" type="video/mp4" />
+    </video>
+  </div>
   <div class="wrapper-login">
     <h2>LOGIN</h2>
     <form #loginForm="ngForm" (ngSubmit)="handleLogin(loginForm)">
@@ -11,7 +16,6 @@
           #nameControl="ngModel"
           class="form-control"
           id="username"
-          autofocus
           autocomplete="false"
           placeholder="Enter email"
           required

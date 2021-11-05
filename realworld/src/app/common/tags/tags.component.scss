@@ -1,5 +1,5 @@
 .container-tags {
-    width: 235px;
+    width: 185px;
     border-radius: 4px;
     height: 250px;
     background-color: #fff;
@@ -11,11 +11,11 @@
         font-weight: 500;
         height: 30px;
         line-height: 50px;
-        padding-left: 20px;
+        padding-left: 10px;
     }
 }
 .list-tag {
-    padding-left: 20px;
+    padding-left: 10px;
     ul {
         list-style: none;
         height: 195px;
@@ -23,7 +23,7 @@
     }
     li {
         p {
-            width: 200px;
+            width: 160px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;

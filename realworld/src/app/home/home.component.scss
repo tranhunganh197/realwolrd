@@ -8,6 +8,11 @@
     align-items: center;
     flex-direction: column;
 }
+.icon-like.active {
+    color: red;
+    animation: aniLiked 0.3s ease-in-out;
+    animation-iteration-count: 2;
+}
 .banner {
     margin-top: 10px;
     width: 80%;
@@ -71,11 +76,11 @@
     overflow: hidden;
     position: relative;
     .avt-user {
-        width: 48px;
+        width: 44px;
         margin-left: 10px;
         border-radius: 50%;
         border: 1px solid rgba(219, 219, 219, 1);
-        height: 48px;
+        height: 45px;
         overflow: hidden;
         img {
             width: 100%;
@@ -101,6 +106,10 @@
             text-overflow: ellipsis;
             width: 140px;
             text-transform: uppercase;
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
         }
         &:last-child {
             font-size: 12px;
@@ -109,7 +118,7 @@
 }
 .btn-like {
     position: absolute;
-    top: 5px;
+    top: 10px;
     right: 10px;
     span {
         height: 30px;
@@ -122,6 +131,7 @@
     }
 }
 .body-item {
+    padding-bottom: 10px;
     p {
         width: 100%;
         padding: 5px;
@@ -131,7 +141,7 @@
     a {
         color: black;
         font-size: 12px;
-        padding: 0 0 5px 25px;
+        padding: 0 0 5px 20px;
     }
 }
 .item-feed {
@@ -157,5 +167,34 @@
     to {
         transform: translateX(0%);
         opacity: 1;
+    }
+}
+.status {
+    padding: 20px;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+@keyframes aniLiked {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.15);
+    }
+}
+@media (max-width: 1024px) {
+    .banner {
+        width: 96%;
+        height: 250px;
+        &-right {
+            display: none;
+        }
+    }
+    .container-feed {
+        width: 96%;
+        .item-feed:last-child {
+            display: none;
+        }
     }
 }
