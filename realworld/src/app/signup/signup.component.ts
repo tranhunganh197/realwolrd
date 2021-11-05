@@ -21,7 +21,11 @@ export class SignupComponent implements OnInit {
     console.log(ngForm.value);
     console.log(ngForm.value?.username);
     this.userService.signup({ user: { username: ngForm.value?.username, email: ngForm.value?.email, password: ngForm.value?.password } });
-    this.router.navigate(["/home"])
+    this.userService.currentUser.subscribe(data => {
+      if (data !== 'undefined') {
+        this.router.navigate(["/home"])
+      } else { return }
+    })
 
   }
 }
