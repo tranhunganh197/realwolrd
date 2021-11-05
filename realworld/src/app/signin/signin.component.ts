@@ -27,7 +27,7 @@ export class SigninComponent implements OnInit {
         localStorage.setItem("token", data?.token);
         this.router.navigate(["/home"])
       } else {
-        console.log("a");
+        this.err = 'email or password is invalid';
 
       }
 
