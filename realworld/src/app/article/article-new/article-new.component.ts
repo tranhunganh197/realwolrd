@@ -14,7 +14,10 @@ export class ArticleNewComponent implements OnInit {
   about!: any;
   tags!: any;
 
-  constructor(private articleService:ArticleService) { }
+  a =
+    '<font face="Arial">sadasdasksaf</font><p><font face="Arial">adsandasdsaldkla</font></p><p><font face="Arial">&#273;&#226;nspd&#225;</font></p><p><font face="Arial">dsadasldsad,sa;</font></p>';
+
+  constructor(private articleService: ArticleService) {}
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -43,23 +46,18 @@ export class ArticleNewComponent implements OnInit {
   };
 
   handleAddArticle(ngForm: NgForm) {
-    console.log(2);
     if (ngForm.submitted) {
+      this.articleService.createArticle({
+        article: {
+          title: this.title,
+          description: this.title,
+          body: this.htmlContent,
+          tagList: this.tags.split(','),
+        },
+      });
       ngForm.onReset();
     }
   }
 
-  ngOnInit(): void {
-    this.articleService.createArticle({
-      article: {
-        title: 'How to train your dragon',
-        description: 'Ever wonder how?',
-        body: 'You have to believe',
-        tagList: ['reactjs', 'angular', 'dragons'],
-      },
-    });
-  }
-  createArticle() {
-    
-  }
+  ngOnInit(): void {}
 }
