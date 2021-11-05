@@ -16,9 +16,11 @@ export class UserService {
   signup(user: any) {
     this.http
       .post('http://localhost:3000/api/users', user)
-      .subscribe((data) => {
+      .subscribe((data:any) => {
           this.setUser(data);
           this.userData.next(this.user?.user);
+      },err => {
+        return;
       });
   }
 
@@ -32,6 +34,8 @@ export class UserService {
       .subscribe((data) => {
         this.setUser(data);
         this.userData.next(this.user?.user);
+      },err => {
+        return;
       });
   }
 

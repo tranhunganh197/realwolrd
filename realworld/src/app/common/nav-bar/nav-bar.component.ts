@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,7 +12,7 @@ export class NavBarComponent implements OnInit {
   isNotAuthPage: boolean = false;
   href: any;
   // khong sua doan nay
-  hideTabs: boolean = true;
+  hideTabs: boolean = false;
   @HostListener('document:click', ['$event'])
   clickOutside(e: any) {
     if (
@@ -25,7 +26,7 @@ export class NavBarComponent implements OnInit {
   }
   ///end///
 
-  constructor(public router: Router) {
+  constructor(public router: Router, private userService: UserService) {
     this.router.events.subscribe((event) => {
       let a = this.router.url;
       if (a == '/signup' || a == '/signin') {
@@ -36,5 +37,13 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userService.currentUser.subscribe((data: any) => {
+      if (data === 422) {
+        this.isLogin = false;
+      } else {
+        this.isLogin = true;
+      }
+    });
+  }
 }
