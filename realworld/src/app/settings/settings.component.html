@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="edit-infor">
-    <form #settingForm="ngForm" (ngSubmit)="handleUpdate(settingForm)">
+    <form #settingForm="ngForm" (ngSubmit)="handleUpdate()">
       <div class="row">
         <div class="form-group col-xl-6 col-md-12">
           <label for="username">Username</label>
@@ -34,7 +34,6 @@
             #urlControl="ngModel"
             class="form-control"
             id="urlAvatar"
-            autofocus
             autocomplete="false"
             placeholder="URL Profile Picture"
           />

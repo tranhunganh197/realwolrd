@@ -15,7 +15,11 @@ export class UserService {
   currentUser: Observable<any> = this.userData.asObservable();
 
   signup(user: any) {
-    this.http.post('http://localhost:3000/api/users',user)
+    this.http.post('http://localhost:3000/api/users',user).subscribe(data => {
+      this.setUser(data);
+      this.userData.next(this.user?.user);
+      localStorage.setItem("token", this.user?.user?.token);
+    })
   }
 
   setUser(user: any) {
@@ -24,7 +28,6 @@ export class UserService {
 
   signin(user: any) {
     this.http.post('http://localhost:3000/api/users/login', user).subscribe(data => {
-      console.log(data);
       this.setUser(data);
       this.userData.next(this.user?.user);
       localStorage.setItem("token", this.user?.user?.token);
