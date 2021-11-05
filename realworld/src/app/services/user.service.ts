@@ -17,9 +17,13 @@ export class UserService {
     this.http
       .post('http://localhost:3000/api/users', user)
       .subscribe((data) => {
-        this.setUser(data);
-        this.userData.next(this.user?.user);
-        localStorage.setItem('token', this.user?.user?.token);
+        if (data) {
+          this.setUser(data);
+          this.userData.next(this.user?.user);
+          localStorage.setItem('token', this.user?.user?.token);
+        } else {
+          this.userData.next(undefined);
+        }
       });
   }
 
@@ -31,9 +35,13 @@ export class UserService {
     this.http
       .post('http://localhost:3000/api/users/login', user)
       .subscribe((data) => {
-        this.setUser(data);
-        this.userData.next(this.user?.user);
-        localStorage.setItem('token', this.user?.user?.token);
+        if (data) {
+          this.setUser(data);
+          this.userData.next(this.user?.user);
+          localStorage.setItem('token', this.user?.user?.token);
+        } else {
+          this.userData.next(undefined);
+        }
       });
   }
 
