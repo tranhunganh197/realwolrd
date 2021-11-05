@@ -1,2 +1,59 @@
-<router-outlet></router-outlet>
-<div class="container-profile"></div>
+<div class="container-profile">
+  <div class="banner">
+    <div class="avatar-user">
+      <img
+        src="https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg"
+        alt=""
+      />
+    </div>
+    <div class="user-infor">
+      <p>TranThanhTung</p>
+      <p>Đây là chỗ viết bio!</p>
+    </div>
+    <div class="setting">
+      <a routerLink="/settings"
+        ><mat-icon class="icon-set">settings</mat-icon
+        ><span>Edit Profile</span></a
+      >
+    </div>
+  </div>
+  <div class="show-article">
+    <div class="tab-article">
+      <a
+        routerLink=""
+        class="col-5"
+        routerLinkActive="selected"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >My Articles</a
+      >
+      <a
+        routerLink=""
+        class="col-5"
+        routerLinkActive="selected"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Favorited Articles</a
+      >
+    </div>
+    <div class="item-article col-12">
+      <div class="top-item">
+        <div class="avt-user">
+          <img
+            src="https://i.pinimg.com/236x/ad/c0/01/adc00172f98f2f36e2dc0efb3b9bd9ad.jpg"
+            alt=""
+          />
+        </div>
+        <div class="user-title">
+          <p>TranThanhTung</p>
+          <p>November 3, 2021</p>
+        </div>
+        <div class="btn-like">
+          <span><mat-icon class="icon-like">favorite_border</mat-icon>0</span>
+        </div>
+      </div>
+      <div class="body-item">
+        <p></p>
+        <a routerLink="">Read more...</a>
+      </div>
+    </div>
+  </div>
+</div>
