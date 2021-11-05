@@ -22,6 +22,7 @@ export class SigninComponent implements OnInit {
     console.log(ngForm.value?.username);
     console.log(ngForm.value?.password);
     this.userService.signin({ user: { email: ngForm.value?.username, password: ngForm.value?.password } });
+    this.router.navigate(["/home"])
   };
 
 
