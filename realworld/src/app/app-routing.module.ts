@@ -39,9 +39,9 @@ const routes: Routes = [
       { path: 'my-favorite', component: MyFavoriteComponent },
     ],
   },
-  {path:'article/detail/:id', component:ArticleDetailComponent},
-  {path:'article/edit/:id', component:ArticleEditComponent},
-  {path:'article/new', component:ArticleNewComponent},
+  { path: 'article/detail/:id', component: ArticleDetailComponent },
+  { path: 'article/edit/:id', component: ArticleEditComponent },
+  { path: 'article/new', component: ArticleNewComponent },
 ];
 
 @NgModule({
