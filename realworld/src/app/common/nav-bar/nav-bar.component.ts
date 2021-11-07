@@ -8,9 +8,12 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./nav-bar.component.scss'],
 })
 export class NavBarComponent implements OnInit {
-  isLogin: boolean = true;
+  isLogin: boolean = false;
   isNotAuthPage: boolean = false;
   href: any;
+  username: string = 'unknown';
+  avatar: string =
+    'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
   // khong sua doan nay
   hideTabs: boolean = false;
   @HostListener('document:click', ['$event'])
@@ -43,6 +46,7 @@ export class NavBarComponent implements OnInit {
         this.isLogin = false;
       } else {
         this.isLogin = true;
+        this.username = data.username;
       }
     });
   }

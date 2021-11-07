@@ -11,7 +11,7 @@ export class SettingsComponent implements OnInit {
   name!: string;
   email!: string;
   password!: string;
-  urlAvatar =
+  urlAvatar: string =
     'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
 
   constructor(private userService: UserService) {}

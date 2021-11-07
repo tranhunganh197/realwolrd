@@ -13,28 +13,33 @@ export class SignupComponent implements OnInit {
   public username!: string;
   public email!: string;
   public password!: string;
-  public err!:string;
-  constructor(private http: HttpClient, private userService: UserService, private router: Router) { }
+  public err!: string;
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     localStorage.removeItem('token');
-   }
+  }
 
   handleSignup(ngForm: NgForm): void {
-    this.userService.signup({ user: { 
-        username: ngForm.value?.username, 
-        email: ngForm.value?.email, 
-        password: ngForm.value?.password 
-      } 
+    this.userService.signup({
+      user: {
+        username: ngForm.value?.username,
+        email: ngForm.value?.email,
+        password: ngForm.value?.password,
+      },
     });
-    this.userService.currentUser.subscribe(data => {
+    this.userService.currentUser.subscribe((data) => {
       if (data === 422) {
-        this.err = 'email or password is invalid';
+        this.err = 'Email or password is invalid';
         return;
       } else {
-        localStorage.setItem('token',data?.token);
+        localStorage.setItem('token', data?.token);
         this.router.navigateByUrl('/');
       }
-    })
+    });
   }
 }
