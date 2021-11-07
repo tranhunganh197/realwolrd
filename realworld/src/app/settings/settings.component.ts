@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -17,12 +18,11 @@ export class SettingsComponent implements OnInit {
   data:any;
   message!:string;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,private router:Router) {}
 
   ngOnInit(): void {
     this.userService.getUser().subscribe((data) => {
       this.data = data;
-      console.log(this.data);
       this.name = this.data?.user?.username;
       this.email = this.data?.user?.email;
       this.password = this.data?.user?.password;
@@ -41,10 +41,11 @@ export class SettingsComponent implements OnInit {
       },
     }).subscribe(data => {
       if (data) {
-        this.message = "SUCCESS!"
+        this.message = "SUCCESS!";
+        this.router.navigateByUrl('/home');
+      } else {
+        this.message ="Failure";
       }
     })
   }
-
-
 }

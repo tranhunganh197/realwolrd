@@ -14,6 +14,7 @@ export class NavBarComponent implements OnInit {
   username: string = 'unknown';
   avatar: string =
     'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
+  data:any;
   // khong sua doan nay
   hideTabs: boolean = false;
   @HostListener('document:click', ['$event'])
@@ -41,19 +42,21 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.currentUser.subscribe((data: any) => {
-      if (data === 422) {
-        this.isLogin = false;
-      } else {
+    this.userService.getUser().subscribe(data => {
+      if (data) {
         this.isLogin = true;
-        this.username = data?.username;
-        this.avatar = data?.image;
+        this.data = data;
+        this.username = this.data?.user?.username;
+        this.avatar = this.data?.user?.image;
+      } else {
+        this.isLogin = false;
+        return;
       }
-    });
+    })
   }
 
   logout() {
     localStorage.clear();
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/signin');
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import { observable, Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +12,14 @@ export class UserService {
   token: any;
   userData: any = new ReplaySubject(1);
   currentUser: Observable<any> = this.userData.asObservable();
+  login:boolean=false;
 
   signup(user: any) {
     this.http
       .post('http://localhost:3000/api/users', user)
       .subscribe((data:any) => {
           this.setUser(data);
+          this.login = true;
           this.userData.next(this.user?.user);
       },err => {
         return;
@@ -33,6 +35,7 @@ export class UserService {
       .post('http://localhost:3000/api/users/login', user)
       .subscribe((data) => {
         this.setUser(data);
+        this.login = true;
         this.userData.next(this.user?.user);
       },err => {
         return;
@@ -56,7 +59,11 @@ export class UserService {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       }),
     };
-    return this.http.get('http://localhost:3000/api/user', httpOptions);
+    if (localStorage.getItem('token')) {
+      return this.http.get('http://localhost:3000/api/user', httpOptions);
+    } else {
+      return this.currentUser;
+    }
   }
 
   getProfile() {
@@ -65,3 +72,4 @@ export class UserService {
     );
   }
 }
+ 
