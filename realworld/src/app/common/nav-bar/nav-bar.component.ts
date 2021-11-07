@@ -46,7 +46,8 @@ export class NavBarComponent implements OnInit {
         this.isLogin = false;
       } else {
         this.isLogin = true;
-        this.username = data.username;
+        this.username = data?.username;
+        this.avatar = data?.image;
       }
     });
   }
