@@ -29,7 +29,6 @@ export class SigninComponent implements OnInit {
       user: { email: ngForm.value?.username, password: ngForm.value?.password },
     });
     this.userService.currentUser.subscribe((data) => {
-      console.log(data);
       if (data === 422) {
         this.err = 'Email or password is invalid';
         return;

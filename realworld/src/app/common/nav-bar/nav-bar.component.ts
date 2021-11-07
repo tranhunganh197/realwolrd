@@ -42,15 +42,16 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe(data => {
-      if (data) {
+    this.userService.tokenData.next(localStorage.getItem('token'));
+    this.userService.currentToken.subscribe(token => {
+      if (token) {
         this.isLogin = true;
-        this.data = data;
-        this.username = this.data?.user?.username;
-        this.avatar = this.data?.user?.image;
+        this.userService.getUser().subscribe(data => {
+          this.avatar = data?.user?.image;
+          this.username = data?.user?.username;
+        })
       } else {
         this.isLogin = false;
-        return;
       }
     })
   }
