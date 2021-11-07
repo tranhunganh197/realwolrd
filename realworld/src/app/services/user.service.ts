@@ -60,10 +60,8 @@ export class UserService {
   }
 
   getProfile() {
-    console.log(this.user)
-    console.log(this.user?.user?.name);
     return this.http.get(
-      `http://localhost:3000/api/profiles/` + this.user?.user?.name
+      `http://localhost:3000/api/profiles/` + this.user?.user?.username
     );
   }
 }
