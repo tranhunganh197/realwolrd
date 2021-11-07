@@ -46,4 +46,8 @@ export class NavBarComponent implements OnInit {
       }
     });
   }
+
+  logout() {
+    localStorage.removeItem('token');
+  }
 }
