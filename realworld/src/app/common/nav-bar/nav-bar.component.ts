@@ -48,6 +48,7 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     localStorage.clear();
+    this.userService.tokenData.next(localStorage.getItem('token'));
     this.router.navigateByUrl('/signin');
   }
 }
