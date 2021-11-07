@@ -29,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SafePipe } from './safe.pipe';
+import { ToastNotificationsModule } from 'ngx-toast-notifications';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,6 +64,7 @@ import { SafePipe } from './safe.pipe';
     AngularEditorModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ToastNotificationsModule,
     HttpClientModule,
   ],
   providers: [],

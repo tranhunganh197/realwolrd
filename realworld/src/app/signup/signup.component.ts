@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Toaster } from 'ngx-toast-notifications';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
@@ -15,9 +15,9 @@ export class SignupComponent implements OnInit {
   public password!: string;
   public err!: string;
   constructor(
-    private http: HttpClient,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private toaster: Toaster
   ) {}
 
   ngOnInit(): void {
@@ -37,6 +37,12 @@ export class SignupComponent implements OnInit {
         this.err = 'Email or password is invalid';
         return;
       } else {
+        this.toaster.open({
+          position: 'top-center',
+          duration: 2000,
+          caption: 'SIGNUP SUCCESSFUL!',
+          type: 'success',
+        });
         localStorage.setItem('token', data?.token);
         this.router.navigateByUrl('/');
       }
