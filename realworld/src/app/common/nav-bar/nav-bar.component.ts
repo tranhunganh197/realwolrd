@@ -10,9 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 export class NavBarComponent implements OnInit {
   isLogin: boolean = false;
   href: any;
-  username: string = 'unknown';
-  avatar: string =
-    'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
+  username!: string;
+  avatar!: string;
   data: any;
   // khong sua doan nay
   hideTabs: boolean = false;
@@ -37,7 +36,11 @@ export class NavBarComponent implements OnInit {
       if (token) {
         this.isLogin = true;
         this.userService.getUser().subscribe(data => {
-          this.avatar = data?.user?.image;
+          if (data.user.image === undefined) {
+            this.avatar = 'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
+          } else {
+            this.avatar = data?.user?.image;
+          }
           this.username = data?.user?.username;
         })
       } else {

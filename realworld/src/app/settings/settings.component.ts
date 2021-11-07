@@ -13,21 +13,22 @@ export class SettingsComponent implements OnInit {
   email!: string;
   password!: string;
   bio!:string;
-  urlAvatar: string =
-    'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
-  data:any;
+  urlAvatar!: string;
   message!:string;
 
   constructor(private userService: UserService,private router:Router) {}
 
   ngOnInit(): void {
     this.userService.getUser().subscribe((data) => {
-      this.data = data;
-      this.name = this.data?.user?.username;
-      this.email = this.data?.user?.email;
-      this.password = this.data?.user?.password;
-      this.bio = this.data?.user?.bio;
-      this.urlAvatar = this.data?.user?.image;
+      this.name = data?.user?.username;
+      this.email = data?.user?.email;
+      this.password = data?.user?.password;
+      this.bio = data?.user?.bio;
+      if (data?.user?.image === undefined) {
+        this.urlAvatar = 'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
+      } else {
+        this.urlAvatar = data?.user?.image;
+      }
     });
   }
 
@@ -41,7 +42,6 @@ export class SettingsComponent implements OnInit {
       },
     }).subscribe(data => {
       if (data) {
-        this.message = "SUCCESS!";
         this.router.navigateByUrl('/home');
       } else {
         this.message ="Failure";

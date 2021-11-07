@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,12 +9,16 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MyProfileComponent implements OnInit {
   dataProfile:any;
-  constructor(private userService:UserService) { }
+  constructor(private userService:UserService,private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.userService.getProfile().subscribe(data => {
+    this.activatedRoute.params.subscribe(param => {
+      console.log(param.id);
+      this.userService.getProfile(param.id)
+      .subscribe(data => {
       console.log(data);
       this.dataProfile = data;
+      })
     })
   }
 
