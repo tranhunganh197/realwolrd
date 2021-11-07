@@ -9,7 +9,6 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NavBarComponent implements OnInit {
   isLogin: boolean = false;
-  isNotAuthPage: boolean = false;
   href: any;
   username: string = 'unknown';
   avatar: string =
@@ -29,16 +28,7 @@ export class NavBarComponent implements OnInit {
   }
   ///end///
 
-  constructor(public router: Router, private userService: UserService) {
-    this.router.events.subscribe((event) => {
-      let a = this.router.url;
-      if (a == '/signup' || a == '/signin') {
-        this.isNotAuthPage = false;
-      } else {
-        this.isNotAuthPage = true;
-      }
-    });
-  }
+  constructor(public router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.currentUser.subscribe((data: any) => {
@@ -53,6 +43,6 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('token');
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/signin');
   }
 }

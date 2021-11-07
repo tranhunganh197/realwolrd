@@ -1,4 +1,4 @@
-<div class="container-nav" [ngClass]="{ logined: isNotAuthPage }">
+<div class="container-nav">
   <div class="logo-blog" routerLink="home">BLOGMOCK</div>
   <div class="nav-bar">
     <div class="container-logined" *ngIf="isLogin">
@@ -24,7 +24,15 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link"
+          <a class="nav-link" (click)="logout()"
+            ><mat-icon class="nav-icon">logout</mat-icon><span>Logout</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/profiles/{{ username }}"
+            routerLinkActive="selected"
             ><img src="{{ avatar }}" alt="" /> {{ username }}</a
           >
         </li>
@@ -60,7 +68,10 @@
     <div class="logined" *ngIf="isLogin">
       <ul>
         <li class="nav-item">
-          <a class="nav-link user"
+          <a
+            class="nav-link user"
+            routerLink="/profiles/{{ username }}"
+            routerLinkActive="selected"
             ><mat-icon class="nav-icon">person</mat-icon
             ><span>{{ username }}</span></a
           >
@@ -84,6 +95,11 @@
             [routerLinkActiveOptions]="{ exact: true }"
             ><mat-icon class="nav-icon">settings</mat-icon
             ><span>Settings</span></a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="logout()"
+            ><mat-icon class="nav-icon">logout</mat-icon><span>Logout</span></a
           >
         </li>
       </ul>

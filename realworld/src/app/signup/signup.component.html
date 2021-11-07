@@ -1,76 +1,89 @@
 <div class="container-fluid container-signup">
   <div class="wrapper-signup">
-    <h2>SIGNUP</h2>
-    <form #signupForm="ngForm" (ngSubmit)="handleSignup(signupForm)">
-      <div class="form-group item-input">
-        <input
-          type="text"
-          name="username"
-          [(ngModel)]="username"
-          #nameControl="ngModel"
-          class="form-control"
-          id="username"
-          autocomplete="false"
-          placeholder="Enter username..."
-          required
-        />
-      </div>
-      <div
-        *ngIf="
-          signupForm.submitted || (nameControl.invalid && nameControl.touched)
-        "
-        class="notice_err"
-      >
-        <p *ngIf="nameControl.hasError('required')">Name is required.</p>
-      </div>
-      <div class="form-group">
-        <input
-          type="email"
-          name="email"
-          [(ngModel)]="email"
-          #emailControl="ngModel"
-          class="form-control"
-          id="email"
-          autofocus
-          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-          autocomplete="false"
-          placeholder="Enter email..."
-          required
-        />
-      </div>
-      <div
-        *ngIf="
-          signupForm.submitted || (emailControl.invalid && emailControl.touched)
-        "
-        class="notice_err"
-      >
-        <p *ngIf="emailControl.hasError('required')">Email is required.</p>
-        <p *ngIf="emailControl.errors?.pattern">This is not a valid Email!!!</p>
-      </div>
-      <div class="form-group item-input">
-        <input
-          type="password"
-          name="password"
-          [(ngModel)]="password"
-          #passControl="ngModel"
-          class="form-control"
-          id="password"
-          autocomplete="false"
-          placeholder="Password..."
-          required
-        />
-      </div>
-      <div
-        *ngIf="
-          signupForm.submitted || (passControl.invalid && passControl.touched)
-        "
-        class="notice_err"
-      >
-        <p *ngIf="passControl.hasError('required')">Password is required.</p>
-      </div>
-      <button type="submit" class="btn btn-info" [disabled]="!signupForm.valid">
-        SIGNUP
-      </button>
-    </form>
+    <div class="img-signup col-xl-6 col-md-6"></div>
+    <div class="form-signup col-xl-6 col-md-6">
+      <p class="blog-name">
+        BLOGMOCK <mat-icon class="icon-lg"> check_circle_outline</mat-icon>
+      </p>
+      <h3>Sign up to Blogmock</h3>
+      <span>Have an account? <a routerLink="/signin">Sign in</a></span>
+      <form #signupForm="ngForm" (ngSubmit)="handleSignup(signupForm)">
+        <div class="form-group item-input">
+          <input
+            type="text"
+            name="username"
+            [(ngModel)]="username"
+            #nameControl="ngModel"
+            class="form-control"
+            id="username"
+            autocomplete="false"
+            placeholder="Enter username..."
+            required
+          />
+        </div>
+        <div
+          *ngIf="
+            signupForm.submitted || (nameControl.invalid && nameControl.touched)
+          "
+          class="notice_err"
+        >
+          <p *ngIf="nameControl.hasError('required')">Name is required.</p>
+        </div>
+        <div class="form-group">
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            #emailControl="ngModel"
+            class="form-control"
+            id="email"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            autocomplete="false"
+            placeholder="Enter email..."
+            required
+          />
+        </div>
+        <div
+          *ngIf="
+            signupForm.submitted ||
+            (emailControl.invalid && emailControl.touched)
+          "
+          class="notice_err"
+        >
+          <p *ngIf="emailControl.hasError('required')">Email is required.</p>
+          <p *ngIf="emailControl.errors?.pattern">
+            This is not a valid Email!!!
+          </p>
+        </div>
+        <div class="form-group item-input">
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            #passControl="ngModel"
+            class="form-control"
+            id="password"
+            autocomplete="false"
+            placeholder="Password..."
+            required
+          />
+        </div>
+        <div
+          *ngIf="
+            signupForm.submitted || (passControl.invalid && passControl.touched)
+          "
+          class="notice_err"
+        >
+          <p *ngIf="passControl.hasError('required')">Password is required.</p>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-danger"
+          [disabled]="!signupForm.valid"
+        >
+          SIGNUP
+        </button>
+      </form>
+    </div>
   </div>
 </div>
