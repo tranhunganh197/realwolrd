@@ -9,12 +9,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class NavBarComponent implements OnInit {
   isLogin: boolean = false;
-  isNotAuthPage: boolean = false;
   href: any;
   username: string = 'unknown';
   avatar: string =
     'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
-  data:any;
+  data: any;
   // khong sua doan nay
   hideTabs: boolean = false;
   @HostListener('document:click', ['$event'])
@@ -30,16 +29,7 @@ export class NavBarComponent implements OnInit {
   }
   ///end///
 
-  constructor(public router: Router, private userService: UserService) {
-    this.router.events.subscribe((event) => {
-      let a = this.router.url;
-      if (a == '/signup' || a == '/signin') {
-        this.isNotAuthPage = false;
-      } else {
-        this.isNotAuthPage = true;
-      }
-    });
-  }
+  constructor(public router: Router, private userService: UserService) {}
 
   ngOnInit(): void {
     this.userService.tokenData.next(localStorage.getItem('token'));
@@ -53,7 +43,7 @@ export class NavBarComponent implements OnInit {
       } else {
         this.isLogin = false;
       }
-    })
+    });
   }
 
   logout() {
