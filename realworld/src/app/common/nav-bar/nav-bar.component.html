@@ -4,79 +4,48 @@
     <div class="container-logined" *ngIf="isLogin">
       <ul>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/home/global-feed"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-          Home</a
-          >
+          <a class="nav-link" routerLink="/home/global-feed" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Home</a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/article/new"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
+          <a class="nav-link" routerLink="/article/new" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">
             <mat-icon class="nav-icon">drive_file_rename_outline</mat-icon>New
-            Article</a
-          >
+            Article
+          </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/settings"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-            ><mat-icon class="nav-icon">settings</mat-icon>Settings</a
-          >
+          <a class="nav-link" routerLink="/settings" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon class="nav-icon">settings</mat-icon>Settings
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="logout()"
-            ><mat-icon class="nav-icon">logout</mat-icon><span>Logout</span></a
-          >
+          <a class="nav-link" (click)="logout()">
+            <mat-icon class="nav-icon">logout</mat-icon><span>Logout</span>
+          </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/profiles/{{ username }}"
-            routerLinkActive="selected"
-            ><img src="{{ avatar }}" alt="" /> {{ username }}</a
-          >
+          <a class="nav-link" routerLink="/profiles/{{ username }}" routerLinkActive="selected"><img src="{{ avatar }}"
+              alt="" /> {{ username }}</a>
         </li>
       </ul>
     </div>
     <div class="container-notlogined" *ngIf="!isLogin">
       <ul>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/home/global-feed"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-          Home</a
-          >
+          <a class="nav-link" routerLink="/home/global-feed" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Home</a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="signin"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >Login</a
-          >
+          <a class="nav-link" routerLink="signin" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">Login</a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="signup"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >Register</a
-          >
+          <a class="nav-link" routerLink="signup" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">Register</a>
         </li>
       </ul>
     </div>
@@ -88,61 +57,38 @@
     <div class="logined" *ngIf="isLogin">
       <ul>
         <li class="nav-item">
-          <a
-            class="nav-link user"
-            routerLink="/profiles/{{ username }}"
-            routerLinkActive="selected"
-            ><mat-icon class="nav-icon">person</mat-icon
-            ><span>{{ username }}</span></a
-          >
+          <a class="nav-link user" routerLink="/profiles/{{ username }}" routerLinkActive="selected">
+            <mat-icon class="nav-icon">person</mat-icon><span>{{ username }}</span>
+          </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link add"
-            routerLink="/article/new"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <mat-icon class="nav-icon">drive_file_rename_outline</mat-icon
-            ><span>New Article</span></a
-          >
+          <a class="nav-link add" routerLink="/article/new" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon class="nav-icon">drive_file_rename_outline</mat-icon><span>New Article</span>
+          </a>
         </li>
         <li class="nav-item">
-          <a
-            class="nav-link setting"
-            routerLink="/settings"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-            ><mat-icon class="nav-icon">settings</mat-icon
-            ><span>Settings</span></a
-          >
+          <a class="nav-link setting" routerLink="/settings" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">
+            <mat-icon class="nav-icon">settings</mat-icon><span>Settings</span>
+          </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="logout()"
-            ><mat-icon class="nav-icon">logout</mat-icon><span>Logout</span></a
-          >
+          <a class="nav-link" (click)="logout()">
+            <mat-icon class="nav-icon">logout</mat-icon><span>Logout</span>
+          </a>
         </li>
       </ul>
     </div>
     <div class="notlogined" *ngIf="!isLogin">
       <ul>
         <li class="nav-item">
-          <a
-            class="nav-link login"
-            routerLink="signin"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >Login</a
-          >
+          <a class="nav-link login" routerLink="signin" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">Login</a>
         </li>
         <li class="nav-item regis">
-          <a
-            class="nav-link"
-            routerLink="signup"
-            routerLinkActive="selected"
-            [routerLinkActiveOptions]="{ exact: true }"
-            >Register</a
-          >
+          <a class="nav-link" routerLink="signup" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">Register</a>
         </li>
       </ul>
     </div>

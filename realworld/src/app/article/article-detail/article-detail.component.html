@@ -1,1 +1,29 @@
-<p>article-detail works!</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<p>title: {{article?.title}}</p>
+<p>avata article: {{article?.author.image}}</p>
+<p>create day: {{article?.createdAt}}</p>
+
+<div [hidden]="!canModify">
+    <a class="btn btn-sm btn-outline-secondary">
+        Edit Article
+    </a>
+
+    <button class="btn btn-sm btn-outline-danger" (click)="deleteArticle()">
+        Delete Article
+    </button>
+</div>
+
+<span [hidden]="canModify">
+    <button>
+        Follow
+    </button>
+    <button>
+        Article
+    </button>
+</span>
+<p>body article: {{article?.body}}</p>
