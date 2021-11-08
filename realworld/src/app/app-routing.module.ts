@@ -16,7 +16,8 @@ import { ArticleNewComponent } from './article/article-new/article-new.component
 import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/global-feed', pathMatch: 'full' },
+  { path: 'home', redirectTo: 'home/global-feed', pathMatch: 'full'},
   // { path: '**', redirectTo: '/notfound' },
   { path: 'notfound', component: NotfoundComponent },
   {
@@ -25,10 +26,10 @@ const routes: Routes = [
     children: [
       { path: 'your-feed', component: FeedYourComponent },
       { path: 'global-feed', component: FeedGlobalComponent },
+      { path: 'tags/:id', component: FeedTagsComponent },
     ],
   },
   { path: 'settings', component: SettingsComponent },
-  { path: 'tags', component: FeedTagsComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   {

@@ -71,4 +71,8 @@ export class ArticleService {
     };
     return this.http.delete(`http://localhost:3000/api/articles/${id}`, httpOptions)
   }
+
+  getTags() {
+    return this.http.get('http://localhost:3000/api/tags');
+  }
 }

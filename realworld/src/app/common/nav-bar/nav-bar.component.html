@@ -4,6 +4,11 @@
     <div class="container-logined" *ngIf="isLogin">
       <ul>
         <li class="nav-item">
+          <a class="nav-link" routerLink="/home/global-feed" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Home</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="/article/new" routerLinkActive="selected"
             [routerLinkActiveOptions]="{ exact: true }">
             <mat-icon class="nav-icon">drive_file_rename_outline</mat-icon>New
@@ -29,6 +34,11 @@
     </div>
     <div class="container-notlogined" *ngIf="!isLogin">
       <ul>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home/global-feed" routerLinkActive="selected"
+            [routerLinkActiveOptions]="{ exact: true }">
+            Home</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="signin" routerLinkActive="selected"
             [routerLinkActiveOptions]="{ exact: true }">Login</a>
