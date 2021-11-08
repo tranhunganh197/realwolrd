@@ -2,9 +2,9 @@
   <h5>Popular Tags</h5>
   <div class="list-tag">
     <ul>
-      <li><p>#tranđâsdasdsadasádsadasdsadsasadsafsdfd</p></li>
-      <li><p>#thanh</p></li>
-      <li><p>#tung</p></li>
+      <li *ngFor="let tag of tagsArr">
+        <a routerLink="/home/tags/{{tag}}">#{{tag}}</a>
+      </li>
     </ul>
   </div>
 </div>

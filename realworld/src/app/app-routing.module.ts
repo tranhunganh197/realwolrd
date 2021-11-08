@@ -25,10 +25,10 @@ const routes: Routes = [
     children: [
       { path: 'your-feed', component: FeedYourComponent },
       { path: 'global-feed', component: FeedGlobalComponent },
+      { path: 'tags/:id', component: FeedTagsComponent },
     ],
   },
   { path: 'settings', component: SettingsComponent },
-  { path: 'tags', component: FeedTagsComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   {
