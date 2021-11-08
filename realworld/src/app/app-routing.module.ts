@@ -16,7 +16,8 @@ import { ArticleNewComponent } from './article/article-new/article-new.component
 import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/global-feed', pathMatch: 'full' },
+  { path: 'home', redirectTo: 'home/global-feed', pathMatch: 'full'},
   // { path: '**', redirectTo: '/notfound' },
   { path: 'notfound', component: NotfoundComponent },
   {
