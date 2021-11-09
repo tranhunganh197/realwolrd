@@ -18,7 +18,6 @@ import { NotfoundComponent } from './notfound/notfound.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home/global-feed', pathMatch: 'full' },
   { path: 'home', redirectTo: 'home/global-feed', pathMatch: 'full'},
-  // { path: '**', redirectTo: '/notfound' },
   { path: 'notfound', component: NotfoundComponent },
   {
     path: 'home',
@@ -43,6 +42,7 @@ const routes: Routes = [
   { path: 'article/detail/:id', component: ArticleDetailComponent },
   { path: 'article/edit/:id', component: ArticleEditComponent },
   { path: 'article/new', component: ArticleNewComponent },
+  { path: '**', redirectTo: '/notfound' },
 ];
 
 @NgModule({

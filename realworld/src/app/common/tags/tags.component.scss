@@ -1,38 +1,23 @@
 .container-tags {
-    width: 185px;
     border-radius: 4px;
     height: 250px;
     background-color: #fff;
     border: 1px solid rgba(219, 219, 219, 1);
-    display: flex;
-    flex-direction: column;
+    padding:0.5rem 1rem;
     h5 {
         font-size: 13px;
-        font-weight: 500;
-        height: 30px;
-        line-height: 50px;
-        padding-left: 10px;
+        font-weight: 600;
     }
-}
-.list-tag {
-    padding-left: 10px;
     ul {
         list-style: none;
-        height: 195px;
         overflow: hidden;
-    }
-    li {
-        p {
-            width: 160px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 13px;
-            margin-bottom: 0;
-            &:hover {
-                cursor: pointer;
-                text-decoration: underline;
-            }
+        li {
+            display:inline-block;
+            box-sizing: border-box;
+            margin: 0 10px 2px 0;
         }
     }
 }
+
+
+    

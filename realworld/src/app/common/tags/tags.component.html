@@ -1,10 +1,8 @@
 <div class="container-tags">
   <h5>Popular Tags</h5>
-  <div class="list-tag">
-    <ul>
-      <li *ngFor="let tag of tagsArr">
-        <a routerLink="/home/tags/{{tag}}">#{{tag}}</a>
-      </li>
-    </ul>
-  </div>
+  <ul>
+    <li *ngFor="let tag of tagsArr">
+      <a routerLink="/home/tags/{{tag}}">#{{tag}}</a>
+    </li>
+  </ul>
 </div>

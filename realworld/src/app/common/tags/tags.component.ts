@@ -16,6 +16,7 @@ export class TagsComponent implements OnInit {
     this.articleService.getTags().subscribe(tags => {
       this.tags = Object.values(tags);
       this.tagsArr = this.tags[0];
+      this.tagsArr = this.tagsArr.slice(0,10);
     })
   }
 }
