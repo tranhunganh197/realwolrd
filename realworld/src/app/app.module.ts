@@ -31,6 +31,10 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SafePipe } from './safe.pipe';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { MomentModule } from 'ngx-moment';
+<<<<<<< HEAD
+=======
+
+>>>>>>> d3e0f60150429120c6d7906fe525ce0b6aa5c0be
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,4 +77,4 @@ import { MomentModule } from 'ngx-moment';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
