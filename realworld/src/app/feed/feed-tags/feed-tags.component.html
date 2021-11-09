@@ -1,3 +1,27 @@
-<ul *ngFor="let tag of dataTags">
-    <li>{{tag.slug}}</li>
-</ul>
+<div class="item-article" *ngFor="let tag of dataTags">
+    <div class="top-item">
+      <div class="avt-user">
+        <img src="{{ tag?.author?.image }}" alt="" />
+      </div>
+      <div class="user-title">
+        <p routerLink="/profiles/{{ tag?.author?.username }}">
+          {{ tag?.author?.username }}
+        </p>
+        <p>{{ tag?.createdAt | amTimeAgo }}</p>
+      </div>
+      <div class="btn-like">
+        <span
+          ><mat-icon class="icon-like active" *ngIf="tag?.favorited"
+            >favorite</mat-icon
+          >
+          <mat-icon class="icon-like" *ngIf="!tag?.favorited"
+            >favorite_border</mat-icon
+          >{{ tag?.favoritesCount }}</span
+        >
+      </div>
+    </div>
+    <div class="body-item">
+      <div [innerHTML]="tag?.body | safe" class="status"></div>
+      <a routerLink="/tag/detail/{{ tag?.slug }}">Read more...</a>
+    </div>
+</div>

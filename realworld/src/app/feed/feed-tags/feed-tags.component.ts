@@ -18,7 +18,11 @@ export class FeedTagsComponent implements OnInit {
       this.articleService.currentActicles.subscribe((data:any) => {
         this.dataArticles = data;
         this.dataTags = this.dataArticles.articles.filter((article:any) => {
-          return article?.tagList.join(',').indexOf(tag.id) !== -1;
+          if (article?.tagList) {
+            return article?.tagList.join(',').indexOf(tag.id) !== -1;
+          } else {
+            return;
+          }
         });
       })
     })

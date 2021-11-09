@@ -31,7 +31,6 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SafePipe } from './safe.pipe';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { MomentModule } from 'ngx-moment';
-import { PickerModule } from '@ctrl/ngx-emoji-mart';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +60,6 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
-    PickerModule,
     NgbModule,
     MomentModule,
     FormsModule,

@@ -9,18 +9,26 @@
   </div>
   <div class="container-feed">
     <div class="item-feed col-xl-10 col-md-12">
-      <div class="change-feed" *ngIf="false">
+      <div class="change-feed">
         <a
+          routerLink="/home/global-feed"
+          routerLinkActive="selected"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Global Article</a
+        >
+        <a
+          *ngIf="isLogin"
           routerLink="/home/your-feed"
           routerLinkActive="selected"
           [routerLinkActiveOptions]="{ exact: true }"
           >Your Article</a
         >
         <a
-          routerLink="/home/global-feed"
+          *ngIf="isLogin"
+          routerLink="/home/tags/hihi"
           routerLinkActive="selected"
           [routerLinkActiveOptions]="{ exact: true }"
-          >Global Article</a
+          >Tags Article</a
         >
       </div>
       <router-outlet></router-outlet>
