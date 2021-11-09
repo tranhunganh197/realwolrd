@@ -37,13 +37,14 @@
 .user-infor {
     position: absolute;
     text-align: center;
-    bottom: -170px;
+    bottom: -130px;
     left: 50%;
     transform: translate(-50%, -50%);
     p:first-child {
         font-weight: 500;
         font-size: 15px;
         margin-bottom: 5px;
+        text-transform: uppercase;
     }
     p:last-child {
         font-size: 13px;

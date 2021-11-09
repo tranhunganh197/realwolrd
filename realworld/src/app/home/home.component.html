@@ -9,62 +9,21 @@
   </div>
   <div class="container-feed">
     <div class="item-feed col-xl-10 col-md-12">
-      <div class="item-article">
-        <div class="top-item">
-          <div class="avt-user">
-            <img
-              src="https://i.pinimg.com/236x/ad/c0/01/adc00172f98f2f36e2dc0efb3b9bd9ad.jpg"
-              alt=""
-            />
-          </div>
-          <div class="user-title">
-            <p routerLink="">TranThanhTung</p>
-            <p>November 3, 2021</p>
-          </div>
-          <div class="btn-like">
-            <span
-              ><mat-icon class="icon-like active" *ngIf="true"
-                >favorite</mat-icon
-              >
-              <mat-icon class="icon-like" *ngIf="false"
-                >favorite_border</mat-icon
-              >0</span
-            >
-          </div>
-        </div>
-        <div class="body-item">
-          <div [innerHTML]="test | safe" class="status"></div>
-          <a routerLink="">Read more...</a>
-        </div>
+      <div class="change-feed" *ngIf="false">
+        <a
+          routerLink="/home/your-feed"
+          routerLinkActive="selected"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Your Article</a
+        >
+        <a
+          routerLink="/home/global-feed"
+          routerLinkActive="selected"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Global Article</a
+        >
       </div>
-      <div class="item-article">
-        <div class="top-item">
-          <div class="avt-user">
-            <img
-              src="https://i.pinimg.com/236x/ad/c0/01/adc00172f98f2f36e2dc0efb3b9bd9ad.jpg"
-              alt=""
-            />
-          </div>
-          <div class="user-title">
-            <p routerLink="">TranThanhTung</p>
-            <p>November 3, 2021</p>
-          </div>
-          <div class="btn-like">
-            <span
-              ><mat-icon class="icon-like active" *ngIf="true"
-                >favorite</mat-icon
-              >
-              <mat-icon class="icon-like" *ngIf="false"
-                >favorite_border</mat-icon
-              >1</span
-            >
-          </div>
-        </div>
-        <div class="body-item">
-          <div [innerHTML]="test | safe" class="status"></div>
-          <a routerLink="">Read more...</a>
-        </div>
-      </div>
+      <router-outlet></router-outlet>
     </div>
     <div class="item-feed col-xl-2 col-md-0">
       <app-tags></app-tags>

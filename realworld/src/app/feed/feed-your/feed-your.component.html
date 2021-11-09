@@ -1,1 +1,26 @@
-<p>feed-your works!</p>
+<!-- <div class="item-article" *ngFor="let article of articles">
+    <div class="top-item">
+      <div class="avt-user">
+        <img src="{{ article?.author?.image }}" alt="" />
+      </div>
+      <div class="user-title">
+        <p routerLink="">{{ article?.author?.username }}</p>
+        <p>{{ article?.createdAt | amTimeAgo }}</p>
+      </div>
+      <div class="btn-like">
+        <span
+          ><mat-icon class="icon-like active" *ngIf="article?.favorited"
+            >favorite</mat-icon
+          >
+          <mat-icon class="icon-like" *ngIf="!article?.favorited"
+            >favorite_border</mat-icon
+          >{{ article?.favoritesCount }}</span
+        >
+      </div>
+    </div>
+    <div class="body-item">
+      <div [innerHTML]="article?.body | safe" class="status"></div>
+      <a routerLink="/article/detail/{{ article?.slug }}">Read more...</a>
+    </div>
+  </div>
+   -->

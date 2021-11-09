@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SafePipe } from './safe.pipe';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
+import { MomentModule } from 'ngx-moment';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +61,9 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
+    PickerModule,
     NgbModule,
+    MomentModule,
     FormsModule,
     AngularEditorModule,
     ReactiveFormsModule,
@@ -67,6 +71,7 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
     ToastNotificationsModule,
     HttpClientModule,
   ],
+  schemas: [NO_ERRORS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
 })

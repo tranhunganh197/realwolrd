@@ -1,29 +1,66 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<p>title: {{article?.title}}</p>
-<p>avata article: {{article?.author.image}}</p>
-<p>create day: {{article?.createdAt}}</p>
-
-<div [hidden]="!canModify">
-    <a class="btn btn-sm btn-outline-secondary">
+<div class="container-detail">
+  <div class="infor-author">
+    <div class="avatar-author">
+      <img src="{{ article?.author?.image }}" alt="" />
+    </div>
+    <div class="title-author">
+      <a routerLink="/profiles/{{ article?.author?.username }}">{{
+        article?.author?.username
+      }}</a>
+      <span>{{ article?.createdAt | amTimeAgo }}</span>
+    </div>
+    <div class="funct-article" *ngIf="canModify">
+      <button
+        class="btn btn-outline-secondary"
+        routerLink="/article/edit/{{ article?.slug }}"
+      >
         Edit Article
-    </a>
-
-    <button class="btn btn-sm btn-outline-danger" (click)="deleteArticle()">
+      </button>
+      <button class="btn btn-outline-danger" (click)="deleteArticle()">
         Delete Article
-    </button>
-</div>
+      </button>
+    </div>
+    <div class="funct-article" *ngIf="!canModify">
+      <button class="btn btn-outline-danger" *ngIf="false">
+        + Follow User
+      </button>
+      <button class="btn btn-outline-danger" *ngIf="true">Followed</button>
 
-<span [hidden]="canModify">
-    <button>
-        Follow
-    </button>
-    <button>
-        Article
-    </button>
-</span>
-<p>body article: {{article?.body}}</p>
+      <button class="btn btn-outline-success">
+        {{ article?.favoritesCount }} Favorited
+      </button>
+    </div>
+  </div>
+  <h3>{{ article?.title }}</h3>
+  <div class="body-article" [innerHTML]="article?.body | safe"></div>
+  <div class="comment">
+    <div class="list-comment">
+      <div class="comment-item">
+        <img
+          src="https://cdn.dribbble.com/users/1731254/screenshots/15637966/media/8a042e3d526de06f63ce736b26674327.png?compress=1&resize=1200x900"
+          alt=""
+        />
+        <div class="infor_user-cmt">
+          <p>
+            TranThanhTung <span>{{ article?.createdAt | amTimeAgo }}</span>
+          </p>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s,
+          </p>
+        </div>
+        <mat-icon class="icon-delete">remove_circle_outline</mat-icon>
+      </div>
+    </div>
+    <div class="box-comment">
+      <form class="comment-form">
+        <textarea placeholder="Type something....."></textarea>
+
+        <button type="submit" class="btn-cmt">
+          <mat-icon class="icon-rep">reply</mat-icon>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
