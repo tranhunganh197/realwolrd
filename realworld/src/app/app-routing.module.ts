@@ -43,6 +43,9 @@ const routes: Routes = [
   { path: 'article/edit/:id', component: ArticleEditComponent },
   { path: 'article/new', component: ArticleNewComponent },
   { path: '**', redirectTo: '/notfound' },
+  { path: '**', redirectTo: '/notfound' },
+  { path: '**', redirectTo: '/notfound' },
+  { path: '**', redirectTo: '/notfound' },
 ];
 
 @NgModule({
