@@ -45,6 +45,8 @@ const routes: Routes = [
   { path: '**', redirectTo: '/notfound' },
   { path: '**', redirectTo: '/notfound' },
   { path: '**', redirectTo: '/notfound' },
+  { path: '**', redirectTo: '/notfound' },
+  { path: '**', redirectTo: '/notfound' },
 ];
 
 @NgModule({
