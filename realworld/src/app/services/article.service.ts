@@ -22,6 +22,7 @@ export class ArticleService {
   }
 
   getMyArticles(username: string) {
+    console.log(username);
     return this.http.get(`http://localhost:3000/api/articles/?author=${username}`)
   }
 
@@ -40,10 +41,7 @@ export class ArticleService {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    this.http.post('http://localhost:3000/api/articles', article, httpOptions).subscribe(data => {
-      console.log(data);
-      this.article = data;
-    })
+    return this.http.post('http://localhost:3000/api/articles', article, httpOptions)
   }
 
   getArticle(id: any) {
@@ -74,5 +72,35 @@ export class ArticleService {
 
   getTags() {
     return this.http.get('http://localhost:3000/api/tags');
+  }
+
+  addComment(param:string,comment:any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      })
+    };
+    return this.http.post(`http://localhost:3000/api/articles/${param}/comments`,comment,httpOptions)
+  }
+
+  getComments(param:string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      })
+    };
+    return this.http.get(`http://localhost:3000/api/articles/${param}/comments`,httpOptions);
+  }
+
+  deleteComment(param:string, id:any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      })
+    };
+    this.http.delete(`http://localhost:3000/api/articles/${param}/comments/${id?._id}`,httpOptions).subscribe()
   }
 }

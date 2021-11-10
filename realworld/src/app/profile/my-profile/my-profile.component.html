@@ -2,7 +2,7 @@
   <div class="banner">
     <div class="avatar-user">
       <img
-        src="https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg"
+        [src]="dataProfile?.profile?.image"
         alt=""
       />
     </div>
@@ -20,40 +20,20 @@
   <div class="show-article">
     <div class="tab-article">
       <a
-        routerLink=""
+        routerLink="/profiles/{{dataProfile?.profile?.username}}/my-article"
         class="col-5"
         routerLinkActive="selected"
         [routerLinkActiveOptions]="{ exact: true }"
         >My Articles</a
       >
       <a
-        routerLink=""
+      routerLink="/profiles/{{dataProfile?.profile?.username}}/my-favorite"
         class="col-5"
         routerLinkActive="selected"
         [routerLinkActiveOptions]="{ exact: true }"
         >Favorited Articles</a
       >
     </div>
-    <div class="item-article col-12">
-      <div class="top-item">
-        <div class="avt-user">
-          <img
-            src="https://i.pinimg.com/236x/ad/c0/01/adc00172f98f2f36e2dc0efb3b9bd9ad.jpg"
-            alt=""
-          />
-        </div>
-        <div class="user-title">
-          <p>TranThanhTung</p>
-          <p>November 3, 2021</p>
-        </div>
-        <div class="btn-like">
-          <span><mat-icon class="icon-like">favorite_border</mat-icon>0</span>
-        </div>
-      </div>
-      <div class="body-item">
-        <p></p>
-        <a routerLink="">Read more...</a>
-      </div>
-    </div>
+    <router-outlet></router-outlet>
   </div>
 </div>

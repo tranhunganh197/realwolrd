@@ -13,6 +13,9 @@ export class ArticleDetailComponent implements OnInit {
   currentUser: any;
   canModify!: boolean;
   article: any;
+  comment!:string;
+  commentArr:any[] = [];
+  imgUser!:string;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,9 +37,14 @@ export class ArticleDetailComponent implements OnInit {
     this.userService.getUser().subscribe((data) => {
       this.currentUser = data;
       console.log(this.currentUser);
+      this.imgUser = this.currentUser?.user?.image;
       this.canModify =
         this.currentUser?.user?.username === this.article?.author.username;
     });
+
+    this.articleService.getComments(this.id).subscribe((data:any) => {
+      this.commentArr = data?.comments;
+    })
   }
   deleteArticle() {
     console.log(this.article.slug);
@@ -44,4 +52,28 @@ export class ArticleDetailComponent implements OnInit {
       this.router.navigateByUrl('/');
     });
   }
+
+  addComment() {
+    if (this.comment === "") {
+      return
+    } else {
+      this.articleService.addComment(this.id,{
+        comment: {
+          body:this.comment
+        }
+      }).subscribe((a:any) => {
+        this.commentArr.unshift(a?.comment);
+      })
+    }
+  }
+
+  deleteComment(comment:any) {
+    console.log(comment)
+    this.articleService.deleteComment(this.id,comment);
+    this.articleService.getComments(this.id).subscribe((data:any) => {
+      this.commentArr = data?.comments;
+      console.log(this.commentArr)
+    })
+  }
 }
+

@@ -9,17 +9,19 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MyArticleComponent implements OnInit {
 
-  myArticlesData:any;
+  articles:any;
 
   constructor(
     private articleService:ArticleService,
     private userService:UserService,
   ) { }
 
-  ngOnInit(): void {
-    console.log(this.userService.user);
-    this.articleService.getMyArticles('username').subscribe(data => {
-      this.myArticlesData = data;
+  ngOnInit() {
+    this.userService.getUser().subscribe(data => {
+      this.articleService.getMyArticles(data?.user?.username).subscribe((data:any) => {
+        this.articles = data?.articles;
+        console.log(this.articles)
+      })
     })
   }
 

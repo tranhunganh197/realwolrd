@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ArticleService } from 'src/app/services/article.service';
 
@@ -13,11 +14,12 @@ export class ArticleNewComponent implements OnInit {
   title!: any;
   about!: any;
   tags!: any;
+  article!:any;
 
   a =
     '<font face="Arial">sadasdasksaf</font><p><font face="Arial">adsandasdsaldkla</font></p><p><font face="Arial">&#273;&#226;nspd&#225;</font></p><p><font face="Arial">dsadasldsad,sa;</font></p>';
 
-  constructor(private articleService: ArticleService) {}
+  constructor(private articleService: ArticleService, private route:Router) {}
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -54,8 +56,9 @@ export class ArticleNewComponent implements OnInit {
           body: this.htmlContent,
           tagList: this.tags.split(','),
         },
-      });
-      ngForm.onReset();
+      }).subscribe((data:any) => {
+        this.route.navigateByUrl(`article/detail/${data?.article?.slug}`)
+      })
     }
   }
 

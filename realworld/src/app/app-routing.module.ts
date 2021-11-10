@@ -35,6 +35,7 @@ const routes: Routes = [
     path: 'profiles/:id',
     component: MyProfileComponent,
     children: [
+      { path: '', redirectTo: 'my-article', pathMatch: 'full' },
       { path: 'my-article', component: MyArticleComponent },
       { path: 'my-favorite', component: MyFavoriteComponent },
     ],

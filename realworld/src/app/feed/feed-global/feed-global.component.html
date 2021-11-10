@@ -21,6 +21,7 @@
     </div>
   </div>
   <div class="body-item">
+    <p>{{article?.title}}</p>
     <div [innerHTML]="article?.body | safe" class="status"></div>
     <a routerLink="/article/detail/{{ article?.slug }}">Read more...</a>
   </div>

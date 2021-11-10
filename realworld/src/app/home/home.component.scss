@@ -107,7 +107,7 @@
         line-height: 30px;
     }
     a.selected {
-        background-color: rgba(140, 70, 221, 1);
-        color: #fff;
+        color: rgba(140, 70, 221, 1);
+        border-bottom: rgba(140, 70, 221, 1) 1px solid;
     }
 }

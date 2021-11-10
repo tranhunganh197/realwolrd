@@ -13,15 +13,10 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(param => {
-      console.log(param.id);
       this.userService.getProfile(param.id)
       .subscribe(data => {
-      console.log(data);
       this.dataProfile = data;
       })
     })
   }
-
-  
-
 }

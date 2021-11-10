@@ -39,6 +39,7 @@
     text-align: center;
     bottom: -130px;
     left: 50%;
+    height:30px;
     transform: translate(-50%, -50%);
     p:first-child {
         font-weight: 500;
@@ -190,6 +191,11 @@
         font-size: 12px;
         padding: 0 0 5px 5px;
     }
+}
+
+.selected {
+    background-color: crimson;
+    color:white;
 }
 @media (max-width: 1024px) {
     .banner {
