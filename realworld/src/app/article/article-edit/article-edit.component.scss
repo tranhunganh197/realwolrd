@@ -1,0 +1,57 @@
+.container_edit-article {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 50px;
+    flex-direction: column;
+    background-color: #fff;
+    animation: showForm 1s ease-in-out;
+    h3 {
+        padding: 50px 0 20px 0;
+        font-weight: 500;
+    }
+    form {
+        width: 60%;
+        input {
+            &::placeholder {
+                font-size: 12px;
+            }
+        }
+        .form_submit {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            button {
+                min-width: 300px;
+            }
+        }
+    }
+}
+.btn-publish {
+    color: #fff;
+    background-color: rgba(140, 70, 221, 1);
+}
+
+@media (max-width: 768px) {
+    .container_edit-article {
+        form {
+            width: 100%;
+            padding: 30px;
+            button {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@keyframes showForm {
+    from {
+        transform: translateY(-300%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}

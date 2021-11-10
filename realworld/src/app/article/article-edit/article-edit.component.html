@@ -1,7 +1,31 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<p>article-edit works!</p>
+<div class="container_edit-article">
+    <h3>EDIT ARTICLE</h3>
+    <form #editArticle="ngForm" (ngSubmit)="handleUpdateArticle()">
+        <div class="form-group">
+            <label for="articleTitle">Article Title</label>
+            <input type="text" name="title" [(ngModel)]="title" #titleControl="ngModel" class="form-control"
+                id="articleTitle" autocomplete="false" placeholder="Article title..." required />
+        </div>
+        <div class="form-group">
+            <label for="articleAbout">Article About</label>
+            <input type="text" name="description" [(ngModel)]="description" #aboutControl="ngModel" class="form-control"
+                id="articleAbout" autocomplete="false" placeholder="Article about..." required />
+        </div>
+        <div class="form-group">
+            <label for="articleBody">Article Body</label>
+            <angular-editor name="body" [(ngModel)]="body" [config]="config" required></angular-editor>
+        </div>
+        <div class="form-group">
+            <label for="articleTag">Article Tag</label>
+            <input type="text" name="tag" [(ngModel)]="tag" #tagsControl="ngModel" class="form-control" id="articleTag"
+                autocomplete="false" placeholder="Article tags..." />
+        </div>
+        <div class="form_submit">
+            <div class="fr-submit col-12">
+                <button type="submit" class="btn btn-info" [disabled]="!editArticle.valid">
+                    Edit Article
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

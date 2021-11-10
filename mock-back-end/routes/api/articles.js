@@ -229,7 +229,7 @@ router.get('/:article/comments', auth.optional, function(req, res, next){
     return req.article.populate({
       path: 'comments',
       populate: {
-        path: 'author'
+        path: 'author',
       },
       options: {
         sort: {
@@ -280,3 +280,4 @@ router.delete('/:article/comments/:comment', auth.required, function(req, res, n
 });
 
 module.exports = router;
+

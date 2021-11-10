@@ -13,6 +13,7 @@ CommentSchema.methods.toJSONFor = function(user){
     body: this.body,
     createdAt: this.createdAt,
     author: this.author,
+    article: this.article,
   };
 };
 
