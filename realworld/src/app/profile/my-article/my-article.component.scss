@@ -70,6 +70,8 @@
         width: 100%;
         padding: 5px 0 0 20px;
         font-weight: 500;
+        max-height: 90px;
+        overflow: hidden;
         margin: 0;
         word-wrap: break-word;
     }
@@ -108,5 +110,5 @@
 
 .active {
     background-color: firebrick;
-    color:white;
+    color: white;
 }

@@ -1,0 +1,199 @@
+.item-article {
+    width: 100%;
+    border-radius: 4px;
+    min-height: 150px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid rgba(219, 219, 219, 1);
+    display: flex;
+    flex-direction: column;
+}
+.top-item {
+    height: 60px;
+    margin: 0 auto;
+    width: 96%;
+    user-select: none;
+    border-bottom: 2px solid rgba(219, 219, 219, 1);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    .avt-user {
+        width: 44px;
+        margin-left: 10px;
+        border-radius: 50%;
+        border: 1px solid rgba(219, 219, 219, 1);
+        height: 45px;
+        overflow: hidden;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+.user-title {
+    width: 150px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 15px;
+    p {
+        line-height: 20px;
+        margin: 0;
+        &:first-child {
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 140px;
+            text-transform: uppercase;
+            &:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+        &:last-child {
+            font-size: 12px;
+        }
+    }
+}
+.btn-like {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    span {
+        height: 30px;
+        min-width: 30px;
+        cursor: pointer;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+.body-item {
+    padding-bottom: 10px;
+    p {
+        width: 100%;
+        padding: 5px;
+        margin: 0;
+        word-wrap: break-word;
+    }
+    a {
+        font-size: 12px;
+        padding: 0 0 5px 20px;
+    }
+}
+.item-feed {
+    padding: 10px;
+}
+.status {
+    padding: 20px;
+    max-height: 150px;
+    overflow: hidden;
+}
+
+@keyframes aniLiked {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.15);
+    }
+}
+
+.load {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    .avt-user {
+        background-color: rgb(228, 220, 220);
+    }
+    .user-title {
+        margin-left: 5px;
+        p {
+            &:first-child {
+                height: 13px;
+                width: 250px;
+                background-color: rgb(228, 220, 220);
+                border-radius: 10px;
+                margin-bottom: 5px;
+            }
+            &:last-child {
+                height: 10px;
+                width: 150px;
+                background-color: rgb(228, 220, 220);
+                border-radius: 20px;
+            }
+        }
+    }
+    .btn-like {
+        width: 100px;
+        border-radius: 6px;
+        height: 30px;
+        background-color: rgb(228, 220, 220);
+    }
+    .body-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .status {
+            margin-top: 3px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            p {
+                width: 100%;
+                margin-bottom: 2px;
+                height: 10px;
+                border-radius: 10px;
+                background-color: rgb(228, 220, 220);
+                &:nth-child(2) {
+                    width: 97%;
+                }
+                &:nth-child(3) {
+                    width: 94%;
+                }
+                &:nth-child(4) {
+                    width: 91%;
+                }
+                &:nth-child(5) {
+                    width: 88%;
+                }
+                &:nth-child(6) {
+                    width: 85%;
+                }
+                &:nth-child(7) {
+                    width: 82%;
+                }
+            }
+        }
+        a {
+            width: 50px;
+            margin-left: 20px;
+            height: 10px;
+            background-color: rgb(228, 220, 220);
+            border-radius: 10px;
+        }
+    }
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        animation: load 0.5s linear infinite;
+    }
+}
+@keyframes load {
+    from {
+        left: -100%;
+    }
+    to {
+        left: 100%;
+    }
+}

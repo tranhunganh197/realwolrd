@@ -9,7 +9,7 @@ import { ArticleService } from 'src/app/services/article.service';
 export class FeedGlobalComponent implements OnInit {
   dataArticles!: any;
   articles: any;
-
+  isLoading: boolean = true;
   constructor(private articleService: ArticleService) {}
 
   ngOnInit(): void {
@@ -17,6 +17,9 @@ export class FeedGlobalComponent implements OnInit {
     this.articleService.currentActicles.subscribe((data: any) => {
       this.dataArticles = data;
       this.articles = this.dataArticles.articles;
+      if (this.articleService !== undefined || this.articleService !== null) {
+        this.isLoading = false;
+      }
     });
   }
 }

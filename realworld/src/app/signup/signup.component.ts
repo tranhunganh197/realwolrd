@@ -13,7 +13,9 @@ export class SignupComponent implements OnInit {
   public username!: string;
   public email!: string;
   public password!: string;
+  public retypepassword!: string;
   public err!: string;
+  isNotMatch: boolean = false;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -23,29 +25,40 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     localStorage.removeItem('token');
   }
-
+  handleCheck() {
+    if (
+      this.retypepassword !== this.password &&
+      this.retypepassword.length > 0
+    ) {
+      this.isNotMatch = true;
+    } else {
+      this.isNotMatch = false;
+    }
+  }
   handleSignup(ngForm: NgForm): void {
-    this.userService.signup({
-      user: {
-        username: ngForm.value?.username,
-        email: ngForm.value?.email,
-        password: ngForm.value?.password,
-      },
-    });
-    this.userService.currentUser.subscribe((data) => {
-      if (data === 422) {
-        this.err = 'Email or password is invalid';
-        return;
-      } else {
-        this.toaster.open({
-          position: 'top-center',
-          duration: 2000,
-          caption: 'SIGNUP SUCCESSFUL!',
-          type: 'success',
-        });
-        localStorage.setItem('token', data?.token);
-        this.router.navigateByUrl('/');
-      }
-    });
+    if (!this.isNotMatch) {
+      this.userService.signup({
+        user: {
+          username: ngForm.value?.username,
+          email: ngForm.value?.email,
+          password: ngForm.value?.password,
+        },
+      });
+      this.userService.currentUser.subscribe((data) => {
+        if (data === 422) {
+          this.err = 'Email or password is invalid';
+          return;
+        } else {
+          this.toaster.open({
+            position: 'top-center',
+            duration: 2000,
+            caption: 'SIGNUP SUCCESSFUL!',
+            type: 'success',
+          });
+          localStorage.setItem('token', data?.token);
+          this.router.navigateByUrl('/');
+        }
+      });
+    }
   }
 }

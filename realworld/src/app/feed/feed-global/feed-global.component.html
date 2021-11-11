@@ -1,28 +1,42 @@
-<div class="item-article" *ngFor="let article of articles">
-  <div class="top-item">
-    <div class="avt-user">
-      <img src="{{ article?.author?.image }}" alt="" />
-    </div>
-    <div class="user-title">
-      <p routerLink="/profiles/{{ article?.author?.username }}">
-        {{ article?.author?.username }}
-      </p>
-      <p>{{ article?.createdAt | amTimeAgo }}</p>
-    </div>
-    <div class="btn-like">
-      <span
-        ><mat-icon class="icon-like active" *ngIf="article?.favorited"
-          >favorite</mat-icon
+<app-load *ngIf="isLoading"></app-load>
+
+<div class="list-item" *ngIf="!isLoading">
+  <div class="item-article" *ngFor="let article of articles">
+    <div class="top-item">
+      <div class="avt-user">
+        <img src="{{ article?.author?.image }}" alt="" />
+      </div>
+      <div class="user-title">
+        <p routerLink="/profiles/{{ article?.author?.username }}">
+          {{ article?.author?.username }}
+        </p>
+        <p>{{ article?.createdAt | amTimeAgo }}</p>
+      </div>
+      <div class="btn-like">
+        <span
+          ><mat-icon
+            class="icon-like active"
+            *ngIf="article?.favorited"
+            matTooltip="Unlike this article"
+            >favorite</mat-icon
+          >
+          <mat-icon
+            class="icon-like"
+            *ngIf="!article?.favorited"
+            matTooltip="Like this article"
+            >favorite_border</mat-icon
+          >{{ article?.favoritesCount }}</span
         >
-        <mat-icon class="icon-like" *ngIf="!article?.favorited"
-          >favorite_border</mat-icon
-        >{{ article?.favoritesCount }}</span
+      </div>
+    </div>
+    <div class="body-item">
+      <p>{{ article?.title }}</p>
+      <div [innerHTML]="article?.body | safe" class="status"></div>
+      <a
+        routerLink="/article/detail/{{ article?.slug }}"
+        matTooltip="Click to view detail article!"
+        >Read more...</a
       >
     </div>
-  </div>
-  <div class="body-item">
-    <p>{{article?.title}}</p>
-    <div [innerHTML]="article?.body | safe" class="status"></div>
-    <a routerLink="/article/detail/{{ article?.slug }}">Read more...</a>
   </div>
 </div>

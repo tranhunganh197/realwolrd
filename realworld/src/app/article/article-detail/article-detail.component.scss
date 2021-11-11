@@ -5,11 +5,60 @@
     flex-direction: column;
     align-items: center;
     padding-top: 50px;
+
     h3 {
         font-weight: 500;
         text-transform: uppercase;
         font-size: 18px;
         padding: 10px 0;
+    }
+}
+.confirm_delete {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    .box-confirm {
+        padding: 10px;
+        width: 300px;
+        border-radius: 6px;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        border: 1px solid rgba(219, 219, 219, 1);
+        .img-delete {
+            width: 100%;
+            height: 150px;
+            background-image: url(../../../assets/Images/delete.png);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        h3 {
+            padding: 10px 0 5px 0;
+            font-size: 13px;
+            text-align: center;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+        .btn-confirm {
+            width: 80%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            button {
+                min-width: 100px;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+        }
     }
 }
 .infor-author {
@@ -75,13 +124,12 @@
     }
 }
 
-
 .blog {
     border: 1px solid rgba(219, 219, 219, 1);
     border-radius: 15px;
     img {
         width: 50px;
-        height:50px;
+        height: 50px;
         border-radius: 50%;
         margin-right: 10px;
     }
@@ -92,29 +140,46 @@
     textarea {
         width: calc(100% - 110px);
         height: 50px;
-        padding:0.5rem;
+        padding: 0.5rem;
         box-sizing: border-box;
         border: 1px solid rgba(219, 219, 219, 1);
         border-radius: 5px;
     }
     button {
-        height:50px;
+        height: 50px;
         width: 50px;
         position: absolute;
-        right:0px;
+        right: 0px;
         background-color: white;
-        border:none;
-        color:rgb(206, 17, 206);
+        border: none;
+        color: rgb(206, 17, 206);
     }
     .content-comment {
         border-radius: 10px;
-        padding:0.5rem 1rem;
+        padding: 0.5rem 1rem;
         background-color: whitesmoke;
+        width: 90.3%;
+        p {
+            &:first-child {
+                font-weight: 500;
+            }
+        }
     }
     span {
         font-size: x-small;
     }
     p {
-        margin:0;
+        margin: 0;
     }
+}
+.icon-delete {
+    position: absolute;
+    right: 12px;
+    color: #534e4e;
+    cursor: pointer;
+}
+.body-article {
+    width: 100%;
+    word-wrap: break-word;
+    min-height: 30px;
 }

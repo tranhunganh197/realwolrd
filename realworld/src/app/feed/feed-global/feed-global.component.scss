@@ -85,7 +85,7 @@
     a {
         color: black;
         font-size: 12px;
-        padding: 0 0 5px 20px;
+        padding: 0 0 0 20px;
     }
 }
 .item-feed {
@@ -93,7 +93,10 @@
 }
 .status {
     padding: 20px;
+    word-wrap: break-word;
+    border-bottom: 1px solid rgba(219, 219, 219, 1);
     max-height: 150px;
+    margin-bottom: 5px;
     overflow: hidden;
 }
 .icon-like.active {

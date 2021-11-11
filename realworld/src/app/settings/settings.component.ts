@@ -15,7 +15,7 @@ export class SettingsComponent implements OnInit {
   bio!: string;
   urlAvatar!: string;
   message!: string;
-
+  errorURL: boolean = false;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -36,29 +36,36 @@ export class SettingsComponent implements OnInit {
       }
     });
   }
-
+  handleError() {
+    this.errorURL = true;
+  }
+  handleSuccess() {
+    this.errorURL = false;
+  }
   handleUpdate() {
-    this.userService
-      .settingsUser({
-        user: {
-          email: this.email,
-          bio: this.bio,
-          image: this.urlAvatar,
-          password: this.password,
-        },
-      })
-      .subscribe((data) => {
-        if (data) {
-          this.toaster.open({
-            position: 'top-center',
-            duration: 1000,
-            caption: 'UPDATE SUCCESSFUL!',
-            type: 'success',
-          });
-          this.router.navigateByUrl('/home');
-        } else {
-          this.message = 'Failure';
-        }
-      });
+    if (!this.errorURL) {
+      this.userService
+        .settingsUser({
+          user: {
+            email: this.email,
+            bio: this.bio,
+            image: this.urlAvatar,
+            password: this.password,
+          },
+        })
+        .subscribe((data) => {
+          if (data) {
+            this.toaster.open({
+              position: 'top-center',
+              duration: 1000,
+              caption: 'UPDATE SUCCESSFUL!',
+              type: 'success',
+            });
+            this.router.navigateByUrl('/home');
+          } else {
+            this.message = 'Failure';
+          }
+        });
+    } else return;
   }
 }

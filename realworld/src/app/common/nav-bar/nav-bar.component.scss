@@ -117,6 +117,30 @@
     display: none;
     visibility: hidden;
 }
+.show-funct {
+    position: relative;
+}
+.profile-hide {
+    right: 5px;
+    bottom: -151px;
+    overflow: hidden;
+    border-radius: 4px;
+    position: absolute;
+    width: 200px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    height: 150px;
+    overflow: hidden;
+    background-color: rgba(140, 70, 221, 1);
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        li {
+            width: 100%;
+            background-color: rgba(140, 70, 221, 1);
+        }
+    }
+}
 @media (max-width: 1024px) {
     .container-nav {
         .logo-blog {
@@ -178,9 +202,7 @@
                     border-radius: 4px;
                     margin-bottom: 5px;
                     overflow: hidden;
-                    &:hover {
-                        opacity: 0.7;
-                    }
+                    cursor: pointer;
                     span {
                         margin-top: 5px;
                         margin-left: 5px;
@@ -209,7 +231,7 @@
                     width: 100%;
                     color: #fff;
                     border: 1px solid rgba(255, 255, 255, 0.18);
-                    background: rgba(255, 255, 255, 0.25);
+                    background: rgba(140, 70, 221, 1);
                     backdrop-filter: blur(1px);
                     font-weight: 500;
                     border-radius: 4px;
@@ -222,7 +244,7 @@
                         animation: nothide 0.7s ease-in-out;
                     }
                     &:hover {
-                        opacity: 0.7;
+                        opacity: 0.8;
                     }
                     span {
                         margin-top: 5px;

@@ -55,3 +55,9 @@
         opacity: 1;
     }
 }
+input.ng-touched.ng-invalid {
+    border: 2px solid red;
+}
+textarea.ng-touched.ng-invalid {
+    border: 2px solid red;
+}

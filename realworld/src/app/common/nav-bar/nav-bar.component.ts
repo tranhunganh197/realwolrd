@@ -13,6 +13,7 @@ export class NavBarComponent implements OnInit {
   username!: string;
   avatar!: string;
   data: any;
+  hide: boolean = false;
   // khong sua doan nay
   hideTabs: boolean = false;
   @HostListener('document:click', ['$event'])
@@ -25,6 +26,11 @@ export class NavBarComponent implements OnInit {
     } else {
       this.hideTabs = !this.hideTabs;
     }
+    if (e.target.className !== 'nav-link hidefunct') {
+      this.hide = false;
+    } else {
+      this.hide = !this.hide;
+    }
   }
   ///end///
 
@@ -32,17 +38,18 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.tokenData.next(localStorage.getItem('token'));
-    this.userService.currentToken.subscribe(token => {
+    this.userService.currentToken.subscribe((token) => {
       if (token) {
         this.isLogin = true;
-        this.userService.getUser().subscribe(data => {
+        this.userService.getUser().subscribe((data) => {
           if (data.user.image === undefined) {
-            this.avatar = 'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
+            this.avatar =
+              'https://i.pinimg.com/564x/20/5a/c8/205ac833d83d23c76ccb74f591cb6000.jpg';
           } else {
             this.avatar = data?.user?.image;
           }
           this.username = data?.user?.username;
-        })
+        });
       } else {
         this.isLogin = false;
       }

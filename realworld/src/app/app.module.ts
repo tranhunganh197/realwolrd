@@ -31,6 +31,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SafePipe } from './safe.pipe';
 import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { MomentModule } from 'ngx-moment';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { LoadComponent } from './load/load.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,6 +55,7 @@ import { MomentModule } from 'ngx-moment';
     FeedTagsComponent,
     FeedYourComponent,
     SafePipe,
+    LoadComponent,
   ],
   imports: [
     RouterModule,
@@ -62,6 +65,7 @@ import { MomentModule } from 'ngx-moment';
     MatIconModule,
     NgbModule,
     MomentModule,
+    MatTooltipModule,
     FormsModule,
     AngularEditorModule,
     ReactiveFormsModule,
@@ -73,4 +77,4 @@ import { MomentModule } from 'ngx-moment';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

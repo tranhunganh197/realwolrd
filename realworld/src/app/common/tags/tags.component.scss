@@ -1,9 +1,11 @@
 .container-tags {
     border-radius: 4px;
-    height: 250px;
+    height: 180px;
     background-color: #fff;
     border: 1px solid rgba(219, 219, 219, 1);
-    padding:0.5rem 1rem;
+    padding: 0.5rem 1rem;
+    user-select: none;
+
     h5 {
         font-size: 13px;
         font-weight: 600;
@@ -12,12 +14,12 @@
         list-style: none;
         overflow: hidden;
         li {
-            display:inline-block;
+            display: inline-block;
             box-sizing: border-box;
             margin: 0 10px 2px 0;
+            a {
+                color: black;
+            }
         }
     }
 }
-
-
-    

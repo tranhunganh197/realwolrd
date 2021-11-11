@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ArticleService } from 'src/app/services/article.service';
 import { UserService } from 'src/app/services/user.service';
@@ -11,11 +11,12 @@ import { UserService } from 'src/app/services/user.service';
 export class ArticleDetailComponent implements OnInit {
   id: any;
   currentUser: any;
-  canModify!: boolean;
+  canModify: boolean = false;
   article: any;
-  comment!:string;
-  commentArr:any[] = [];
-  imgUser!:string;
+  comment!: string;
+  commentArr: any[] = [];
+  imgUser!: string;
+  isDelete: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,7 +24,20 @@ export class ArticleDetailComponent implements OnInit {
     private articleService: ArticleService,
     private router: Router
   ) {}
-
+  @HostListener('document:click', ['$event'])
+  clickOutside(e: any) {
+    console.log(e);
+    if (e.target.className == 'btn btn-outline-danger btn-delete') {
+      this.isDelete = true;
+    }
+    if (
+      e.target.className == 'confirm_delete' ||
+      e.target.className == 'btn btn-outline-secondary cancel' ||
+      e.target.className == 'btn btn-outline-danger confirm'
+    ) {
+      this.isDelete = false;
+    }
+  }
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
@@ -42,9 +56,9 @@ export class ArticleDetailComponent implements OnInit {
         this.currentUser?.user?.username === this.article?.author.username;
     });
 
-    this.articleService.getComments(this.id).subscribe((data:any) => {
+    this.articleService.getComments(this.id).subscribe((data: any) => {
       this.commentArr = data?.comments;
-    })
+    });
   }
   deleteArticle() {
     console.log(this.article.slug);
@@ -54,26 +68,27 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   addComment() {
-    if (this.comment === "") {
-      return
+    if (this.comment === '') {
+      return;
     } else {
-      this.articleService.addComment(this.id,{
-        comment: {
-          body:this.comment
-        }
-      }).subscribe((a:any) => {
-        this.commentArr.unshift(a?.comment);
-      })
+      this.articleService
+        .addComment(this.id, {
+          comment: {
+            body: this.comment,
+          },
+        })
+        .subscribe((a: any) => {
+          this.commentArr.unshift(a?.comment);
+        });
     }
   }
 
-  deleteComment(comment:any) {
-    console.log(comment)
-    this.articleService.deleteComment(this.id,comment);
-    this.articleService.getComments(this.id).subscribe((data:any) => {
+  deleteComment(comment: any) {
+    console.log(comment);
+    this.articleService.deleteComment(this.id, comment);
+    this.articleService.getComments(this.id).subscribe((data: any) => {
       this.commentArr = data?.comments;
-      console.log(this.commentArr)
-    })
+      console.log(this.commentArr);
+    });
   }
 }
-
