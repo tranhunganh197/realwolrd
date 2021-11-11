@@ -7,8 +7,8 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  isLogin:boolean = false;
-  constructor(private userService:UserService) {}
+  isLogin: boolean = false;
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.tokenData.next(localStorage.getItem('token'));
@@ -21,3 +21,4 @@ export class HomeComponent implements OnInit {
     });
   }
 }
+// duy
