@@ -26,7 +26,6 @@ export class ArticleDetailComponent implements OnInit {
   ) {}
   @HostListener('document:click', ['$event'])
   clickOutside(e: any) {
-    console.log(e);
     if (e.target.className == 'btn btn-outline-danger btn-delete') {
       this.isDelete = true;
     }
@@ -54,6 +53,7 @@ export class ArticleDetailComponent implements OnInit {
 
     this.articleService.getComments(this.id).subscribe((data: any) => {
       this.commentArr = data?.comments;
+      console.log(this.commentArr)
     });
   }
   deleteArticle() {
@@ -80,11 +80,12 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   deleteComment(comment: any) {
-    console.log(comment);
-    this.articleService.deleteComment(this.id, comment);
-    this.articleService.getComments(this.id).subscribe((data: any) => {
-      this.commentArr = data?.comments;
-      console.log(this.commentArr);
-    });
+    this.articleService.deleteComment(this.id, comment).subscribe(data => {
+      console.log(data);
+    })
+    // this.articleService.getComments(this.id).subscribe((data: any) => {
+    //   this.commentArr = data?.comments;
+    //   console.log(this.commentArr);
+    // });
   }
 }

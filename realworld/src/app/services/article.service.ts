@@ -107,14 +107,14 @@ export class ArticleService {
     return this.http.get(`http://localhost:3000/api/articles/${param}/comments`,httpOptions);
   }
 
-  deleteComment(param:string, id:any) {
+  deleteComment(param:string, comment:any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    this.http.delete(`http://localhost:3000/api/articles/${param}/comments/${id?._id}`,httpOptions).subscribe()
+    return this.http.delete(`http://localhost:3000/api/articles/${param}/comments/${comment?._id}`,httpOptions)
   }
 
   pushTag(tag:any) {
