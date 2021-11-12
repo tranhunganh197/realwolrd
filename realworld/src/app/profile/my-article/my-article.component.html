@@ -6,10 +6,10 @@
       </div>
       <div class="user-title">
         <p>{{ article?.author?.username }}</p>
-        <p>{{ article?.updatedAt | amTimeAgo }}</p>
+        <p>{{ article?.createdAt | amTimeAgo }}</p>
       </div>
       <div class="btn-like">
-        <span><mat-icon class="icon-like">favorite_border</mat-icon>0</span>
+        <span><mat-icon [ngClass]="!article?.favorited ? 'icon-like' : 'icon-like-red'" (click)="toggleLike(article?.favorited,article?.slug)">favorite_border</mat-icon>{{article?.favoritesCount}}</span>
       </div>
     </div>
     <div class="body-item">

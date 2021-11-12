@@ -17,7 +17,8 @@
       >
     </div>
     <div class="setting" *ngIf="!isUser">
-      <button>Follow</button>
+      <button (click)="follow()" *ngIf="!isFollow">Follow</button>
+      <button (click)="unfollow()" *ngIf="isFollow">Unfollow</button>
     </div>
   </div>
   <div class="show-article">

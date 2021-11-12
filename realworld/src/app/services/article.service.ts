@@ -17,15 +17,26 @@ export class ArticleService {
   constructor(private http: HttpClient) { }
 
   getArticles() {
-    this.http.get('http://localhost:3000/api/articles').subscribe(data => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      })
+    };
+    this.http.get('http://localhost:3000/api/articles',httpOptions).subscribe(data => {
       console.log(data);
       this.dataActicles.next(data);
     })
   }
 
   getMyArticles(username: string) {
-    console.log(username);
-    return this.http.get(`http://localhost:3000/api/articles/?author=${username}`)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      })
+    };
+    return this.http.get(`http://localhost:3000/api/articles/?author=${username}`,httpOptions)
   }
 
   getFavoriteArticles(username: string) {
@@ -108,5 +119,25 @@ export class ArticleService {
 
   pushTag(tag:any) {
     this.dataTag.next(tag);
+  }
+
+  favorite(slug:string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    };
+    return this.http.post(`http://localhost:3000/api/articles/${slug}/favorite`,{},httpOptions)
+  }
+
+  unFavorite(slug:string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    };
+    return this.http.delete(`http://localhost:3000/api/articles/${slug}/favorite`,httpOptions)
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from 'src/app/services/article.service';
 import { UserService } from 'src/app/services/user.service';
@@ -8,9 +8,12 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './my-article.component.html',
   styleUrls: ['./my-article.component.scss']
 })
-export class MyArticleComponent implements OnInit {
+export class MyArticleComponent implements OnInit,OnDestroy {
 
   articles:any;
+  ob:any;
+  favoritesCount!:any;
+  isFavorite!:any;
 
   constructor(
     private articleService:ArticleService,
@@ -19,14 +22,38 @@ export class MyArticleComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.currentParam.subscribe((param:string) => {
+    this.ob = this.userService.currentParam.subscribe((param:string) => {
       this.userService.getProfile(param).subscribe((data:any) => {
         this.articleService.getMyArticles(data?.profile?.username).subscribe((data:any) => {
           this.articles = data?.articles;
-          console.log(this.articles)
         })
       })
     })
+  }
+
+  toggleLike(isFavoried:boolean,slug:string) {
+    if (isFavoried) {
+      this.articleService.unFavorite(slug).subscribe((data:any)  => {
+        this.articles.map((article:any,index:any) => {
+          if (article?.slug === data?.article?.slug) {
+            this.articles[index] = data?.article;
+          }
+        });
+      })
+    } else {
+      console.log(isFavoried)
+      this.articleService.favorite(slug).subscribe((data:any) => {
+        this.articles.map((article:any,index:any) => {
+          if (article?.slug === data?.article?.slug) {
+            this.articles[index] = data?.article;
+          }
+        });
+      })
+    }
+  }
+
+  ngOnDestroy() {
+    this.ob.unsubscribe();
   }
 
 }

@@ -11,6 +11,7 @@ export class MyProfileComponent implements OnInit {
   dataProfile:any;
   isUser!:boolean;
   name!:string;
+  isFollow!:boolean;
   constructor(private userService:UserService,private activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -19,6 +20,7 @@ export class MyProfileComponent implements OnInit {
       this.userService.getProfile(param?.id)
       .subscribe(profile => {
         this.dataProfile = profile;
+        this.isFollow = this.dataProfile?.profile?.following;
         this.userService.getUser().subscribe(user => {
           if(user?.user?.username === this.dataProfile?.profile?.username) {
             this.isUser = true;
@@ -31,4 +33,18 @@ export class MyProfileComponent implements OnInit {
       })
     })
   }
+
+  follow() {
+    this.userService.follow(this.dataProfile?.profile?.username).subscribe((data:any) => {
+      this.isFollow = data?.profile?.following
+    });
+  }
+
+  unfollow() {
+    this.userService.unfollow(this.dataProfile?.profile?.username).subscribe((data:any) => {
+      this.isFollow = data?.profile?.following;
+    })
+  }
 }
+
+

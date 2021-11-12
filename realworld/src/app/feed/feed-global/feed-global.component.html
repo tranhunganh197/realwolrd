@@ -13,20 +13,7 @@
         <p>{{ article?.createdAt | amTimeAgo }}</p>
       </div>
       <div class="btn-like">
-        <span
-          ><mat-icon
-            class="icon-like active"
-            *ngIf="article?.favorited"
-            matTooltip="Unlike this article"
-            >favorite</mat-icon
-          >
-          <mat-icon
-            class="icon-like"
-            *ngIf="!article?.favorited"
-            matTooltip="Like this article"
-            >favorite_border</mat-icon
-          >{{ article?.favoritesCount }}</span
-        >
+        <span><mat-icon [ngClass]="!article?.favorited ? 'icon-like' : 'icon-like-red'" (click)="toggleLike(article?.favorited,article?.slug)">favorite_border</mat-icon>{{article?.favoritesCount}}</span>
       </div>
     </div>
     <div class="body-item">
