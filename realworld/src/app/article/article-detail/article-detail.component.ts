@@ -74,7 +74,10 @@ export class ArticleDetailComponent implements OnInit {
           },
         })
         .subscribe((a: any) => {
-          this.commentArr.unshift(a?.comment);
+          this.articleService.getComments(this.id).subscribe((data: any) => {
+            this.commentArr = data?.comments;
+            this.comment ='';
+          });
         });
     }
   }
@@ -83,9 +86,8 @@ export class ArticleDetailComponent implements OnInit {
     this.articleService.deleteComment(this.id, comment).subscribe(data => {
       console.log(data);
     })
-    // this.articleService.getComments(this.id).subscribe((data: any) => {
-    //   this.commentArr = data?.comments;
-    //   console.log(this.commentArr);
-    // });
+    this.commentArr = this.commentArr.filter(cmt => {
+      return comment?._id !== cmt?._id
+    })
   }
 }
