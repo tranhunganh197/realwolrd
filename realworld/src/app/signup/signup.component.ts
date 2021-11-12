@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Toaster } from 'ngx-toast-notifications';
+import { Toast, Toaster } from 'ngx-toast-notifications';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private toaster: Toaster
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     localStorage.removeItem('token');
@@ -43,22 +43,47 @@ export class SignupComponent implements OnInit {
           email: ngForm.value?.email,
           password: ngForm.value?.password,
         },
+      }).subscribe((data: any) => {
+        console.log(data.user?.username);
+        localStorage.setItem('token', data.user?.token);
+        this.userService.setUser(data);
+        this.userService.userData.next(data.user?.username);
+        this.userService.tokenData.next(localStorage.getItem('token'));
+        this.toaster.open({
+          position: 'top-center',
+          duration: 2000,
+          caption: 'LOGIN SUCCESSFUL!',
+          component: CustomToastComponent,
+          type: 'success',
+        });
+        this.router.navigateByUrl('/');
+      }, err => {
+        this.toaster.open({
+          position: 'top-center',
+          duration: 5000,
+          caption: 'ACCOUNT ALREADY EXISTS!',
+          component: CustomToastComponent,
+          type: 'danger',
+        });
       });
-      this.userService.currentUser.subscribe((data) => {
-        if (data === 422) {
-          this.err = 'Email or password is invalid';
-          return;
-        } else {
-          this.toaster.open({
-            position: 'top-center',
-            duration: 2000,
-            caption: 'SIGNUP SUCCESSFUL!',
-            type: 'success',
-          });
-          localStorage.setItem('token', data?.token);
-          this.router.navigateByUrl('/');
-        }
-      });
+
     }
   }
+}
+
+
+@Component({
+  template:
+    '<div style="padding: 5px;">' +
+    '<div class="custom-caption">{{toast.caption}}</div>' +
+
+    '</div>',
+  styleUrls: ['./signup.component.scss'],
+
+},
+
+)
+export class CustomToastComponent {
+  @Input()
+  toast!: Toast;
 }

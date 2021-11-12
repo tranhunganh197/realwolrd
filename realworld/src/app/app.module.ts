@@ -12,7 +12,7 @@ import { TagsComponent } from './common/tags/tags.component';
 import { HomeComponent } from './home/home.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { SettingsComponent } from './settings/settings.component';
-import { SigninComponent } from './signin/signin.component';
+import { CustomToastComponent, SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 import { FeedGlobalComponent } from './feed/feed-global/feed-global.component';
 import { FeedTagsComponent } from './feed/feed-tags/feed-tags.component';
@@ -56,6 +56,7 @@ import { LoadComponent } from './load/load.component';
     FeedYourComponent,
     SafePipe,
     LoadComponent,
+    CustomToastComponent,
   ],
   imports: [
     RouterModule,
@@ -77,4 +78,4 @@ import { LoadComponent } from './load/load.component';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

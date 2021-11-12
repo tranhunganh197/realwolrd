@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Toaster } from 'ngx-toast-notifications';
+import { Toast, Toaster } from 'ngx-toast-notifications';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { style } from '@angular/animations';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -20,28 +21,50 @@ export class SigninComponent implements OnInit {
     private userService: UserService,
     private toaster: Toaster,
     private router: Router
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   handleLogin(ngForm: NgForm): void {
     this.userService.signin({
       user: { email: ngForm.value?.username, password: ngForm.value?.password },
+    }).subscribe((data: any) => {
+      console.log(data.user?.username);
+      localStorage.setItem('token', data.user?.token);
+      this.userService.setUser(data);
+      this.userService.userData.next(data.user?.username);
+      this.userService.tokenData.next(localStorage.getItem('token'));
+      this.toaster.open({
+        position: 'top-center',
+        duration: 2000,
+        caption: 'LOGIN SUCCESSFUL!',
+        component: CustomToastComponent,
+        type: 'success',
+      });
+      this.router.navigateByUrl('/');
+    }, err => {
+      this.toaster.open({
+        position: 'top-center',
+        duration: 5000,
+        caption: 'LOGIN UNDEFINED ACCOUNT!',
+        component: CustomToastComponent,
+        type: 'danger',
+      });
     });
-    this.userService.currentUser.subscribe((data) => {
-      if (data === 422) {
-        this.err = 'Email or password is invalid';
-        return;
-      } else {
-        this.toaster.open({
-          position: 'top-center',
-          duration: 2000,
-          caption: 'LOGIN SUCCESSFUL!',
-          type: 'success',
-        });
-        localStorage.setItem('token', data?.token);
-        this.router.navigateByUrl('/');
-      }
-    });
+
   }
+}
+@Component({
+  template:
+    '<div style="padding: 10px;">' +
+    '<div class="custom-caption">{{toast.caption}}</div>' +
+    '</div>',
+  styleUrls: ['./signin.component.scss'],
+
+},
+
+)
+export class CustomToastComponent {
+  @Input()
+  toast!: Toast;
 }

@@ -6,27 +6,21 @@ import { observable, Observable, ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   user: any;
   token: any;
   userData: any = new ReplaySubject(1);
   currentUser: Observable<any> = this.userData.asObservable();
-  tokenData:any = new ReplaySubject(1);
+  tokenData: any = new ReplaySubject(1);
   currentToken: Observable<any> = this.tokenData.asObservable();
   dataParam:any = new ReplaySubject(1);
   currentParam:any = this.dataParam.asObservable();
 
   signup(user: any) {
-    this.http
+    return this.http
       .post('http://localhost:3000/api/users', user)
-      .subscribe((data:any) => {
-          this.setUser(data);
-          this.userData.next(this.user?.user);
-          this.tokenData.next(localStorage.getItem('token'));
-      },err => {
-        return;
-      });
+
   }
 
   setUser(user: any) {
@@ -34,15 +28,9 @@ export class UserService {
   }
 
   signin(user: any) {
-    this.http
+    return this.http
       .post('http://localhost:3000/api/users/login', user)
-      .subscribe((data) => {
-        this.setUser(data);
-        this.userData.next(this.user?.user);
-        this.tokenData.next(localStorage.getItem('token'));
-      },err => {
-        return;
-      });
+
   }
 
   settingsUser(user: any) {
@@ -105,4 +93,3 @@ export class UserService {
     return this.http.delete(`http://localhost:3000/api/profiles/${username}/follow`,httpOptions)
   }
 }
- 
