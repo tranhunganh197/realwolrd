@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ArticleService } from 'src/app/services/article.service';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-article-edit',
@@ -12,9 +14,13 @@ export class ArticleEditComponent implements OnInit {
   title!: string;
   description!: string;
   body!: string;
-  tag!: string;
   id!: any;
   article!: any;
+  tags: any[] = [];
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   constructor(private articleService: ArticleService,
     private router: Router, private route: ActivatedRoute) { }
@@ -55,7 +61,7 @@ export class ArticleEditComponent implements OnInit {
       this.title = this.article?.title;
       this.description = this.article?.description;
       this.body = this.article?.body;
-      this.tag = this.article?.tagList;
+      this.tags = this.article?.tagList;
 
     })
   }
@@ -66,8 +72,28 @@ export class ArticleEditComponent implements OnInit {
           title: this.title,
           description: this.description,
           body: this.body,
-          tag: this.tag,
+          tagList: this.tags,
         },
       })
+  }
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.tags.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  remove(tag: any): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
   }
 }

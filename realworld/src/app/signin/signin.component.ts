@@ -45,7 +45,7 @@ export class SigninComponent implements OnInit {
     }, err => {
       this.toaster.open({
         position: 'top-center',
-        duration: 5000,
+        duration: 3000,
         caption: 'LOGIN UNDEFINED ACCOUNT!',
         component: CustomToastComponent,
         type: 'danger',

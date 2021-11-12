@@ -33,6 +33,7 @@ import { ToastNotificationsModule } from 'ngx-toast-notifications';
 import { MomentModule } from 'ngx-moment';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { LoadComponent } from './load/load.component';
+import { MatChipsModule } from '@angular/material/chips';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +58,7 @@ import { LoadComponent } from './load/load.component';
     SafePipe,
     LoadComponent,
     CustomToastComponent,
+
   ],
   imports: [
     RouterModule,
@@ -73,6 +75,7 @@ import { LoadComponent } from './load/load.component';
     BrowserAnimationsModule,
     ToastNotificationsModule,
     HttpClientModule,
+    MatChipsModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [],
