@@ -17,15 +17,29 @@
         </div>
         <div class="form-group">
             <label for="articleTag">Article Tag</label>
-            <input type="text" name="tag" [(ngModel)]="tag" #tagsControl="ngModel" class="form-control" id="articleTag"
-                autocomplete="false" placeholder="Article tags..." />
+            <!-- <input type="text" name="tag" [(ngModel)]="tag" #tagsControl="ngModel" class="form-control" id="articleTag"
+                autocomplete="false" placeholder="Article tags..." /> -->
+            <mat-form-field class="example-chip-list" appearance="fill">
+
+                <mat-chip-list #chipList aria-label="Fruit selection">
+                    <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+                        (removed)="remove(tag)">
+                        #{{tag}}
+                        <button matChipRemove *ngIf="removable">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip>
+                    <input placeholder="Enter tags" class="form-control" [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)">
+                </mat-chip-list>
+            </mat-form-field>
         </div>
         <div class="form_submit">
-            <div class="fr-submit col-12">
-                <button type="submit" class="btn btn-info" [disabled]="!editArticle.valid">
-                    Edit Article
-                </button>
-            </div>
+            <button type="submit" class="btn btn-publish " [disabled]="!editArticle.valid">
+                UPDATE ARTICLE
+            </button>
+
         </div>
     </form>
 </div>

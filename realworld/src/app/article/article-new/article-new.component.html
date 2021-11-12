@@ -2,57 +2,35 @@
   <h3>CREATE NEW ARTICLE</h3>
   <form #addArticle="ngForm" (ngSubmit)="handleAddArticle(addArticle)">
     <div class="form-group">
-      <input
-        type="text"
-        name="title"
-        [(ngModel)]="title"
-        #titleControl="ngModel"
-        class="form-control"
-        id="email"
-        autocomplete="false"
-        placeholder="Article title..."
-        required
-      />
+      <input type="text" name="title" [(ngModel)]="title" #titleControl="ngModel" class="form-control" id="email"
+        autocomplete="false" placeholder="Article title..." required />
     </div>
     <div class="form-group">
-      <input
-        type="text"
-        name="about"
-        [(ngModel)]="about"
-        #aboutControl="ngModel"
-        class="form-control"
-        id="about"
-        autocomplete="false"
-        placeholder="Article about..."
-        required
-      />
+      <input type="text" name="about" [(ngModel)]="about" #aboutControl="ngModel" class="form-control" id="about"
+        autocomplete="false" placeholder="Article about..." required />
     </div>
     <div class="form-group">
-      <angular-editor
-        name="htmlContent"
-        [(ngModel)]="htmlContent"
-        [config]="config"
-        required
-      ></angular-editor>
+      <angular-editor name="htmlContent" [(ngModel)]="htmlContent" [config]="config" required></angular-editor>
     </div>
     <div class="form-group">
-      <input
-        type="text"
-        name="tags"
-        [(ngModel)]="tags"
-        #tagsControl="ngModel"
-        class="form-control"
-        id="tags"
-        autocomplete="false"
-        placeholder="Article tags..."
-      />
+      <mat-form-field class="example-chip-list" appearance="fill">
+
+        <mat-chip-list #chipList aria-label="Fruit selection">
+          <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+            #{{tag}}
+            <button matChipRemove *ngIf="removable">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input placeholder="Enter tags" class="form-control" [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+
     </div>
     <div class="form_submit">
-      <button
-        type="submit"
-        class="btn btn-publish"
-        [disabled]="!addArticle.valid"
-      >
+      <button type="submit" class="btn btn-publish" [disabled]="!addArticle.valid">
         PUBLISH
       </button>
     </div>

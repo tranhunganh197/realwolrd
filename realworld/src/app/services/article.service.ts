@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -11,10 +12,11 @@ export class ArticleService {
   dataActicles: any = new ReplaySubject<any>(1);
   currentActicles: any = this.dataActicles.asObservable();
   article: any;
-  dataTag:any = new ReplaySubject(1);
-  currentTag:any = this.dataTag.asObservable();
+  dataTag: any = new ReplaySubject(1);
+  currentTag: any = this.dataTag.asObservable();
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private router: Router,) { }
 
   getArticles() {
     const httpOptions = {
@@ -23,7 +25,7 @@ export class ArticleService {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    this.http.get('http://localhost:3000/api/articles',httpOptions).subscribe(data => {
+    this.http.get('http://localhost:3000/api/articles', httpOptions).subscribe(data => {
       console.log(data);
       this.dataActicles.next(data);
     })
@@ -36,7 +38,7 @@ export class ArticleService {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    return this.http.get(`http://localhost:3000/api/articles/?author=${username}`,httpOptions)
+    return this.http.get(`http://localhost:3000/api/articles/?author=${username}`, httpOptions)
   }
 
   getFavoriteArticles(username: string) {
@@ -68,8 +70,9 @@ export class ArticleService {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    this.http.put(`http://localhost:3000/api/articles/${id}`, article, httpOptions).subscribe(data => {
+    this.http.put(`http://localhost:3000/api/articles/${id}`, article, httpOptions).subscribe((data: any) => {
       console.log(data);
+      this.router.navigateByUrl('/home');
     })
   }
 
@@ -87,57 +90,57 @@ export class ArticleService {
     return this.http.get('http://localhost:3000/api/tags');
   }
 
-  addComment(param:string,comment:any) {
+  addComment(param: string, comment: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    return this.http.post(`http://localhost:3000/api/articles/${param}/comments`,comment,httpOptions)
+    return this.http.post(`http://localhost:3000/api/articles/${param}/comments`, comment, httpOptions)
   }
 
-  getComments(param:string) {
+  getComments(param: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    return this.http.get(`http://localhost:3000/api/articles/${param}/comments`,httpOptions);
+    return this.http.get(`http://localhost:3000/api/articles/${param}/comments`, httpOptions);
   }
 
-  deleteComment(param:string, comment:any) {
+  deleteComment(param: string, id: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    return this.http.delete(`http://localhost:3000/api/articles/${param}/comments/${comment?._id}`,httpOptions)
+    this.http.delete(`http://localhost:3000/api/articles/${param}/comments/${id?._id}`, httpOptions).subscribe()
   }
 
-  pushTag(tag:any) {
+  pushTag(tag: any) {
     this.dataTag.next(tag);
   }
 
-  favorite(slug:string) {
+  favorite(slug: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       }),
     };
-    return this.http.post(`http://localhost:3000/api/articles/${slug}/favorite`,{},httpOptions)
+    return this.http.post(`http://localhost:3000/api/articles/${slug}/favorite`, {}, httpOptions)
   }
 
-  unFavorite(slug:string) {
+  unFavorite(slug: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       }),
     };
-    return this.http.delete(`http://localhost:3000/api/articles/${slug}/favorite`,httpOptions)
+    return this.http.delete(`http://localhost:3000/api/articles/${slug}/favorite`, httpOptions)
   }
 }

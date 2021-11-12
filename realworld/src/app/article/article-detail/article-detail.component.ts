@@ -23,7 +23,7 @@ export class ArticleDetailComponent implements OnInit {
     private userService: UserService,
     private articleService: ArticleService,
     private router: Router
-  ) {}
+  ) { }
   @HostListener('document:click', ['$event'])
   clickOutside(e: any) {
     if (e.target.className == 'btn btn-outline-danger btn-delete') {
@@ -76,16 +76,14 @@ export class ArticleDetailComponent implements OnInit {
         .subscribe((a: any) => {
           this.articleService.getComments(this.id).subscribe((data: any) => {
             this.commentArr = data?.comments;
-            this.comment ='';
+            this.comment = '';
           });
         });
     }
   }
 
   deleteComment(comment: any) {
-    this.articleService.deleteComment(this.id, comment).subscribe(data => {
-      console.log(data);
-    })
+    this.articleService.deleteComment(this.id, comment)
     this.commentArr = this.commentArr.filter(cmt => {
       return comment?._id !== cmt?._id
     })

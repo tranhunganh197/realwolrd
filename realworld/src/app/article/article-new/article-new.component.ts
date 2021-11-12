@@ -3,6 +3,10 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ArticleService } from 'src/app/services/article.service';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
+
+
 
 @Component({
   selector: 'app-article-new',
@@ -13,13 +17,17 @@ export class ArticleNewComponent implements OnInit {
   htmlContent!: any;
   title!: any;
   about!: any;
-  tags!: any;
-  article!:any;
+  tags: any[] = [];
+  article!: any;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   a =
     '<font face="Arial">sadasdasksaf</font><p><font face="Arial">adsandasdsaldkla</font></p><p><font face="Arial">&#273;&#226;nspd&#225;</font></p><p><font face="Arial">dsadasldsad,sa;</font></p>';
 
-  constructor(private articleService: ArticleService, private route:Router) {}
+  constructor(private articleService: ArticleService, private route: Router) { }
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -54,13 +62,34 @@ export class ArticleNewComponent implements OnInit {
           title: this.title,
           description: this.title,
           body: this.htmlContent,
-          tagList: this.tags.split(','),
+          tagList: this.tags,
         },
-      }).subscribe((data:any) => {
+      }).subscribe((data: any) => {
+        console.log(data);
         this.route.navigateByUrl(`article/detail/${data?.article?.slug}`)
       })
     }
   }
 
-  ngOnInit(): void {}
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      this.tags.push(value);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  remove(tag: any): void {
+    const index = this.tags.indexOf(tag);
+
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+    }
+  }
+
+  ngOnInit(): void { }
 }

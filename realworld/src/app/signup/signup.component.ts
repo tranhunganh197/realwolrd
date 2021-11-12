@@ -60,7 +60,7 @@ export class SignupComponent implements OnInit {
       }, err => {
         this.toaster.open({
           position: 'top-center',
-          duration: 5000,
+          duration: 3000,
           caption: 'ACCOUNT ALREADY EXISTS!',
           component: CustomToastComponent,
           type: 'danger',
