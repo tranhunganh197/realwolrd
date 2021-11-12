@@ -4,6 +4,7 @@
     margin-bottom: 10px;
     border: 2px solid rgba(219, 219, 219, 1);
     display: flex;
+    background-color: #fff;
     flex-direction: column;
 }
 .top-item {
@@ -81,6 +82,7 @@
         padding: 0 0 5px 5px;
     }
 }
+
 @media (max-width: 1024px) {
     .banner {
         width: 90%;
@@ -108,7 +110,17 @@
     }
 }
 
-.active {
-    background-color: firebrick;
-    color: white;
+.icon-like.active {
+    color: red;
+    animation: aniLiked 0.3s ease-in-out;
+    animation-iteration-count: 2;
+}
+
+@keyframes aniLiked {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.15);
+    }
 }

@@ -5,21 +5,23 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-my-favorite',
   templateUrl: './my-favorite.component.html',
-  styleUrls: ['./my-favorite.component.scss']
+  styleUrls: ['./my-favorite.component.scss'],
 })
 export class MyFavoriteComponent implements OnInit {
-
-  dataFavorite:any;
+  dataFavorite: any;
+  isLoading: boolean = true;
 
   constructor(
-    private articleService:ArticleService,
-    private userService:UserService
-  ) { }
+    private articleService: ArticleService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.articleService.getFavoriteArticles('username').subscribe(data => {
+    this.articleService.getFavoriteArticles('username').subscribe((data) => {
       this.dataFavorite = data;
-    })
+      if (this.dataFavorite !== undefined && this.dataFavorite.length > 0) {
+        this.isLoading = false;
+      }
+    });
   }
-
 }

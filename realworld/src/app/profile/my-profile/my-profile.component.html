@@ -1,14 +1,11 @@
 <div class="container-profile">
   <div class="banner">
     <div class="avatar-user">
-      <img
-        [src]="dataProfile?.profile?.image"
-        alt=""
-      />
+      <img [src]="dataProfile?.profile?.image" alt="" />
     </div>
     <div class="user-infor">
-      <p>{{dataProfile?.profile?.username}}</p>
-      <p>{{dataProfile?.profile?.bio}}</p>
+      <p>{{ dataProfile?.profile?.username }}</p>
+      <p>{{ dataProfile?.profile?.bio }}</p>
     </div>
     <div class="setting">
       <a routerLink="/settings" *ngIf="isUser"
@@ -16,23 +13,36 @@
         ><span>Edit Profile</span></a
       >
     </div>
-    <div class="setting" *ngIf="!isUser">
-      <button>Follow</button>
+    <div class="follow" *ngIf="!isUser">
+      <button
+        class="btn btn-outline-danger"
+        (click)="follow()"
+        *ngIf="!isFollow"
+      >
+        Follow
+      </button>
+      <button
+        class="btn btn-outline-success"
+        (click)="unfollow()"
+        *ngIf="isFollow"
+      >
+        Followed
+      </button>
     </div>
   </div>
   <div class="show-article">
-    <hr>
+    <hr />
     <div class="tab-article" *ngIf="isUser">
       <a
-        routerLink="/profiles/{{dataProfile?.profile?.username}}/my-article"
+        routerLink="/profiles/{{ dataProfile?.profile?.username }}/my-article"
         class="col-5"
         routerLinkActive="selected"
         [routerLinkActiveOptions]="{ exact: true }"
-        >{{name}} Articles</a
+        >{{ name }} Articles</a
       >
       <a
         *ngIf="isUser"
-        routerLink="/profiles/{{dataProfile?.profile?.username}}/my-favorite"
+        routerLink="/profiles/{{ dataProfile?.profile?.username }}/my-favorite"
         class="col-5"
         routerLinkActive="selected"
         [routerLinkActiveOptions]="{ exact: true }"

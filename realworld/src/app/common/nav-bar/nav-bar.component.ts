@@ -26,7 +26,10 @@ export class NavBarComponent implements OnInit {
     } else {
       this.hideTabs = !this.hideTabs;
     }
-    if (e.target.className !== 'nav-link hidefunct') {
+    if (
+      e.target.className !== 'nav-link hidefunct' &&
+      e.target.className !== 'avt-user'
+    ) {
       this.hide = false;
     } else {
       this.hide = !this.hide;

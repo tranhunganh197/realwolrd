@@ -267,9 +267,13 @@ router.post('/:article/comments', auth.required, function(req, res, next) {
 });
 
 router.delete('/:article/comments/:comment', auth.required, function(req, res, next) {
-  console.log(req.comment);
   if(req.comment.author.toString() === req.payload.id.toString()){
     req.article.comments.remove(req.comment._id);
+    console.log('before', req.article.comments)
+    req.article.comments = req.article.comments.filter(comment => {
+      return comment._id.toString() !== req.comment._id.toString(); 
+    })
+    console.log('after', req.article.comments)
     req.article.save()
       .then(Comment.find({_id: req.comment._id}).remove().exec())
       .then(function(){

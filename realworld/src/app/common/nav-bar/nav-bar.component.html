@@ -17,7 +17,8 @@
 
         <li class="nav-item show-funct">
           <a class="nav-link hidefunct" routerLinkActive="selected"
-            ><img src="{{ avatar }}" alt="" /> {{ username }}</a
+            ><img class="avt-user" src="{{ avatar }}" alt="" />
+            {{ username }}</a
           >
           <div class="profile-hide" *ngIf="hide">
             <ul>
@@ -33,7 +34,7 @@
               </li>
               <li class="nav-item">
                 <a
-                  class="nav-link setting"
+                  class="nav-link add"
                   routerLink="/settings"
                   routerLinkActive="selected"
                   [routerLinkActiveOptions]="{ exact: true }"
@@ -42,7 +43,7 @@
                   ><span>Settings</span>
                 </a>
               </li>
-              <li class="nav-item add">
+              <li class="nav-item setting">
                 <a class="nav-link" (click)="logout()">
                   <mat-icon class="nav-icon">logout</mat-icon
                   ><span>Logout</span>

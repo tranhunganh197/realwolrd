@@ -57,13 +57,39 @@ export class UserService {
     }
   }
 
-  getProfile(username: string) {
+  getProfile(username:string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    };
     return this.http.get(
-      `http://localhost:3000/api/profiles/` + username
+      `http://localhost:3000/api/profiles/` + username,httpOptions
     );
   }
 
   pushParam(param:string) {
     this.dataParam.next(param);
+  }
+
+  follow(username:string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    };
+    return this.http.post(`http://localhost:3000/api/profiles/${username}/follow`,{},httpOptions)
+  }
+
+  unfollow(username:string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    };
+    return this.http.delete(`http://localhost:3000/api/profiles/${username}/follow`,httpOptions)
   }
 }

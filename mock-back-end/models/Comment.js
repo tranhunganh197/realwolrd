@@ -9,7 +9,7 @@ var CommentSchema = new mongoose.Schema({
 // Requires population of author
 CommentSchema.methods.toJSONFor = function(user){
   return {
-    id: this._id,
+    _id: this._id,
     body: this.body,
     createdAt: this.createdAt,
     author: this.author,
