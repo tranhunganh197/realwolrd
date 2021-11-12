@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Toaster } from 'ngx-toast-notifications';
+import { Toast, Toaster } from 'ngx-toast-notifications';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
@@ -53,6 +53,7 @@ export class SignupComponent implements OnInit {
           position: 'top-center',
           duration: 2000,
           caption: 'LOGIN SUCCESSFUL!',
+          component: CustomToastComponent,
           type: 'success',
         });
         this.router.navigateByUrl('/');
@@ -60,11 +61,29 @@ export class SignupComponent implements OnInit {
         this.toaster.open({
           position: 'top-center',
           duration: 5000,
-          caption: 'LOGIN UNDEFINED ACCOUNT!',
+          caption: 'ACCOUNT ALREADY EXISTS!',
+          component: CustomToastComponent,
           type: 'danger',
         });
       });
 
     }
   }
+}
+
+
+@Component({
+  template:
+    '<div style="padding: 5px;">' +
+    '<div class="custom-caption">{{toast.caption}}</div>' +
+
+    '</div>',
+  styleUrls: ['./signup.component.scss'],
+
+},
+
+)
+export class CustomToastComponent {
+  @Input()
+  toast!: Toast;
 }

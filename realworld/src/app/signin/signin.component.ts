@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Toaster } from 'ngx-toast-notifications';
+import { Toast, Toaster } from 'ngx-toast-notifications';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { style } from '@angular/animations';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
@@ -37,6 +38,7 @@ export class SigninComponent implements OnInit {
         position: 'top-center',
         duration: 2000,
         caption: 'LOGIN SUCCESSFUL!',
+        component: CustomToastComponent,
         type: 'success',
       });
       this.router.navigateByUrl('/');
@@ -45,9 +47,24 @@ export class SigninComponent implements OnInit {
         position: 'top-center',
         duration: 5000,
         caption: 'LOGIN UNDEFINED ACCOUNT!',
+        component: CustomToastComponent,
         type: 'danger',
       });
     });
 
   }
+}
+@Component({
+  template:
+    '<div style="padding: 10px;">' +
+    '<div class="custom-caption">{{toast.caption}}</div>' +
+    '</div>',
+  styleUrls: ['./signin.component.scss'],
+
+},
+
+)
+export class CustomToastComponent {
+  @Input()
+  toast!: Toast;
 }
