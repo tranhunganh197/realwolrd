@@ -11,10 +11,13 @@
       <p>{{dataProfile?.profile?.bio}}</p>
     </div>
     <div class="setting">
-      <a routerLink="/settings"
+      <a routerLink="/settings" *ngIf="isUser"
         ><mat-icon class="icon-set">settings</mat-icon
         ><span>Edit Profile</span></a
       >
+    </div>
+    <div class="setting" *ngIf="!isUser">
+      <button>Follow</button>
     </div>
   </div>
   <div class="show-article">
@@ -24,10 +27,11 @@
         class="col-5"
         routerLinkActive="selected"
         [routerLinkActiveOptions]="{ exact: true }"
-        >My Articles</a
+        >{{name}} Articles</a
       >
       <a
-      routerLink="/profiles/{{dataProfile?.profile?.username}}/my-favorite"
+        *ngIf="isUser"
+        routerLink="/profiles/{{dataProfile?.profile?.username}}/my-favorite"
         class="col-5"
         routerLinkActive="selected"
         [routerLinkActiveOptions]="{ exact: true }"

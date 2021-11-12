@@ -11,6 +11,8 @@ export class ArticleService {
   dataActicles: any = new ReplaySubject<any>(1);
   currentActicles: any = this.dataActicles.asObservable();
   article: any;
+  dataTag:any = new ReplaySubject(1);
+  currentTag:any = this.dataTag.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -102,5 +104,9 @@ export class ArticleService {
       })
     };
     this.http.delete(`http://localhost:3000/api/articles/${param}/comments/${id?._id}`,httpOptions).subscribe()
+  }
+
+  pushTag(tag:any) {
+    this.dataTag.next(tag);
   }
 }

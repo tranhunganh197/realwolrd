@@ -14,6 +14,8 @@ export class UserService {
   currentUser: Observable<any> = this.userData.asObservable();
   tokenData:any = new ReplaySubject(1);
   currentToken: Observable<any> = this.tokenData.asObservable();
+  dataParam:any = new ReplaySubject(1);
+  currentParam:any = this.dataParam.asObservable();
 
   signup(user: any) {
     this.http
@@ -71,6 +73,10 @@ export class UserService {
     return this.http.get(
       `http://localhost:3000/api/profiles/` + username
     );
+  }
+
+  pushParam(param:string) {
+    this.dataParam.next(param);
   }
 }
  

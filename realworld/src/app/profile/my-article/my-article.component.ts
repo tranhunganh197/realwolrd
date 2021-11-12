@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from 'src/app/services/article.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,13 +15,16 @@ export class MyArticleComponent implements OnInit {
   constructor(
     private articleService:ArticleService,
     private userService:UserService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.userService.getUser().subscribe(data => {
-      this.articleService.getMyArticles(data?.user?.username).subscribe((data:any) => {
-        this.articles = data?.articles;
-        console.log(this.articles)
+    this.userService.currentParam.subscribe((param:string) => {
+      this.userService.getProfile(param).subscribe((data:any) => {
+        this.articleService.getMyArticles(data?.profile?.username).subscribe((data:any) => {
+          this.articles = data?.articles;
+          console.log(this.articles)
+        })
       })
     })
   }
