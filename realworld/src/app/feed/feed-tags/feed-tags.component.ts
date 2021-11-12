@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleService } from 'src/app/services/article.service';
 
@@ -8,6 +8,7 @@ import { ArticleService } from 'src/app/services/article.service';
   styleUrls: ['./feed-tags.component.scss']
 })
 export class FeedTagsComponent implements OnInit {
+  @Output() tag:any = new EventEmitter
 
   constructor(private articleService:ArticleService,private activatedRoute: ActivatedRoute) { }
   dataArticles:any;
@@ -15,6 +16,7 @@ export class FeedTagsComponent implements OnInit {
   ngOnInit(): void {
     this.articleService.getArticles()
     this.activatedRoute.params.subscribe(tag => {
+      this.articleService.pushTag(tag?.id);
       this.articleService.currentActicles.subscribe((data:any) => {
         this.dataArticles = data;
         this.dataTags = this.dataArticles.articles.filter((article:any) => {

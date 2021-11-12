@@ -24,8 +24,8 @@
           >Your Article</a
         >
         <a
-          *ngIf="isLogin"
-          routerLink="/home/tags/hihi"
+          *ngIf="param"
+          routerLink="/home/tags/{{param}}"
           routerLinkActive="selected"
           [routerLinkActiveOptions]="{ exact: true }"
           >Tags Article</a
