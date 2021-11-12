@@ -41,19 +41,15 @@ export class ArticleDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
-      // console.log(this.id);
-    });
-    this.articleService.getArticle(this.id).subscribe((data: any) => {
-      this.article = data.article;
-      console.log(this.article);
-    });
-
-    this.userService.getUser().subscribe((data) => {
-      this.currentUser = data;
-      console.log(this.currentUser);
-      this.imgUser = this.currentUser?.user?.image;
-      this.canModify =
-        this.currentUser?.user?.username === this.article?.author.username;
+      this.articleService.getArticle(this.id).subscribe((data: any) => {
+        this.article = data?.article;
+        this.userService.getUser().subscribe((data) => {
+          this.currentUser = data;
+          this.imgUser = this.currentUser?.user?.image;
+          this.canModify =
+            this.currentUser?.user?.username === this.article?.author?.username;
+        });
+      });
     });
 
     this.articleService.getComments(this.id).subscribe((data: any) => {
