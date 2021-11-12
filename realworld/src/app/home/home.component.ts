@@ -8,7 +8,6 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-<<<<<<< HEAD
   isLogin:boolean = false;
   param!:string;
   constructor(
@@ -16,10 +15,6 @@ export class HomeComponent implements OnInit {
     private articleService:ArticleService,
     private cdr:ChangeDetectorRef
     ) {}
-=======
-  isLogin: boolean = false;
-  constructor(private userService: UserService) { }
->>>>>>> 5ab8ec4e33fcfd26ec5320eeb6beea12499943d8
 
   ngOnInit(): void {
     this.userService.tokenData.next(localStorage.getItem('token'));
