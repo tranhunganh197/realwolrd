@@ -16,6 +16,11 @@ html {
 body {
     scroll-behavior: smooth;
 }
+.toast-success {
+    padding-left: 80px;
+    text-align: center;
+    background-position: 35% !important;
+}
 ::-webkit-scrollbar-track {
     background-color: #f5f5f5;
 }
