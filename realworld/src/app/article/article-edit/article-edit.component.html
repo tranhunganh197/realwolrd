@@ -1,40 +1,61 @@
 <div class="container_edit-article">
-    <h3>EDIT ARTICLE</h3>
+    <h2>EDIT ARTICLE</h2>
     <form #editArticle="ngForm" (ngSubmit)="handleUpdateArticle()">
         <div class="form-group">
-            <label for="articleTitle">Article Title</label>
-            <input type="text" name="title" [(ngModel)]="title" #titleControl="ngModel" class="form-control"
-                id="articleTitle" autocomplete="false" placeholder="Article title..." required />
-        </div>
-        <div class="form-group">
-            <label for="articleAbout">Article About</label>
-            <input type="text" name="description" [(ngModel)]="description" #aboutControl="ngModel" class="form-control"
-                id="articleAbout" autocomplete="false" placeholder="Article about..." required />
-        </div>
-        <div class="form-group">
-            <label for="articleBody">Article Body</label>
-            <angular-editor name="body" [(ngModel)]="body" [config]="config" required></angular-editor>
-        </div>
-        <div class="form-group">
-            <label for="articleTag">Article Tag</label>
-            <!-- <input type="text" name="tag" [(ngModel)]="tag" #tagsControl="ngModel" class="form-control" id="articleTag"
-                autocomplete="false" placeholder="Article tags..." /> -->
-            <mat-form-field class="example-chip-list" appearance="fill">
+            <div class="inputBox">
+                <input type="text" name="title" [(ngModel)]="title" #titleControl="ngModel" class="form-control"
+                    id="articleTitle" autocomplete="false" required />
+                <span class="text">Title</span>
+                <span class="line"></span>
+            </div>
 
-                <mat-chip-list #chipList aria-label="Fruit selection">
-                    <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
+        </div>
+        <div class="form-group">
+            <div class="inputBox">
+                <input type="text" name="description" [(ngModel)]="description" #aboutControl="ngModel"
+                    class="form-control" id="articleAbout" autocomplete="false" required />
+                <span class="text">About</span>
+                <span class="line"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <!-- <span class="text-body">Body</span> -->
+            <angular-editor name="body" [(ngModel)]="body" [config]="config" required placeholder="Article Body...">
+            </angular-editor>
+
+
+
+        </div>
+
+        <div class="form-group">
+
+            <mat-form-field appearance="fill">
+                <span class="text-tag"> Tags</span>
+                <mat-chip-list #chipList>
+
+                    <mat-chip class="a" *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
                         (removed)="remove(tag)">
                         #{{tag}}
                         <button matChipRemove *ngIf="removable">
-                            <mat-icon>cancel</mat-icon>
+                            <mat-icon>x</mat-icon>
                         </button>
                     </mat-chip>
-                    <input placeholder="Enter tags" class="form-control" [matChipInputFor]="chipList"
+
+
+                    <input class="form-control input-tag" [matChipInputFor]="chipList" placeholder="Enter tag ..."
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
                         (matChipInputTokenEnd)="add($event)">
+
+
+
+
+
                 </mat-chip-list>
+
             </mat-form-field>
+
         </div>
+
         <div class="form_submit">
             <button type="submit" class="btn btn-publish " [disabled]="!editArticle.valid">
                 UPDATE ARTICLE
