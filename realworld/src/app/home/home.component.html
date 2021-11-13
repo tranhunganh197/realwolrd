@@ -10,15 +10,28 @@
   <div class="container-feed">
     <div class="item-feed col-xl-10 col-md-12">
       <div class="change-feed">
-        <a
-          routerLink="/home/global-feed"
+        <a *ngIf="paramHome"
+          routerLink="/home/global-feed/{{paramHome}}"
+          routerLinkActive="selected"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Global Article</a
+        >
+        <a *ngIf="!paramHome"
+          routerLink="/home/global-feed/1"
           routerLinkActive="selected"
           [routerLinkActiveOptions]="{ exact: true }"
           >Global Article</a
         >
         <a
-          *ngIf="isLogin"
-          routerLink="/home/your-feed"
+          *ngIf="isLogin && paramYour"
+          routerLink="/home/your-feed/{{paramYour}}"
+          routerLinkActive="selected"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >Your Article</a
+        >
+        <a
+          *ngIf="isLogin && !paramYour"
+          routerLink="/home/your-feed/1"
           routerLinkActive="selected"
           [routerLinkActiveOptions]="{ exact: true }"
           >Your Article</a

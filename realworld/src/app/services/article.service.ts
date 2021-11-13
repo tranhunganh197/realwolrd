@@ -12,7 +12,10 @@ export class ArticleService {
   article: any;
   dataTag: any = new ReplaySubject(1);
   currentTag: any = this.dataTag.asObservable();
-
+  dataHome: any = new ReplaySubject(1);
+  currentHome: any = this.dataHome.asObservable();
+  dataYour: any = new ReplaySubject(1);
+  currentYour: any = this.dataYour.asObservable();
 
   constructor(private http: HttpClient, private router: Router,) { }
 

@@ -10,6 +10,9 @@ import { UserService } from '../services/user.service';
 export class HomeComponent implements OnInit {
   isLogin:boolean = false;
   param!:string;
+  paramHome!:string;
+  paramYour!:string;
+  
   constructor(
     private userService:UserService,
     private articleService:ArticleService,
@@ -27,6 +30,14 @@ export class HomeComponent implements OnInit {
     });
     this.articleService.currentTag.subscribe((data:any) => {
       this.param = data;
+    })
+    this.articleService.currentHome.subscribe((data:any) => {
+      this.paramHome = data?.id;
+    })
+    this.articleService.currentYour.subscribe((data:any) => {
+      console.log(data);
+      this.paramYour = data?.id;
+      console.log(this.paramYour)
     })
   }
 

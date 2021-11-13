@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
@@ -18,16 +18,20 @@ export class FeedGlobalComponent implements OnInit,OnDestroy {
   constructor(
     private articleService: ArticleService,
     private route:Router,
+    private activatedRoute:ActivatedRoute
     ) {}
   ngOnDestroy(): void {
     this.ob.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.ob = this.articleService.getArticles(2,0).subscribe((data: any) => {
+    this.activatedRoute.params.subscribe(paramHome => {
+      this.articleService.dataHome.next(paramHome);
+    })
+    this.ob = this.articleService.getArticles(5,0).subscribe((data: any) => {
       this.dataArticles = data;
       this.articles = this.dataArticles.articles;
-      for (let i = 0; i < this.dataArticles.articlesCount;i+=2) {
+      for (let i = 0; i < this.dataArticles.articlesCount;i+=5) {
         this.page++;
         this.skipPage.push(i);
         this.numberPage.push(this.page);
@@ -39,7 +43,7 @@ export class FeedGlobalComponent implements OnInit,OnDestroy {
   }
   getPage(i:number) {
     console.log(this.skipPage[i-1]);
-    this.articleService.getArticles(2,this.skipPage[i-1]).subscribe((data:any) => {
+    this.articleService.getArticles(5,this.skipPage[i-1]).subscribe((data:any) => {
       console.log(data);
       this.dataArticles = data;
       this.articles = this.dataArticles.articles;

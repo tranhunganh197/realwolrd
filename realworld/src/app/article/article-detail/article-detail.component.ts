@@ -76,6 +76,7 @@ export class ArticleDetailComponent implements OnInit {
         .subscribe((a: any) => {
           this.articleService.getComments(this.id).subscribe((data: any) => {
             this.commentArr = data?.comments;
+            console.log(this.commentArr);
             this.comment = '';
           });
         });
