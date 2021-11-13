@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap");
+* {
+    box-sizing: border-box;
+}
 .container_create-article {
     width: 100%;
     min-height: 100vh;
@@ -7,9 +11,12 @@
     flex-direction: column;
     background-color: #fff;
     animation: showForm 1s ease-in-out;
-    h3 {
-        padding: 50px 0 20px 0;
-        font-weight: 500;
+    h2 {
+        width: 100%;
+        color: #a496da;
+        font-size: 36px;
+        text-align: center;
+        margin-top: 40px;
     }
     form {
         width: 60%;
@@ -30,7 +37,95 @@
 }
 .btn-publish {
     color: #fff;
-    background-color: rgba(140, 70, 221, 1);
+    background-color: #927fdd;
+    align-items: center;
+    height: 40px;
+    margin-top: 20px;
+}
+.inputBox {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    color: #a496da;
+    margin: 40px 0;
+}
+.inputBox input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    box-shadow: none;
+    outline: none;
+    font-size: 18px;
+    padding: 0 10px;
+    z-index: 1;
+    color: #fff;
+    border: none;
+}
+
+.inputBox .text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 40px;
+    font-size: 18px;
+    padding: 0 10px;
+    display: block;
+    transition: all 0.5s;
+    pointer-events: none;
+}
+.inputBox input:focus + .text,
+.inputBox input:valid + .text {
+    top: -35px;
+    left: -10px;
+}
+.inputBox .line {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #a496da;
+    transition: 0.5s;
+    border-radius: 4px;
+    pointer-events: none;
+}
+.inputBox input:focus ~ .line,
+.inputBox input:valid ~ .line {
+    height: 100%;
+}
+// .text-body {
+//     top: 0;
+//     left: 0;
+//     line-height: 40px;
+//     font-size: 18px;
+//     padding: 0 0px;
+//     display: block;
+//     color: #a496da !important;
+//     transition: all 0.5s;
+//     pointer-events: none;
+// }
+.text-tag {
+    // position: absolute;
+    top: 0;
+    left: 0;
+    line-height: 40px;
+    font-size: 18px;
+    padding: 0 0px;
+    display: block;
+    color: #a496da;
+    transition: all 0.5s;
+    pointer-events: none;
+}
+.a {
+    background-color: #927fdd;
+    color: #fff;
+    height: 40px;
+}
+.input-tag {
+    border: none;
+    border-radius: 0;
+    border-bottom: 3px solid #a496da;
 }
 
 @media (max-width: 768px) {
