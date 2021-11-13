@@ -61,7 +61,7 @@ export class SignupComponent implements OnInit {
         this.toaster.open({
           position: 'top-center',
           duration: 3000,
-          caption: 'ACCOUNT ALREADY EXISTS!',
+          caption: 'USER NAME OR EMAIL HAS BEEN TAKEN!',
           component: CustomToastComponent,
           type: 'danger',
         });
