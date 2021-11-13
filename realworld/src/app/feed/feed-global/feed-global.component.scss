@@ -108,6 +108,10 @@
     animation-iteration-count: 2;
 }
 
+nav {
+    width: 100%;
+}
+
 @keyframes aniLiked {
     from {
         transform: scale(1);

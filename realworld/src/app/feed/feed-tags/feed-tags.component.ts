@@ -14,7 +14,7 @@ export class FeedTagsComponent implements OnInit {
   dataArticles:any;
   dataTags:any[] = [];
   ngOnInit(): void {
-    this.articleService.getArticles()
+    this.articleService.getArticles(5,0)
     this.activatedRoute.params.subscribe(tag => {
       this.articleService.pushTag(tag?.id);
       this.articleService.currentActicles.subscribe((data:any) => {

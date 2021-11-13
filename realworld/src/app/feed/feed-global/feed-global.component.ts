@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
@@ -6,18 +6,21 @@ import { ArticleService } from 'src/app/services/article.service';
   templateUrl: './feed-global.component.html',
   styleUrls: ['./feed-global.component.scss'],
 })
-export class FeedGlobalComponent implements OnInit {
+export class FeedGlobalComponent implements OnInit,OnDestroy {
   dataArticles!: any;
   articles: any;
   isLoading: boolean = true;
+  ob:any;
   constructor(private articleService: ArticleService) {}
+  ngOnDestroy(): void {
+    this.ob.unsubscribe();
+  }
 
   ngOnInit(): void {
-    this.articleService.getArticles();
-    this.articleService.currentActicles.subscribe((data: any) => {
+    this.articleService.getArticles(5,5);
+    this.ob = this.articleService.currentActicles.subscribe((data: any) => {
       this.dataArticles = data;
       this.articles = this.dataArticles.articles;
-      console.log(this.articles)
       if (this.articleService !== undefined || this.articleService !== null) {
         this.isLoading = false;
       }

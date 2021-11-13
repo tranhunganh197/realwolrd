@@ -27,7 +27,7 @@ export class MyArticleComponent implements OnInit, OnDestroy {
           .getMyArticles(data?.profile?.username)
           .subscribe((data: any) => {
             this.articles = data?.articles;
-            if (this.articles !== undefined && this.articles.length > 0) {
+            if (this.articles) {
               this.isLoading = false;
             }
           });

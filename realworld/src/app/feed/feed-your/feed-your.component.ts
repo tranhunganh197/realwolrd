@@ -9,9 +9,19 @@ import { ArticleService } from 'src/app/services/article.service';
 export class FeedYourComponent implements OnInit {
   articles!: any;
   isLoading: boolean = true;
-  constructor(private articleService:ArticleService) {}
+  constructor(
+    private articleService:ArticleService,
+    ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.articleService.getYourArticles(5,0).subscribe((data:any) => {
+      this.articles = data?.articles;     
+      console.log(this.articles)
+      if (this.articles) {
+        this.isLoading = false;
+      }
+    })
+  }
 
   toggleLike(isFavoried:boolean,slug:string) {
     if (isFavoried) {

@@ -18,17 +18,26 @@ export class ArticleService {
 
   constructor(private http: HttpClient, private router: Router,) { }
 
-  getArticles() {
+  getArticles(limit:number,offset:number) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    this.http.get('http://localhost:3000/api/articles', httpOptions).subscribe(data => {
-      console.log(data);
+    this.http.get(`http://localhost:3000/api/articles?limit=${limit}&offset=${offset}`, httpOptions).subscribe(data => {
       this.dataActicles.next(data);
     })
+  }
+
+  getYourArticles(limit:number,offset:number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      })
+    };
+    return this.http.get(`http://localhost:3000/api/articles/feed?limit=${limit}&offset=${offset}`, httpOptions)
   }
 
   getMyArticles(username: string) {
