@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
@@ -11,20 +12,47 @@ export class FeedGlobalComponent implements OnInit,OnDestroy {
   articles: any;
   isLoading: boolean = true;
   ob:any;
-  constructor(private articleService: ArticleService) {}
+  page:number = 0;
+  skipPage:any = [];
+  numberPage:any = [];
+  constructor(
+    private articleService: ArticleService,
+    private route:Router,
+    ) {}
   ngOnDestroy(): void {
     this.ob.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.articleService.getArticles(5,5);
-    this.ob = this.articleService.currentActicles.subscribe((data: any) => {
+    this.ob = this.articleService.getArticles(2,0).subscribe((data: any) => {
       this.dataArticles = data;
       this.articles = this.dataArticles.articles;
+      for (let i = 0; i < this.dataArticles.articlesCount;i+=2) {
+        this.page++;
+        this.skipPage.push(i);
+        this.numberPage.push(this.page);
+      }
       if (this.articleService !== undefined || this.articleService !== null) {
         this.isLoading = false;
       }
     });
+  }
+  getPage(i:number) {
+    console.log(this.skipPage[i-1]);
+    this.articleService.getArticles(2,this.skipPage[i-1]).subscribe((data:any) => {
+      console.log(data);
+      this.dataArticles = data;
+      this.articles = this.dataArticles.articles;
+      this.route.navigateByUrl(`/home/global-feed/${i}`)
+    })
+  }
+
+  prePage() {
+
+  }
+
+  nextPage() {
+  
   }
 
   toggleLike(isFavoried:boolean,slug:string) {

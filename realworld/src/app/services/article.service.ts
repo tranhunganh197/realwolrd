@@ -9,8 +9,6 @@ import { ReplaySubject } from 'rxjs';
 export class ArticleService {
 
   articles!: any[];
-  dataActicles: any = new ReplaySubject<any>(1);
-  currentActicles: any = this.dataActicles.asObservable();
   article: any;
   dataTag: any = new ReplaySubject(1);
   currentTag: any = this.dataTag.asObservable();
@@ -25,9 +23,7 @@ export class ArticleService {
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    this.http.get(`http://localhost:3000/api/articles?limit=${limit}&offset=${offset}`, httpOptions).subscribe(data => {
-      this.dataActicles.next(data);
-    })
+    return this.http.get(`http://localhost:3000/api/articles?limit=${limit}&offset=${offset}`, httpOptions)
   }
 
   getYourArticles(limit:number,offset:number) {

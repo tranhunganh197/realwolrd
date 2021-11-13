@@ -16,15 +16,15 @@ import { ArticleNewComponent } from './article/article-new/article-new.component
 import { NotfoundComponent } from './notfound/notfound.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home/global-feed', pathMatch: 'full' },
-  { path: 'home', redirectTo: 'home/global-feed', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/global-feed/1', pathMatch: 'full' },
+  { path: 'home', redirectTo: 'home/global-feed/1', pathMatch: 'full' },
   { path: 'notfound', component: NotfoundComponent },
   {
     path: 'home',
     component: HomeComponent,
     children: [
-      { path: 'your-feed', component: FeedYourComponent },
-      { path: 'global-feed', component: FeedGlobalComponent },
+      { path: 'your-feed/:id', component: FeedYourComponent },
+      { path: 'global-feed/:id', component: FeedGlobalComponent },
       { path: 'tags/:id', component: FeedTagsComponent },
     ],
   },
