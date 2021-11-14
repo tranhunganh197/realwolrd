@@ -53,6 +53,9 @@ export class ArticleDetailComponent implements OnInit {
           this.canModify =
             this.currentUser?.user?.username === this.article?.author?.username;
         });
+      },err => {
+        this.router.navigateByUrl('/notfound');
+        console.log(err);
       });
     });
 
