@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Article } from 'src/app/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,10 +10,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./article-detail.component.scss'],
 })
 export class ArticleDetailComponent implements OnInit {
-  id: any;
+  id!: string | null;
   currentUser: any;
   canModify: boolean = false;
-  article: any;
+  article!: Article;
   comment!: string;
   commentArr: any[] = [];
   imgUser!: string;
@@ -108,7 +109,7 @@ export class ArticleDetailComponent implements OnInit {
     })
   }
 
-  toggleLike(isFavoried: boolean, slug: string) {
+  toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
     if (isFavoried) {
       this.articleService.unFavorite(slug).subscribe((data: any) => {
         console.log("unlike",data)

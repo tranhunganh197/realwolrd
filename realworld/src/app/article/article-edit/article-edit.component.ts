@@ -4,6 +4,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ArticleService } from 'src/app/services/article.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Article } from 'src/app/article.model';
 
 @Component({
   selector: 'app-article-edit',
@@ -14,12 +15,12 @@ export class ArticleEditComponent implements OnInit {
   title!: string;
   description!: string;
   body!: string;
-  id!: any;
-  article!: any;
-  tags: any[] = [];
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
+  id!: string | null;
+  article!: Article;
+  tags: string[] = [];
+  selectable:boolean = true;
+  removable:boolean = true;
+  addOnBlur:boolean = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   constructor(private articleService: ArticleService,

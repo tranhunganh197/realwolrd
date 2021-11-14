@@ -57,7 +57,7 @@ export class ArticleService {
   }
 
   editArticle(id: any, article: any) {
-    this.http.put(`http://localhost:3000/api/articles/${id}`, article, this.getHttpOptions()).subscribe((data: any) => {
+    this.http.put(`http://localhost:3000/api/articles/${id}`, article, this.getHttpOptions()).subscribe(data=> {
       this.router.navigateByUrl(`/article/detail/${id}`);
     })
   }
@@ -70,15 +70,15 @@ export class ArticleService {
     return this.http.get('http://localhost:3000/api/tags');
   }
 
-  addComment(param: string, comment: any) {
+  addComment(param: string | null, comment: any) {
     return this.http.post(`http://localhost:3000/api/articles/${param}/comments`, comment, this.getHttpOptions())
   }
 
-  getComments(param: string) {
+  getComments(param: string | null) {
     return this.http.get(`http://localhost:3000/api/articles/${param}/comments`, this.getHttpOptions());
   }
 
-  deleteComment(param: string, id: any) {
+  deleteComment(param: string | null, id: any) {
     this.http.delete(`http://localhost:3000/api/articles/${param}/comments/${id?._id}`, this.getHttpOptions()).subscribe()
   }
 
@@ -86,11 +86,11 @@ export class ArticleService {
     this.dataTag.next(tag);
   }
 
-  favorite(slug: string) {
+  favorite(slug: string | undefined) {
     return this.http.post(`http://localhost:3000/api/articles/${slug}/favorite`, {}, this.getHttpOptions())
   }
 
-  unFavorite(slug: string) {
+  unFavorite(slug: string | undefined) {
     return this.http.delete(`http://localhost:3000/api/articles/${slug}/favorite`, this.getHttpOptions())
   }
 }

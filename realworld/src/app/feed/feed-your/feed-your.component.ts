@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Article, Articles } from 'src/app/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
@@ -8,12 +9,12 @@ import { ArticleService } from 'src/app/services/article.service';
   styleUrls: ['./feed-your.component.scss'],
 })
 export class FeedYourComponent implements OnInit {
-  articles!: any;
+  articles!: Article[];
   isLoading: boolean = true;
   page: number = 0;
-  skipPage: any = [];
-  numberPage: any = [];
-  dataArticles: any;
+  skipPage: number[] = [];
+  numberPage: number[] = [];
+  dataArticles!: Articles;
   ob: any;
   currentPage!: number;
   constructor(
@@ -62,7 +63,7 @@ export class FeedYourComponent implements OnInit {
     }
   }
 
-  toggleLike(isFavoried: boolean, slug: string) {
+  toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
     if (isFavoried) {
       this.articleService.unFavorite(slug).subscribe((data: any) => {
         this.articles.map((article: any, index: any) => {

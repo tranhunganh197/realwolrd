@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Article, Articles } from 'src/app/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
@@ -8,13 +9,13 @@ import { ArticleService } from 'src/app/services/article.service';
   styleUrls: ['./feed-global.component.scss'],
 })
 export class FeedGlobalComponent implements OnInit, OnDestroy {
-  dataArticles!: any;
-  articles: any;
+  dataArticles!: Articles;
+  articles: Article[] = [];
   isLoading: boolean = true;
-  ob: any;
+  ob!: any;
   page: number = 0;
-  skipPage: any = [];
-  numberPage: any = [];
+  skipPage: number[] = [];
+  numberPage: number[] = [];
   currentPage: number = 1;
   flags: boolean = false;
   constructor(
@@ -28,12 +29,13 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(paramHome => {
-      this.articleService.dataHome.next(paramHome);
+      this.articleService?.dataHome.next(paramHome);
     })
-    this.ob = this.articleService.getArticles(5, 0).subscribe((data: any) => {
+    this.ob = this.articleService.getArticles(5, 0).subscribe((data:any) => {
       this.dataArticles = data;
-      this.articles = this.dataArticles.articles;
-      for (let i = 0; i < this.dataArticles.articlesCount; i += 5) {
+      this.articles = data?.articles;
+      console.log(this.articles)
+      for (let i = 0; i < this.dataArticles?.articlesCount; i += 5) {
         this.page++;
         this.skipPage.push(i);
         this.numberPage.push(this.page);
@@ -67,10 +69,10 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggleLike(isFavoried: boolean, slug: string) {
+  toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
     if (isFavoried) {
-      this.articleService.unFavorite(slug).subscribe((data: any) => {
-        this.articles.map((article: any, index: any) => {
+      this.articleService.unFavorite(slug).subscribe((data:any) => {
+        this.articles.map((article: Article, index: any) => {
           if (article?.slug === data?.article?.slug) {
             this.articles[index] = data?.article;
           }

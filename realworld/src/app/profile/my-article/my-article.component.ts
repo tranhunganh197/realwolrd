@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Article, Articles } from 'src/app/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,15 +10,14 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./my-article.component.scss'],
 })
 export class MyArticleComponent implements OnInit, OnDestroy {
-  articles: any;
+  articles: Article[] = [];
   ob: any;
-  favoritesCount!: any;
-  isFavorite!: any;
+  favoritesCount!: number;
+  isFavorite!: boolean;
   isLoading: boolean = true;
   constructor(
     private articleService: ArticleService,
     private userService: UserService,
-    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -35,7 +35,7 @@ export class MyArticleComponent implements OnInit, OnDestroy {
     });
   }
 
-  toggleLike(isFavoried: boolean, slug: string) {
+  toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
     if (isFavoried) {
       this.articleService.unFavorite(slug).subscribe((data: any) => {
         this.articles.map((article: any, index: any) => {
@@ -45,7 +45,6 @@ export class MyArticleComponent implements OnInit, OnDestroy {
         });
       });
     } else {
-      console.log(isFavoried);
       this.articleService.favorite(slug).subscribe((data: any) => {
         this.articles.map((article: any, index: any) => {
           if (article?.slug === data?.article?.slug) {
