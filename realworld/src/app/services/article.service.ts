@@ -53,7 +53,7 @@ export class ArticleService {
   }
 
   getArticle(id: any) {
-    return this.http.get(`http://localhost:3000/api/articles/${id}`)
+    return this.http.get(`http://localhost:3000/api/articles/${id}`,this.getHttpOptions())
   }
 
   editArticle(id: any, article: any) {

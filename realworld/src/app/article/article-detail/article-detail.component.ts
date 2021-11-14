@@ -17,6 +17,7 @@ export class ArticleDetailComponent implements OnInit {
   commentArr: any[] = [];
   imgUser!: string;
   isDelete: boolean = false;
+  isFollow!:boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +43,10 @@ export class ArticleDetailComponent implements OnInit {
       this.id = params.get('id');
       this.articleService.getArticle(this.id).subscribe((data: any) => {
         this.article = data?.article;
+        console.log(this.article);
+        this.userService.getProfile(this.article?.author?.username).subscribe((data:any) => {
+          this.isFollow = data?.profile?.following;
+        })
         this.userService.getUser().subscribe((data) => {
           this.currentUser = data;
           this.imgUser = this.currentUser?.user?.image;
@@ -53,11 +58,9 @@ export class ArticleDetailComponent implements OnInit {
 
     this.articleService.getComments(this.id).subscribe((data: any) => {
       this.commentArr = data?.comments;
-      console.log(this.commentArr)
     });
   }
   deleteArticle() {
-    console.log(this.article.slug);
     this.articleService.deleteArticle(this.article.slug).subscribe((data) => {
       this.router.navigateByUrl('/');
     });
@@ -88,5 +91,31 @@ export class ArticleDetailComponent implements OnInit {
     this.commentArr = this.commentArr.filter(cmt => {
       return comment?._id !== cmt?._id
     })
+  }
+
+  follow() {
+    this.userService.follow(this.article?.author?.username).subscribe((data:any) => {
+      this.isFollow = data?.profile?.following;
+    });
+  }
+
+  unfollow() {
+    this.userService.unfollow(this.article?.author?.username).subscribe((data:any) => {
+      this.isFollow = data?.profile?.following;
+    })
+  }
+
+  toggleLike(isFavoried: boolean, slug: string) {
+    if (isFavoried) {
+      this.articleService.unFavorite(slug).subscribe((data: any) => {
+        console.log("unlike",data)
+        this.article = data?.article
+      });
+    } else {
+      this.articleService.favorite(slug).subscribe((data: any) => {
+        console.log("like",data)
+        this.article = data?.article
+      });
+    }
   }
 }

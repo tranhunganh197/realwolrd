@@ -19,12 +19,12 @@
       <button class="btn btn-outline-danger btn-delete">Delete Article</button>
     </div>
     <div class="funct-article" *ngIf="!canModify">
-      <button class="btn btn-outline-danger" *ngIf="false">
+      <button class="btn btn-outline-danger" *ngIf="!isFollow" (click)="follow()">
         + Follow User
       </button>
-      <button class="btn btn-outline-danger" *ngIf="true">Followed</button>
+      <button class="btn btn-outline-danger" *ngIf="isFollow" (click)="unfollow()">Followed</button>
 
-      <button class="btn btn-outline-success">
+      <button class="btn btn-outline-success" (click)="toggleLike(article?.favorited, article?.slug)">
         {{ article?.favoritesCount }} Favorited
       </button>
     </div>
