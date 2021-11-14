@@ -64,6 +64,9 @@ export class FeedYourComponent implements OnInit {
   }
 
   toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
+    if (!localStorage.getItem('token')) {
+      this.route.navigateByUrl('/signin')
+    }
     if (isFavoried) {
       this.articleService.unFavorite(slug).subscribe((data: any) => {
         this.articles.map((article: any, index: any) => {

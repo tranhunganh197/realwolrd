@@ -12,7 +12,7 @@
     <div class="funct-article" *ngIf="canModify">
       <button
         class="btn btn-outline-secondary"
-        routerLink="/article/edit/{{ article?.slug }}"
+        routerLink="/article/edit/{{ article?.slug}}"
       >
         Edit Article
       </button>
@@ -36,7 +36,10 @@
     <div class="body-article" [innerHTML]="article?.body | safe"></div>
     <hr />
     <div class="comment">
-      <form class="d-flex justify-conent-beetween">
+      <div *ngIf="!currentUser">
+        <p><a routerLink="/signin">Login </a>to comment!</p>
+      </div>
+      <form class="d-flex justify-conent-beetween" *ngIf="currentUser">
         <img [src]="imgUser" alt="" />
         <textarea
           placeholder="Type something....."

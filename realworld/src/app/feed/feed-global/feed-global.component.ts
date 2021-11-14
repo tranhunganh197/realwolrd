@@ -34,7 +34,6 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
     this.ob = this.articleService.getArticles(5, 0).subscribe((data:any) => {
       this.dataArticles = data;
       this.articles = data?.articles;
-      console.log(this.articles)
       for (let i = 0; i < this.dataArticles?.articlesCount; i += 5) {
         this.page++;
         this.skipPage.push(i);
@@ -59,8 +58,6 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
     if (this.currentPage >= 2) {
       this.getPage(this.currentPage - 1);
     }
-
-
   }
 
   nextPage() {
@@ -70,6 +67,9 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
   }
 
   toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
+    if (!localStorage.getItem('token')) {
+      this.route.navigateByUrl('/signin')
+    }
     if (isFavoried) {
       this.articleService.unFavorite(slug).subscribe((data:any) => {
         this.articles.map((article: Article, index: any) => {

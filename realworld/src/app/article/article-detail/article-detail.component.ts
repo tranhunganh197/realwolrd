@@ -44,7 +44,6 @@ export class ArticleDetailComponent implements OnInit {
       this.id = params.get('id');
       this.articleService.getArticle(this.id).subscribe((data: any) => {
         this.article = data?.article;
-        console.log(this.article);
         this.userService.getProfile(this.article?.author?.username).subscribe((data:any) => {
           this.isFollow = data?.profile?.following;
         })
@@ -98,18 +97,27 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   follow() {
+    if (!localStorage.getItem('token')) {
+      this.router.navigateByUrl('/signin')
+    }
     this.userService.follow(this.article?.author?.username).subscribe((data:any) => {
       this.isFollow = data?.profile?.following;
     });
   }
 
   unfollow() {
+    if (!localStorage.getItem('token')) {
+      this.router.navigateByUrl('/signin')
+    }
     this.userService.unfollow(this.article?.author?.username).subscribe((data:any) => {
       this.isFollow = data?.profile?.following;
     })
   }
 
   toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
+    if (!localStorage.getItem('token')) {
+      this.router.navigateByUrl('/signin')
+    }
     if (isFavoried) {
       this.articleService.unFavorite(slug).subscribe((data: any) => {
         console.log("unlike",data)

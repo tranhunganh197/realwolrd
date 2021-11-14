@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Article, Articles } from 'src/app/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 
@@ -10,7 +10,9 @@ import { ArticleService } from 'src/app/services/article.service';
 })
 export class FeedTagsComponent implements OnInit {
 
-  constructor(private articleService:ArticleService,private activatedRoute: ActivatedRoute) { }
+  constructor(private articleService:ArticleService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute) { }
   dataArticles!:Articles;
   articles:Article[] = [];
   ngOnInit(): void {
@@ -27,5 +29,29 @@ export class FeedTagsComponent implements OnInit {
         });
       })
     })
+  }
+
+  toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
+    if (!localStorage.getItem('token')) {
+      this.route.navigateByUrl('/signin')
+    }
+    if (isFavoried) {
+      this.articleService.unFavorite(slug).subscribe((data:any) => {
+        this.articles.map((article: Article, index: any) => {
+          if (article?.slug === data?.article?.slug) {
+            this.articles[index] = data?.article;
+          }
+        });
+      })
+    } else {
+      console.log(isFavoried)
+      this.articleService.favorite(slug).subscribe((data: any) => {
+        this.articles.map((article: any, index: any) => {
+          if (article?.slug === data?.article?.slug) {
+            this.articles[index] = data?.article;
+          }
+        });
+      })
+    }
   }
 }

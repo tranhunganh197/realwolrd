@@ -16,6 +16,7 @@ import { ArticleEditComponent } from './article/article-edit/article-edit.compon
 import { ArticleNewComponent } from './article/article-new/article-new.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { AuthGuard } from './auth.guard';
+import { LoginedGuard } from './logined.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home/global-feed/1', pathMatch: 'full' },
@@ -31,8 +32,8 @@ const routes: Routes = [
     ],
   },
   { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard] },
-  { path: 'signin', component: SigninComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: SigninComponent, canActivate:[LoginedGuard] },
+  { path: 'signup', component: SignupComponent, canActivate:[LoginedGuard] },
   {
     path: 'profiles/:id',
     component: MyProfileComponent,
