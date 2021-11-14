@@ -19,34 +19,25 @@ export class ArticleService {
 
   constructor(private http: HttpClient, private router: Router,) { }
 
-  getArticles(limit:number,offset:number) {
-    const httpOptions = {
+  getHttpOptions() {
+    return {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem('token')}`,
       })
     };
-    return this.http.get(`http://localhost:3000/api/articles?limit=${limit}&offset=${offset}`, httpOptions)
+  }
+
+  getArticles(limit:number,offset:number) {
+    return this.http.get(`http://localhost:3000/api/articles?limit=${limit}&offset=${offset}`, this.getHttpOptions())
   }
 
   getYourArticles(limit:number,offset:number) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      })
-    };
-    return this.http.get(`http://localhost:3000/api/articles/feed?limit=${limit}&offset=${offset}`, httpOptions)
+    return this.http.get(`http://localhost:3000/api/articles/feed?limit=${limit}&offset=${offset}`, this.getHttpOptions())
   }
 
   getMyArticles(username: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      })
-    };
-    return this.http.get(`http://localhost:3000/api/articles/?author=${username}`, httpOptions)
+    return this.http.get(`http://localhost:3000/api/articles/?author=${username}`, this.getHttpOptions())
   }
 
   getFavoriteArticles(username: string) {
@@ -58,97 +49,48 @@ export class ArticleService {
   }
 
   createArticle(article: any) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      })
-    };
-    return this.http.post('http://localhost:3000/api/articles', article, httpOptions)
+    return this.http.post('http://localhost:3000/api/articles', article, this.getHttpOptions())
   }
 
   getArticle(id: any) {
-    return this.http.get(`http://localhost:3000/api/articles/${id}`)
+    return this.http.get(`http://localhost:3000/api/articles/${id}`,this.getHttpOptions())
   }
 
   editArticle(id: any, article: any) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      })
-    };
-    this.http.put(`http://localhost:3000/api/articles/${id}`, article, httpOptions).subscribe((data: any) => {
-      console.log(data);
-      this.router.navigateByUrl('/home');
+    this.http.put(`http://localhost:3000/api/articles/${id}`, article, this.getHttpOptions()).subscribe(data=> {
+      this.router.navigateByUrl(`/article/detail/${id}`);
     })
   }
 
   deleteArticle(id: any) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      })
-    };
-    return this.http.delete(`http://localhost:3000/api/articles/${id}`, httpOptions)
+    return this.http.delete(`http://localhost:3000/api/articles/${id}`, this.getHttpOptions())
   }
 
   getTags() {
     return this.http.get('http://localhost:3000/api/tags');
   }
 
-  addComment(param: string, comment: any) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      })
-    };
-    return this.http.post(`http://localhost:3000/api/articles/${param}/comments`, comment, httpOptions)
+  addComment(param: string | null, comment: any) {
+    return this.http.post(`http://localhost:3000/api/articles/${param}/comments`, comment, this.getHttpOptions())
   }
 
-  getComments(param: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      })
-    };
-    return this.http.get(`http://localhost:3000/api/articles/${param}/comments`, httpOptions);
+  getComments(param: string | null) {
+    return this.http.get(`http://localhost:3000/api/articles/${param}/comments`, this.getHttpOptions());
   }
 
-  deleteComment(param: string, id: any) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`,
-      })
-    };
-    this.http.delete(`http://localhost:3000/api/articles/${param}/comments/${id?._id}`, httpOptions).subscribe()
+  deleteComment(param: string | null, id: any) {
+    this.http.delete(`http://localhost:3000/api/articles/${param}/comments/${id?._id}`, this.getHttpOptions()).subscribe()
   }
 
   pushTag(tag: any) {
     this.dataTag.next(tag);
   }
 
-  favorite(slug: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    return this.http.post(`http://localhost:3000/api/articles/${slug}/favorite`, {}, httpOptions)
+  favorite(slug: string | undefined) {
+    return this.http.post(`http://localhost:3000/api/articles/${slug}/favorite`, {}, this.getHttpOptions())
   }
 
-  unFavorite(slug: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    return this.http.delete(`http://localhost:3000/api/articles/${slug}/favorite`, httpOptions)
+  unFavorite(slug: string | undefined) {
+    return this.http.delete(`http://localhost:3000/api/articles/${slug}/favorite`, this.getHttpOptions())
   }
 }

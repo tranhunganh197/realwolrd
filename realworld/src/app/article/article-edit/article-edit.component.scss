@@ -106,7 +106,7 @@
 //     transition: all 0.5s;
 //     pointer-events: none;
 // }
-.text-tag {
+.text-custom {
     // position: absolute;
     top: 0;
     left: 0;
@@ -149,4 +149,13 @@
         transform: translateY(0%);
         opacity: 1;
     }
+}
+input.ng-touched.ng-invalid {
+    border: 2px solid red;
+}
+input.ng-touched.ng-invalid + .text {
+    left: 10px;
+}
+textarea.ng-touched.ng-invalid {
+    border: 2px solid red;
 }

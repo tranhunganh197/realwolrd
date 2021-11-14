@@ -2,12 +2,7 @@
   <h2>ACCOUNT SETTING</h2>
   <div class="infor">
     <div class="avatar-user">
-      <img
-        src="{{ urlAvatar }}"
-        alt=""
-        (error)="handleError()"
-        (load)="handleSuccess()"
-      />
+      <img src="{{ urlAvatar }}" alt="" (error)="handleError()" (load)="handleSuccess()" />
     </div>
     <div class="user-infor">
       <p class="name">{{ name }}</p>
@@ -18,80 +13,39 @@
     <form #settingForm="ngForm" (ngSubmit)="handleUpdate()">
       <div class="row">
         <div class="form-group col-xl-6 col-md-12">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            name="username"
-            [(ngModel)]="name"
-            disabled
-            #nameControl="ngModel"
-            class="form-control"
-            id="username"
-            autocomplete="false"
-            placeholder="Enter username..."
-          />
+          <label for="username" class="text">Username</label>
+          <input type="text" name="username" [(ngModel)]="name" disabled #nameControl="ngModel" class="form-control"
+            id="username" autocomplete="false" placeholder="Enter username..." />
         </div>
         <div class="form-group col-xl-6 col-md-12">
-          <label for="urlProfile">URL Image</label>
-          <input
-            type="text"
-            name="urlAvatar"
-            [(ngModel)]="urlAvatar"
-            #urlControl="ngModel"
-            class="form-control"
-            id="urlAvatar"
-            autocomplete="false"
-            placeholder="URL Profile Picture"
-          />
+          <label for="urlProfile" class="text">URL Image</label>
+          <input type="text" name="urlAvatar" [(ngModel)]="urlAvatar" #urlControl="ngModel" class="form-control"
+            id="urlAvatar" autocomplete="false" placeholder="URL Profile Picture" />
           <p class="error" *ngIf="errorURL">URL is not exist!</p>
         </div>
         <div class="form-group col-xl-6 col-md-12">
-          <label for="email">Email <span>*</span></label>
-          <input
-            type="email"
-            name="email"
-            [(ngModel)]="email"
-            #emailControl="ngModel"
-            class="form-control"
-            id="email"
-            autocomplete="false"
-            placeholder="Email adress..."
-          />
+          <label for="email" class="text">Email <span>*</span></label>
+          <input type="email" name="email" [(ngModel)]="email" #emailControl="ngModel" class="form-control" id="email"
+            autocomplete="false" placeholder="Email adress..." required />
         </div>
         <div class="form-group col-xl-6 col-md-12">
-          <label for="password">Password <span>*</span></label>
-          <input
-            type="password"
-            name="password"
-            [(ngModel)]="password"
-            #passControl="ngModel"
-            class="form-control"
-            id="password"
-            autocomplete="false"
-            placeholder="Password"
-          />
+          <label for="password" class="text">Password <span>*</span></label>
+          <input type="password" name="password" [(ngModel)]="password" #passControl="ngModel" class="form-control"
+            id="password" autocomplete="false" placeholder="Password" required />
         </div>
       </div>
       <div class="form-group">
-        <label for="bio">Bio about you</label>
-        <textarea
-          class="form-control"
-          id="bio"
-          #bioControl="ngModel"
-          name="bio"
-          [(ngModel)]="bio"
-          rows="3"
-        ></textarea>
+        <label for="bio" class="text">Bio about you</label>
+        <textarea class="form-control" id="bio" #bioControl="ngModel" name="bio" [(ngModel)]="bio" rows="3"></textarea>
       </div>
       <div class="message" *ngIf="message">{{ message }}</div>
       <div class="fr-submit col-12">
-        <button
-          type="submit"
-          class="btn btn-info"
-          [disabled]="!settingForm.valid"
-        >
-          UPDATE SETTING
-        </button>
+        <div class="form_submit">
+          <button type="submit" class="btn btn-publish " [disabled]="!settingForm.valid">
+            UPDATE SETTING
+          </button>
+
+        </div>
       </div>
     </form>
   </div>

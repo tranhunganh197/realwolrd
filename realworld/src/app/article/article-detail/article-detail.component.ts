@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { Article } from 'src/app/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,14 +10,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./article-detail.component.scss'],
 })
 export class ArticleDetailComponent implements OnInit {
-  id: any;
+  id!: string | null;
   currentUser: any;
   canModify: boolean = false;
-  article: any;
+  article!: Article;
   comment!: string;
   commentArr: any[] = [];
   imgUser!: string;
   isDelete: boolean = false;
+  isFollow!:boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,22 +44,26 @@ export class ArticleDetailComponent implements OnInit {
       this.id = params.get('id');
       this.articleService.getArticle(this.id).subscribe((data: any) => {
         this.article = data?.article;
+        this.userService.getProfile(this.article?.author?.username).subscribe((data:any) => {
+          this.isFollow = data?.profile?.following;
+        })
         this.userService.getUser().subscribe((data) => {
           this.currentUser = data;
           this.imgUser = this.currentUser?.user?.image;
           this.canModify =
             this.currentUser?.user?.username === this.article?.author?.username;
         });
+      },err => {
+        this.router.navigateByUrl('/notfound');
+        console.log(err);
       });
     });
 
     this.articleService.getComments(this.id).subscribe((data: any) => {
       this.commentArr = data?.comments;
-      console.log(this.commentArr)
     });
   }
   deleteArticle() {
-    console.log(this.article.slug);
     this.articleService.deleteArticle(this.article.slug).subscribe((data) => {
       this.router.navigateByUrl('/');
     });
@@ -88,5 +94,40 @@ export class ArticleDetailComponent implements OnInit {
     this.commentArr = this.commentArr.filter(cmt => {
       return comment?._id !== cmt?._id
     })
+  }
+
+  follow() {
+    if (!localStorage.getItem('token')) {
+      this.router.navigateByUrl('/signin')
+    }
+    this.userService.follow(this.article?.author?.username).subscribe((data:any) => {
+      this.isFollow = data?.profile?.following;
+    });
+  }
+
+  unfollow() {
+    if (!localStorage.getItem('token')) {
+      this.router.navigateByUrl('/signin')
+    }
+    this.userService.unfollow(this.article?.author?.username).subscribe((data:any) => {
+      this.isFollow = data?.profile?.following;
+    })
+  }
+
+  toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
+    if (!localStorage.getItem('token')) {
+      this.router.navigateByUrl('/signin')
+    }
+    if (isFavoried) {
+      this.articleService.unFavorite(slug).subscribe((data: any) => {
+        console.log("unlike",data)
+        this.article = data?.article
+      });
+    } else {
+      this.articleService.favorite(slug).subscribe((data: any) => {
+        console.log("like",data)
+        this.article = data?.article
+      });
+    }
   }
 }

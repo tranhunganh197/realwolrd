@@ -35,9 +35,7 @@ export class HomeComponent implements OnInit {
       this.paramHome = data?.id;
     })
     this.articleService.currentYour.subscribe((data:any) => {
-      console.log(data);
       this.paramYour = data?.id;
-      console.log(this.paramYour)
     })
   }
 

@@ -5,6 +5,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ArticleService } from 'src/app/services/article.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Article } from 'src/app/article.model';
 
 
 
@@ -14,14 +15,14 @@ import { MatChipInputEvent } from '@angular/material/chips';
   styleUrls: ['./article-new.component.scss'],
 })
 export class ArticleNewComponent implements OnInit {
-  htmlContent!: any;
-  title!: any;
-  about!: any;
-  tags: any[] = [];
-  article!: any;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
+  htmlContent!: string;
+  title!: string;
+  about!: string;
+  tags: string[] = [];
+  article!: Article;
+  selectable:boolean = true;
+  removable:boolean = true;
+  addOnBlur:boolean = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   a =

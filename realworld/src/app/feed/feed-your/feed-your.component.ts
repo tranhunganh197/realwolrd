@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Article, Articles } from 'src/app/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
@@ -8,27 +9,28 @@ import { ArticleService } from 'src/app/services/article.service';
   styleUrls: ['./feed-your.component.scss'],
 })
 export class FeedYourComponent implements OnInit {
-  articles!: any;
+  articles!: Article[];
   isLoading: boolean = true;
-  page:number = 0;
-  skipPage:any = [];
-  numberPage:any = [];
-  dataArticles:any;
-  ob:any;
+  page: number = 0;
+  skipPage: number[] = [];
+  numberPage: number[] = [];
+  dataArticles!: Articles;
+  ob: any;
+  currentPage!: number;
   constructor(
-    private articleService:ArticleService,
-    private route:Router,
-    private activatedRoute:ActivatedRoute
-    ) {}
+    private articleService: ArticleService,
+    private route: Router,
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(paramYour => {
       this.articleService.dataYour.next(paramYour);
     })
-    this.ob = this.articleService.getYourArticles(5,0).subscribe((data: any) => {
+    this.ob = this.articleService.getYourArticles(5, 0).subscribe((data: any) => {
       this.dataArticles = data;
       this.articles = this.dataArticles.articles;
-      for (let i = 0; i < this.dataArticles.articlesCount;i+=5) {
+      for (let i = 0; i < this.dataArticles.articlesCount; i += 5) {
         this.page++;
         this.skipPage.push(i);
         this.numberPage.push(this.page);
@@ -39,8 +41,9 @@ export class FeedYourComponent implements OnInit {
     });
   }
 
-  getPage(i:number) {
-    this.articleService.getArticles(5,this.skipPage[i-1]).subscribe((data:any) => {
+  getPage(i: number) {
+    this.currentPage = i;
+    this.articleService.getArticles(5, this.skipPage[i - 1]).subscribe((data: any) => {
       console.log(data);
       this.dataArticles = data;
       this.articles = this.dataArticles.articles;
@@ -49,17 +52,24 @@ export class FeedYourComponent implements OnInit {
   }
 
   prePage() {
-
+    if (this.currentPage >= 2) {
+      this.getPage(this.currentPage - 1);
+    }
   }
 
   nextPage() {
-
+    if (this.currentPage < this.numberPage.length) {
+      this.getPage(this.currentPage + 1);
+    }
   }
 
-  toggleLike(isFavoried:boolean,slug:string) {
+  toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
+    if (!localStorage.getItem('token')) {
+      this.route.navigateByUrl('/signin')
+    }
     if (isFavoried) {
-      this.articleService.unFavorite(slug).subscribe((data:any)  => {
-        this.articles.map((article:any,index:any) => {
+      this.articleService.unFavorite(slug).subscribe((data: any) => {
+        this.articles.map((article: any, index: any) => {
           if (article?.slug === data?.article?.slug) {
             this.articles[index] = data?.article;
           }
@@ -67,8 +77,8 @@ export class FeedYourComponent implements OnInit {
       })
     } else {
       console.log(isFavoried)
-      this.articleService.favorite(slug).subscribe((data:any) => {
-        this.articles.map((article:any,index:any) => {
+      this.articleService.favorite(slug).subscribe((data: any) => {
+        this.articles.map((article: any, index: any) => {
           if (article?.slug === data?.article?.slug) {
             this.articles[index] = data?.article;
           }

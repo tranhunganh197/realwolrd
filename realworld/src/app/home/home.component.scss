@@ -76,7 +76,7 @@
 
 @media (max-width: 1024px) {
     .banner {
-        width: 96%;
+        width: 100%;
         height: 250px;
         &-right {
             display: none;
@@ -93,6 +93,11 @@
     padding-left: 15px;
     &:first-child {
         padding-right: 0;
+    }
+}
+@media (max-width: 400px) {
+    .item-feed {
+        padding-left: 0;
     }
 }
 .change-feed {

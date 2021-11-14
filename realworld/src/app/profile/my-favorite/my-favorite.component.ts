@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Article, Articles } from 'src/app/article.model';
 import { ArticleService } from 'src/app/services/article.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -8,14 +10,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./my-favorite.component.scss'],
 })
 export class MyFavoriteComponent implements OnInit {
-  dataFavorite: any;
+  dataFavorite!: Articles;
   isLoading: boolean = true;
   ob:any;
-  articles:any;
+  articles:Article[] = [];
 
   constructor(
     private articleService: ArticleService,
-    private userService: UserService
+    private userService: UserService,
+    private route:Router
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +39,10 @@ export class MyFavoriteComponent implements OnInit {
     });
   }
 
-  toggleLike(isFavoried: boolean, slug: string) {
+  toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
+    if (!localStorage.getItem('token')) {
+      this.route.navigateByUrl('/signin')
+    }
     if (isFavoried) {
       this.articleService.unFavorite(slug).subscribe((data: any) => {
         this.articles.map((article: any, index: any) => {
@@ -46,7 +52,6 @@ export class MyFavoriteComponent implements OnInit {
         });
       });
     } else {
-      console.log(isFavoried);
       this.articleService.favorite(slug).subscribe((data: any) => {
         this.articles.map((article: any, index: any) => {
           if (article?.slug === data?.article?.slug) {

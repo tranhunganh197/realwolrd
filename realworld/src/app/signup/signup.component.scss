@@ -121,3 +121,8 @@ input.ng-touched.ng-invalid {
 .custom-caption {
     text-align: center;
 }
+@media (max-width: 400px) {
+    .img-signup {
+        display: none;
+    }
+}

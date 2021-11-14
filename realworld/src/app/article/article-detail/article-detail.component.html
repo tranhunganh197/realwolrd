@@ -19,14 +19,25 @@
       <button class="btn btn-outline-danger btn-delete">Delete Article</button>
     </div>
     <div class="funct-article" *ngIf="!canModify">
-      <button class="btn btn-outline-danger" *ngIf="!article?.following">
+      <button
+        class="btn btn-outline-danger"
+        *ngIf="!isFollow"
+        (click)="follow()"
+      >
         + Follow User
       </button>
-      <button class="btn btn-outline-danger" *ngIf="article?.following">
+      <button
+        class="btn btn-outline-danger"
+        *ngIf="isFollow"
+        (click)="unfollow()"
+      >
         Followed
       </button>
 
-      <button class="btn btn-outline-success">
+      <button
+        class="btn btn-outline-success"
+        (click)="toggleLike(article?.favorited, article?.slug)"
+      >
         {{ article?.favoritesCount }} Favorited
       </button>
     </div>
@@ -38,7 +49,10 @@
     <div class="body-article" [innerHTML]="article?.body | safe"></div>
     <hr />
     <div class="comment">
-      <form class="d-flex justify-conent-beetween">
+      <div *ngIf="!currentUser">
+        <p><a routerLink="/signin">Login </a>to comment!</p>
+      </div>
+      <form class="d-flex justify-conent-beetween" *ngIf="currentUser">
         <img [src]="imgUser" alt="" />
         <textarea
           placeholder="Type something....."

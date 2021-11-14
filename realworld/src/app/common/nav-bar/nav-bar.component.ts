@@ -12,7 +12,6 @@ export class NavBarComponent implements OnInit {
   href: any;
   username!: string;
   avatar!: string;
-  data: any;
   hide: boolean = false;
   // khong sua doan nay
   hideTabs: boolean = false;

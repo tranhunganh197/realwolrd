@@ -8,15 +8,15 @@ import { ArticleService } from 'src/app/services/article.service';
   styleUrls: ['./tags.component.scss']
 })
 export class TagsComponent implements OnInit {
-  tags:string[] = [];
-  tagsArr:any;
+  tagsArr:string[] = [];
+  tags!:string;
   constructor(private articleService: ArticleService) { }
 
   ngOnInit(): void {
     this.articleService.getTags().subscribe(tags => {
-      this.tags = Object.values(tags);
-      this.tagsArr = this.tags[0];
-      this.tagsArr = this.tagsArr.slice(0,10);
+      this.tagsArr = Object.values(tags);
+      this.tags = this.tagsArr[0];
+      this.tags = this.tags.slice(0,10);
     })
   }
 }

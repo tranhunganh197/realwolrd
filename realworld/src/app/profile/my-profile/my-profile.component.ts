@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -12,7 +12,11 @@ export class MyProfileComponent implements OnInit {
   isUser!:boolean;
   name!:string;
   isFollow!:boolean;
-  constructor(private userService:UserService,private activatedRoute:ActivatedRoute) { }
+  constructor(
+    private userService:UserService,
+    private activatedRoute:ActivatedRoute,
+    private route:Router
+    ) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(param => {
@@ -35,12 +39,18 @@ export class MyProfileComponent implements OnInit {
   }
 
   follow() {
+    if (!localStorage.getItem('token')) {
+      this.route.navigateByUrl('/signin')
+    }
     this.userService.follow(this.dataProfile?.profile?.username).subscribe((data:any) => {
       this.isFollow = data?.profile?.following
     });
   }
 
   unfollow() {
+    if (!localStorage.getItem('token')) {
+      this.route.navigateByUrl('/signin')
+    }
     this.userService.unfollow(this.dataProfile?.profile?.username).subscribe((data:any) => {
       this.isFollow = data?.profile?.following;
     })

@@ -13,7 +13,6 @@ import { style } from '@angular/animations';
 export class SigninComponent implements OnInit {
   public name!: string;
   public email!: string;
-  public user: any;
   public password!: string;
   public err!: string;
 

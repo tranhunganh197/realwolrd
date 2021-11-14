@@ -4,6 +4,8 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { ArticleService } from 'src/app/services/article.service';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { Article } from 'src/app/article.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-article-edit',
@@ -14,16 +16,19 @@ export class ArticleEditComponent implements OnInit {
   title!: string;
   description!: string;
   body!: string;
-  id!: any;
-  article!: any;
-  tags: any[] = [];
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
+  id!: string | null;
+  article!: Article;
+  tags: string[] = [];
+  selectable:boolean = true;
+  removable:boolean = true;
+  addOnBlur:boolean = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  constructor(private articleService: ArticleService,
-    private router: Router, private route: ActivatedRoute) { }
+  constructor(
+    private articleService: ArticleService,
+    private userService:UserService,
+    private router: Router, 
+    private route: ActivatedRoute) { }
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -55,13 +60,17 @@ export class ArticleEditComponent implements OnInit {
 
     })
     this.articleService.getArticle(this.id).subscribe((data: any) => {
-      this.article = data.article;
-      console.log(this.article?.tagList);
-      this.title = this.article?.title;
-      this.description = this.article?.description;
-      this.body = this.article?.body;
-      this.tags = this.article?.tagList;
-
+      this.userService.getUser().subscribe((user:any) => {
+        if (data?.article?.author?.username !== user?.user.username) {
+          this.router.navigateByUrl(`/article/detail/${data?.article?.slug}`)
+        } else {
+          this.article = data.article;
+          this.title = this.article?.title;
+          this.description = this.article?.description;
+          this.body = this.article?.body;
+          this.tags = this.article?.tagList;
+        }
+      })
     })
   }
   handleUpdateArticle() {
