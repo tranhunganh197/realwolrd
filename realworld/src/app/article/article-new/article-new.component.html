@@ -5,7 +5,7 @@
       <div class="inputBox">
         <input type="text" name="title" [(ngModel)]="title" #titleControl="ngModel" class="form-control" id="email"
           autocomplete="false" required />
-        <span class="text">Title</span>
+        <span class="text">Title <span style="color:red">*</span></span>
         <span class="line"></span>
       </div>
 
@@ -14,18 +14,19 @@
       <div class="inputBox">
         <input type="text" name="about" [(ngModel)]="about" #aboutControl="ngModel" class="form-control" id="about"
           autocomplete="false" required />
-        <span class="text">About</span>
+        <span class="text">About <span style="color:red">*</span></span>
         <span class="line"></span>
       </div>
 
 
     </div>
     <div class="form-group">
+      <span class="text-custom"> Body <span style="color:red">*</span></span>
       <angular-editor name="htmlContent" [(ngModel)]="htmlContent" [config]="config" required></angular-editor>
     </div>
     <div class="form-group">
       <mat-form-field class="example-chip-list" appearance="fill">
-        <span class="text-tag"> Tags</span>
+        <span class="text-custom"> Tags</span>
         <mat-chip-list #chipList aria-label="Fruit selection">
           <mat-chip class="a" *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"
             (removed)="remove(tag)">

@@ -76,7 +76,29 @@ button {
     display: flex;
     justify-content: center;
 }
-
+.text {
+    top: 0;
+    left: 0;
+    line-height: 40px;
+    font-size: 18px;
+    padding: 0 0px;
+    display: block;
+    color: #a496da;
+    transition: all 0.5s;
+    pointer-events: none;
+    margin-top: 10px;
+}
+.btn-publish {
+    color: #fff;
+    background-color: #927fdd;
+    align-items: center;
+    height: 40px;
+    margin-top: 20px;
+}
+input {
+    width: 100%;
+    height: 40px;
+}
 @media (max-width: 720px) {
     .infor {
         width: 90%;
@@ -111,4 +133,13 @@ button {
     font-weight: 500;
     padding: 5px 10px;
     background-color: rgba(255, 0, 0, 0.5);
+}
+input.ng-touched.ng-invalid {
+    border: 2px solid red;
+}
+input.ng-touched.ng-invalid + .text {
+    left: 10px;
+}
+textarea.ng-touched.ng-invalid {
+    border: 2px solid red;
 }
