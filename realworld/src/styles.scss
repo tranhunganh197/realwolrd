@@ -12,10 +12,9 @@
 html {
     font-family: "Poppins", sans-serif;
     background-color: rgb(255, 255, 255);
-}
-body {
     scroll-behavior: smooth;
 }
+
 .toast-success {
     padding-left: 80px;
     text-align: center;
@@ -31,5 +30,5 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgba(140, 70, 221, 1);
+    background-color: rgb(181, 172, 192);
 }

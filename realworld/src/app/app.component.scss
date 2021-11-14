@@ -1,0 +1,12 @@
+.btn-scroll {
+    position: fixed;
+    bottom: 30px;
+    right: 50px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    .icon-scroll {
+        font-size: 50px;
+        transform: rotate(90deg);
+    }
+}
