@@ -5,7 +5,7 @@
             <div class="inputBox">
                 <input type="text" name="title" [(ngModel)]="title" #titleControl="ngModel" class="form-control"
                     id="articleTitle" autocomplete="false" required />
-                <span class="text">Title</span>
+                <span class="text">Title<span style="color:red"> *</span></span>
                 <span class="line"></span>
             </div>
 
@@ -14,11 +14,12 @@
             <div class="inputBox">
                 <input type="text" name="description" [(ngModel)]="description" #aboutControl="ngModel"
                     class="form-control" id="articleAbout" autocomplete="false" required />
-                <span class="text">About</span>
+                <span class="text">About<span style="color:red"> *</span></span>
                 <span class="line"></span>
             </div>
         </div>
         <div class="form-group">
+            <span class="text-custom"> Body<span style="color:red"> *</span></span>
             <!-- <span class="text-body">Body</span> -->
             <angular-editor name="body" [(ngModel)]="body" [config]="config" required placeholder="Article Body...">
             </angular-editor>
@@ -30,7 +31,7 @@
         <div class="form-group">
 
             <mat-form-field appearance="fill">
-                <span class="text-tag"> Tags</span>
+                <span class="text-custom"> Tags</span>
                 <mat-chip-list #chipList>
 
                     <mat-chip class="a" *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable"

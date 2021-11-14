@@ -12,27 +12,18 @@
         </p>
         <p>{{ article?.createdAt | amTimeAgo }}</p>
       </div>
-      <div
-        class="btn-like"
-        (click)="toggleLike(article?.favorited, article?.slug)"
-      >
-        <span
-          ><mat-icon class="icon-like active" *ngIf="article?.favorited"
-            >favorite</mat-icon
-          ><mat-icon class="icon-like" *ngIf="!article?.favorited"
-            >favorite_border</mat-icon
-          >{{ article?.favoritesCount }}</span
-        >
+      <div class="btn-like" (click)="toggleLike(article?.favorited, article?.slug)">
+        <span>
+          <mat-icon class="icon-like active" *ngIf="article?.favorited">favorite</mat-icon>
+          <mat-icon class="icon-like" *ngIf="!article?.favorited">favorite_border</mat-icon>{{ article?.favoritesCount
+          }}
+        </span>
       </div>
     </div>
     <div class="body-item">
       <p>{{ article?.title }}</p>
       <div [innerHTML]="article?.body | safe" class="status"></div>
-      <a
-        routerLink="/article/detail/{{ article?.slug }}"
-        matTooltip="Click to view detail article!"
-        >Read more...</a
-      >
+      <a routerLink="/article/detail/{{ article?.slug }}" matTooltip="Click to view detail article!">Read more...</a>
     </div>
   </div>
   <nav aria-label="Page navigation example" class="d-flex justify-content-center" *ngIf="articles.length">
@@ -44,7 +35,10 @@
         </a>
       </li>
       <ul class="pagination" *ngFor="let i of numberPage">
-        <li class="page-item"><a (click)="getPage(i)"  class="page-link">{{i}}</a></li>
+        <li class="page-item"><a (click)="getPage(i)" class="page-link">
+            {{i}}
+
+          </a></li>
       </ul>
       <li class="page-item">
         <a class="page-link" aria-label="Next" (click)="nextPage()">
@@ -53,9 +47,8 @@
         </a>
       </li>
     </ul>
-</nav>
+  </nav>
   <div class="d-flex justify-content-center" *ngIf="!articles.length">
     <p>There are no posts yet</p>
   </div>
 </div>
-
