@@ -49,8 +49,10 @@
     <div class="body-article" [innerHTML]="article?.body | safe"></div>
     <hr />
     <div class="comment">
-      <div *ngIf="!currentUser">
-        <p><a routerLink="/signin">Login </a>to comment!</p>
+      <div class="notLogin" *ngIf="!currentUser">
+        <p>Login to like and comment on this article!</p>
+        <button routerLink="/signin" class="btn btn-danger">Login</button>
+        <span>Don't have an account?<a routerLink="/signup"> Sign up</a></span>
       </div>
       <form class="d-flex justify-conent-beetween" *ngIf="currentUser">
         <img [src]="imgUser" alt="" />
