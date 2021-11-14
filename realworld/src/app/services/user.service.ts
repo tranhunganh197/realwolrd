@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { observable, Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +16,15 @@ export class UserService {
   currentToken: Observable<any> = this.tokenData.asObservable();
   dataParam:any = new ReplaySubject(1);
   currentParam:any = this.dataParam.asObservable();
+
+  getHttpOptions() {
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      }),
+    };
+  }
 
   signup(user: any) {
     return this.http
@@ -34,38 +43,20 @@ export class UserService {
   }
 
   settingsUser(user: any) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    return this.http.put('http://localhost:3000/api/user', user, httpOptions);
+    return this.http.put('http://localhost:3000/api/user', user, this.getHttpOptions());
   }
 
   getUser() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
     if (localStorage.getItem('token')) {
-      return this.http.get('http://localhost:3000/api/user', httpOptions);
+      return this.http.get('http://localhost:3000/api/user', this.getHttpOptions());
     } else {
       return this.currentUser;
     }
   }
 
   getProfile(username:string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
     return this.http.get(
-      `http://localhost:3000/api/profiles/` + username,httpOptions
+      `http://localhost:3000/api/profiles/` + username,this.getHttpOptions()
     );
   }
 
@@ -74,22 +65,10 @@ export class UserService {
   }
 
   follow(username:string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    return this.http.post(`http://localhost:3000/api/profiles/${username}/follow`,{},httpOptions)
+    return this.http.post(`http://localhost:3000/api/profiles/${username}/follow`,{},this.getHttpOptions())
   }
 
   unfollow(username:string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      }),
-    };
-    return this.http.delete(`http://localhost:3000/api/profiles/${username}/follow`,httpOptions)
+    return this.http.delete(`http://localhost:3000/api/profiles/${username}/follow`,this.getHttpOptions())
   }
 }

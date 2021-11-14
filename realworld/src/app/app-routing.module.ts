@@ -14,6 +14,7 @@ import { ArticleDetailComponent } from './article/article-detail/article-detail.
 import { ArticleEditComponent } from './article/article-edit/article-edit.component';
 import { ArticleNewComponent } from './article/article-new/article-new.component';
 import { NotfoundComponent } from './notfound/notfound.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home/global-feed/1', pathMatch: 'full' },
@@ -23,12 +24,12 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     children: [
-      { path: 'your-feed/:id', component: FeedYourComponent },
+      { path: 'your-feed/:id', component: FeedYourComponent, canActivate:[AuthGuard] },
       { path: 'global-feed/:id', component: FeedGlobalComponent },
       { path: 'tags/:id', component: FeedTagsComponent },
     ],
   },
-  { path: 'settings', component: SettingsComponent },
+  { path: 'settings', component: SettingsComponent, canActivate:[AuthGuard] },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
   {
@@ -37,12 +38,12 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'my-article', pathMatch: 'full' },
       { path: 'my-article', component: MyArticleComponent },
-      { path: 'my-favorite', component: MyFavoriteComponent },
+      { path: 'my-favorite', component: MyFavoriteComponent, canActivate:[AuthGuard] },
     ],
   },
   { path: 'article/detail/:id', component: ArticleDetailComponent },
-  { path: 'article/edit/:id', component: ArticleEditComponent },
-  { path: 'article/new', component: ArticleNewComponent },
+  { path: 'article/edit/:id', component: ArticleEditComponent, canActivate:[AuthGuard] }, 
+  { path: 'article/new', component: ArticleNewComponent,canActivate:[AuthGuard] },
   { path: '**', redirectTo: '/notfound' },
 ];
 
