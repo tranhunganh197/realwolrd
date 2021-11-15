@@ -2,7 +2,12 @@
   <h2>ACCOUNT SETTING</h2>
   <div class="infor">
     <div class="avatar-user">
-      <img src="{{ urlAvatar }}" alt="" (error)="handleError()" (load)="handleSuccess()" />
+      <img
+        src="{{ urlAvatar }}"
+        alt=""
+        (error)="handleError()"
+        (load)="handleSuccess()"
+      />
     </div>
     <div class="user-infor">
       <p class="name">{{ name }}</p>
@@ -14,37 +19,75 @@
       <div class="row">
         <div class="form-group col-xl-6 col-md-12">
           <label for="username" class="text">Username</label>
-          <input type="text" name="username" [(ngModel)]="name" disabled #nameControl="ngModel" class="form-control"
-            id="username" autocomplete="false" placeholder="Enter username..." />
+          <input
+            type="text"
+            name="username"
+            [(ngModel)]="name"
+            disabled
+            #nameControl="ngModel"
+            class="form-control"
+            id="username"
+            autocomplete="false"
+            placeholder="Enter username..."
+          />
         </div>
         <div class="form-group col-xl-6 col-md-12">
           <label for="urlProfile" class="text">URL Image</label>
-          <input type="text" name="urlAvatar" [(ngModel)]="urlAvatar" #urlControl="ngModel" class="form-control"
-            id="urlAvatar" autocomplete="false" placeholder="URL Profile Picture" />
+          <input
+            type="text"
+            name="urlAvatar"
+            [(ngModel)]="urlAvatar"
+            #urlControl="ngModel"
+            class="form-control"
+            id="urlAvatar"
+            autocomplete="false"
+            placeholder="URL Profile Picture"
+          />
           <p class="error" *ngIf="errorURL">URL is not exist!</p>
         </div>
         <div class="form-group col-xl-6 col-md-12">
           <label for="email" class="text">Email <span>*</span></label>
-          <input type="email" name="email" [(ngModel)]="email" #emailControl="ngModel" class="form-control" id="email"
-            autocomplete="false" placeholder="Email adress..." required />
+          <input
+            type="email"
+            name="email"
+            [(ngModel)]="email"
+            #emailControl="ngModel"
+            class="form-control"
+            id="email"
+            autocomplete="false"
+            placeholder="Email adress..."
+            required
+          />
         </div>
         <div class="form-group col-xl-6 col-md-12">
           <label for="password" class="text">Password <span>*</span></label>
-          <input type="password" name="password" [(ngModel)]="password" #passControl="ngModel" class="form-control"
-            id="password" autocomplete="false" placeholder="Password" required />
+          <input
+            type="password"
+            name="password"
+            [(ngModel)]="password"
+            #passControl="ngModel"
+            class="form-control"
+            id="password"
+            autocomplete="false"
+            placeholder="Password"
+          />
         </div>
       </div>
       <div class="form-group">
         <label for="bio" class="text">Bio about you</label>
-        <textarea class="form-control" id="bio" #bioControl="ngModel" name="bio" [(ngModel)]="bio" rows="3"></textarea>
+        <textarea
+          class="form-control"
+          id="bio"
+          #bioControl="ngModel"
+          name="bio"
+          [(ngModel)]="bio"
+          rows="3"
+        ></textarea>
       </div>
       <div class="message" *ngIf="message">{{ message }}</div>
       <div class="fr-submit col-12">
         <div class="form_submit">
-          <button type="submit" class="btn btn-publish " [disabled]="!settingForm.valid">
-            UPDATE SETTING
-          </button>
-
+          <button type="submit" class="btn btn-publish">UPDATE SETTING</button>
         </div>
       </div>
     </form>
