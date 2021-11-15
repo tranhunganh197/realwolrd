@@ -7,8 +7,6 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Article } from 'src/app/article.model';
 
-
-
 @Component({
   selector: 'app-article-new',
   templateUrl: './article-new.component.html',
@@ -20,15 +18,15 @@ export class ArticleNewComponent implements OnInit {
   about!: string;
   tags: string[] = [];
   article!: Article;
-  selectable:boolean = true;
-  removable:boolean = true;
-  addOnBlur:boolean = true;
+  selectable: boolean = true;
+  removable: boolean = true;
+  addOnBlur: boolean = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
   a =
     '<font face="Arial">sadasdasksaf</font><p><font face="Arial">adsandasdsaldkla</font></p><p><font face="Arial">&#273;&#226;nspd&#225;</font></p><p><font face="Arial">dsadasldsad,sa;</font></p>';
 
-  constructor(private articleService: ArticleService, private route: Router) { }
+  constructor(private articleService: ArticleService, private route: Router) {}
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
@@ -58,17 +56,18 @@ export class ArticleNewComponent implements OnInit {
 
   handleAddArticle(ngForm: NgForm) {
     if (ngForm.submitted) {
-      this.articleService.createArticle({
-        article: {
-          title: this.title,
-          description: this.title,
-          body: this.htmlContent,
-          tagList: this.tags,
-        },
-      }).subscribe((data: any) => {
-        console.log(data);
-        this.route.navigateByUrl(`article/detail/${data?.article?.slug}`)
-      })
+      this.articleService
+        .createArticle({
+          article: {
+            title: this.title,
+            description: this.title,
+            body: this.htmlContent,
+            tagList: this.tags,
+          },
+        })
+        .subscribe((data: any) => {
+          this.route.navigateByUrl(`article/detail/${data?.article?.slug}`);
+        });
     }
   }
 
@@ -92,5 +91,5 @@ export class ArticleNewComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

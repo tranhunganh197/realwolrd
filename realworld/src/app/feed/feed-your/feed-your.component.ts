@@ -21,34 +21,37 @@ export class FeedYourComponent implements OnInit {
     private articleService: ArticleService,
     private route: Router,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(paramYour => {
+    this.activatedRoute.params.subscribe((paramYour) => {
       this.articleService.dataYour.next(paramYour);
-    })
-    this.ob = this.articleService.getYourArticles(5, 0).subscribe((data: any) => {
-      this.dataArticles = data;
-      this.articles = this.dataArticles.articles;
-      for (let i = 0; i < this.dataArticles.articlesCount; i += 5) {
-        this.page++;
-        this.skipPage.push(i);
-        this.numberPage.push(this.page);
-      }
-      if (this.dataArticles) {
-        this.isLoading = false;
-      }
     });
+    this.ob = this.articleService
+      .getYourArticles(5, 0)
+      .subscribe((data: any) => {
+        this.dataArticles = data;
+        this.articles = this.dataArticles.articles;
+        for (let i = 0; i < this.dataArticles.articlesCount; i += 5) {
+          this.page++;
+          this.skipPage.push(i);
+          this.numberPage.push(this.page);
+        }
+        if (this.dataArticles) {
+          this.isLoading = false;
+        }
+      });
   }
 
   getPage(i: number) {
     this.currentPage = i;
-    this.articleService.getArticles(5, this.skipPage[i - 1]).subscribe((data: any) => {
-      console.log(data);
-      this.dataArticles = data;
-      this.articles = this.dataArticles.articles;
-      this.route.navigateByUrl(`/home/your-feed/${i}`)
-    })
+    this.articleService
+      .getArticles(5, this.skipPage[i - 1])
+      .subscribe((data: any) => {
+        this.dataArticles = data;
+        this.articles = this.dataArticles.articles;
+        this.route.navigateByUrl(`/home/your-feed/${i}`);
+      });
   }
 
   prePage() {
@@ -65,7 +68,7 @@ export class FeedYourComponent implements OnInit {
 
   toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
     if (!localStorage.getItem('token')) {
-      this.route.navigateByUrl('/signin')
+      this.route.navigateByUrl('/signin');
     }
     if (isFavoried) {
       this.articleService.unFavorite(slug).subscribe((data: any) => {
@@ -74,19 +77,16 @@ export class FeedYourComponent implements OnInit {
             this.articles[index] = data?.article;
           }
         });
-      })
+      });
     } else {
-      console.log(isFavoried)
+      console.log(isFavoried);
       this.articleService.favorite(slug).subscribe((data: any) => {
         this.articles.map((article: any, index: any) => {
           if (article?.slug === data?.article?.slug) {
             this.articles[index] = data?.article;
           }
         });
-      })
+      });
     }
   }
 }
-
-
-

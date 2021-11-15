@@ -18,14 +18,14 @@ export class ArticleDetailComponent implements OnInit {
   commentArr: any[] = [];
   imgUser!: string;
   isDelete: boolean = false;
-  isFollow!:boolean;
+  isFollow!: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private articleService: ArticleService,
     private router: Router
-  ) { }
+  ) {}
   @HostListener('document:click', ['$event'])
   clickOutside(e: any) {
     if (e.target.className == 'btn btn-outline-danger btn-delete') {
@@ -42,21 +42,26 @@ export class ArticleDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.id = params.get('id');
-      this.articleService.getArticle(this.id).subscribe((data: any) => {
-        this.article = data?.article;
-        this.userService.getProfile(this.article?.author?.username).subscribe((data:any) => {
-          this.isFollow = data?.profile?.following;
-        })
-        this.userService.getUser().subscribe((data) => {
-          this.currentUser = data;
-          this.imgUser = this.currentUser?.user?.image;
-          this.canModify =
-            this.currentUser?.user?.username === this.article?.author?.username;
-        });
-      },err => {
-        this.router.navigateByUrl('/notfound');
-        console.log(err);
-      });
+      this.articleService.getArticle(this.id).subscribe(
+        (data: any) => {
+          this.article = data?.article;
+          this.userService
+            .getProfile(this.article?.author?.username)
+            .subscribe((data: any) => {
+              this.isFollow = data?.profile?.following;
+            });
+          this.userService.getUser().subscribe((data) => {
+            this.currentUser = data;
+            this.imgUser = this.currentUser?.user?.image;
+            this.canModify =
+              this.currentUser?.user?.username ===
+              this.article?.author?.username;
+          });
+        },
+        (err) => {
+          this.router.navigateByUrl('/notfound');
+        }
+      );
     });
 
     this.articleService.getComments(this.id).subscribe((data: any) => {
@@ -82,7 +87,6 @@ export class ArticleDetailComponent implements OnInit {
         .subscribe((a: any) => {
           this.articleService.getComments(this.id).subscribe((data: any) => {
             this.commentArr = data?.comments;
-            console.log(this.commentArr);
             this.comment = '';
           });
         });
@@ -90,43 +94,45 @@ export class ArticleDetailComponent implements OnInit {
   }
 
   deleteComment(comment: any) {
-    this.articleService.deleteComment(this.id, comment)
-    this.commentArr = this.commentArr.filter(cmt => {
-      return comment?._id !== cmt?._id
-    })
+    this.articleService.deleteComment(this.id, comment);
+    this.commentArr = this.commentArr.filter((cmt) => {
+      return comment?._id !== cmt?._id;
+    });
   }
 
   follow() {
     if (!localStorage.getItem('token')) {
-      this.router.navigateByUrl('/signin')
+      this.router.navigateByUrl('/signin');
     }
-    this.userService.follow(this.article?.author?.username).subscribe((data:any) => {
-      this.isFollow = data?.profile?.following;
-    });
+    this.userService
+      .follow(this.article?.author?.username)
+      .subscribe((data: any) => {
+        this.isFollow = data?.profile?.following;
+      });
   }
 
   unfollow() {
     if (!localStorage.getItem('token')) {
-      this.router.navigateByUrl('/signin')
+      this.router.navigateByUrl('/signin');
     }
-    this.userService.unfollow(this.article?.author?.username).subscribe((data:any) => {
-      this.isFollow = data?.profile?.following;
-    })
+    this.userService
+      .unfollow(this.article?.author?.username)
+      .subscribe((data: any) => {
+        this.isFollow = data?.profile?.following;
+      });
   }
 
   toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
     if (!localStorage.getItem('token')) {
-      this.router.navigateByUrl('/signin')
+      this.router.navigateByUrl('/signin');
     }
     if (isFavoried) {
       this.articleService.unFavorite(slug).subscribe((data: any) => {
-        console.log("unlike",data)
-        this.article = data?.article
+        this.article = data?.article;
       });
     } else {
       this.articleService.favorite(slug).subscribe((data: any) => {
-        console.log("like",data)
-        this.article = data?.article
+        this.article = data?.article;
       });
     }
   }

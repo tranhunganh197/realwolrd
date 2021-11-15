@@ -10,14 +10,6 @@ export class AppComponent {
   hideBtn: boolean = false;
   @HostListener('window:scroll', [])
   onScroll(): void {
-    // if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    //   console.log('2');
-    // } else if (
-    //   window.innerHeight + window.scrollY <
-    //   document.body.offsetHeight
-    // ) {
-    //   console.log('1');
-    // }
     if (window.innerHeight > window.scrollY) {
       this.hideBtn = false;
     } else {

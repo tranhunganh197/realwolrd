@@ -49,7 +49,6 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
     this.articleService
       .getArticles(5, this.skipPage[i - 1])
       .subscribe((data: any) => {
-        console.log(data);
         this.dataArticles = data;
         this.articles = this.dataArticles.articles;
         this.route.navigateByUrl(`/home/global-feed/${i}`);
@@ -81,7 +80,6 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
         });
       });
     } else {
-      console.log(isFavoried);
       this.articleService.favorite(slug).subscribe((data: any) => {
         this.articles.map((article: any, index: any) => {
           if (article?.slug === data?.article?.slug) {

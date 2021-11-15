@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private toaster: Toaster
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     localStorage.removeItem('token');
@@ -37,52 +37,50 @@ export class SignupComponent implements OnInit {
   }
   handleSignup(ngForm: NgForm): void {
     if (!this.isNotMatch) {
-      this.userService.signup({
-        user: {
-          username: ngForm.value?.username,
-          email: ngForm.value?.email,
-          password: ngForm.value?.password,
-        },
-      }).subscribe((data: any) => {
-        console.log(data.user?.username);
-        localStorage.setItem('token', data.user?.token);
-        this.userService.setUser(data);
-        this.userService.userData.next(data.user?.username);
-        this.userService.tokenData.next(localStorage.getItem('token'));
-        this.toaster.open({
-          position: 'top-center',
-          duration: 2000,
-          caption: 'LOGIN SUCCESSFUL!',
-          component: CustomToastComponent,
-          type: 'success',
-        });
-        this.router.navigateByUrl('/');
-      }, err => {
-        this.toaster.open({
-          position: 'top-center',
-          duration: 3000,
-          caption: 'USER NAME OR EMAIL HAS BEEN TAKEN!',
-          component: CustomToastComponent,
-          type: 'danger',
-        });
-      });
-
+      this.userService
+        .signup({
+          user: {
+            username: ngForm.value?.username,
+            email: ngForm.value?.email,
+            password: ngForm.value?.password,
+          },
+        })
+        .subscribe(
+          (data: any) => {
+            localStorage.setItem('token', data.user?.token);
+            this.userService.setUser(data);
+            this.userService.userData.next(data.user?.username);
+            this.userService.tokenData.next(localStorage.getItem('token'));
+            this.toaster.open({
+              position: 'top-center',
+              duration: 2000,
+              caption: 'LOGIN SUCCESSFUL!',
+              component: CustomToastComponent,
+              type: 'success',
+            });
+            this.router.navigateByUrl('/');
+          },
+          (err) => {
+            this.toaster.open({
+              position: 'top-center',
+              duration: 3000,
+              caption: 'USER NAME OR EMAIL HAS BEEN TAKEN!',
+              component: CustomToastComponent,
+              type: 'danger',
+            });
+          }
+        );
     }
   }
 }
-
 
 @Component({
   template:
     '<div style="padding: 5px;">' +
     '<div class="custom-caption">{{toast.caption}}</div>' +
-
     '</div>',
   styleUrls: ['./signup.component.scss'],
-
-},
-
-)
+})
 export class CustomToastComponent {
   @Input()
   toast!: Toast;
