@@ -1,26 +1,45 @@
 <div class="item-article" *ngFor="let article of articles">
-    <div class="top-item">
-      <div class="avt-user">
-        <img src="{{ article?.author?.image }}" alt="" />
-      </div>
-      <div class="user-title">
-        <p routerLink="/profiles/{{ article?.author?.username }}">
-          {{ article?.author?.username }}
-        </p>
-        <p>{{ article?.createdAt | amTimeAgo }}</p>
-      </div>
-      <div class="btn-like">
-        <div class="btn-like" (click)="toggleLike(article?.favorited, article?.slug)">
-          <span>
-            <mat-icon class="icon-like active" *ngIf="article?.favorited">favorite</mat-icon>
-            <mat-icon class="icon-like" *ngIf="!article?.favorited">favorite_border</mat-icon>{{ article?.favoritesCount
-            }}
-          </span>
-        </div>
+  <div class="top-item">
+    <div class="avt-user">
+      <img src="{{ article?.author?.image }}" alt="" />
+    </div>
+    <div class="user-title">
+      <p routerLink="/profiles/{{ article?.author?.username }}">
+        {{ article?.author?.username }}
+      </p>
+      <p>{{ article?.createdAt | amTimeAgo }}</p>
+    </div>
+    <div class="btn-like">
+      <div
+        class="btn-like"
+        (click)="toggleLike(article?.favorited, article?.slug)"
+      >
+        <span>
+          <mat-icon class="icon-like active" *ngIf="article?.favorited"
+            >favorite</mat-icon
+          >
+          <mat-icon class="icon-like" *ngIf="!article?.favorited"
+            >favorite_border</mat-icon
+          >{{ article?.favoritesCount }}
+        </span>
       </div>
     </div>
-    <div class="body-item">
-      <div [innerHTML]="article?.body | safe" class="status"></div>
-      <a routerLink="/article/detail/{{ article?.slug }}">Read more...</a>
+  </div>
+  <div class="body-item">
+    <p>{{ article?.title }}</p>
+
+    <div [innerHTML]="article?.body | safe" class="status"></div>
+  </div>
+  <div class="footer-item">
+    <a
+      routerLink="/article/detail/{{ article?.slug }}"
+      matTooltip="Click to view detail article!"
+      >Read more...</a
+    >
+    <div class="list_tags">
+      <span class="tag_item" *ngFor="let tag of article?.tagList"
+        >#{{ tag }}</span
+      >
     </div>
+  </div>
 </div>

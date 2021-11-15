@@ -23,15 +23,27 @@
       </div>
     </div>
     <div class="body-item">
+      <p>{{ article?.title }}</p>
       <div [innerHTML]="article?.body | safe" class="status"></div>
+    </div>
+    <div class="footer-item">
       <a
         routerLink="/article/detail/{{ article?.slug }}"
         matTooltip="Click to view detail article!"
         >Read more...</a
       >
+      <div class="list_tags">
+        <span class="tag_item" *ngFor="let tag of article?.tagList"
+          >#{{ tag }}</span
+        >
+      </div>
     </div>
   </div>
-  <nav aria-label="Page navigation example" class="d-flex justify-content-center" *ngIf="articles.length">
+  <nav
+    aria-label="Page navigation example"
+    class="d-flex justify-content-center"
+    *ngIf="articles.length"
+  >
     <ul class="pagination">
       <li class="page-item">
         <a class="page-link" aria-label="Previous" (click)="prePage()">
@@ -40,7 +52,9 @@
         </a>
       </li>
       <ul class="pagination" *ngFor="let i of numberPage">
-        <li class="page-item"><a (click)="getPage(i)"  class="page-link">{{i}}</a></li>
+        <li class="page-item">
+          <a (click)="getPage(i)" class="page-link">{{ i }}</a>
+        </li>
       </ul>
       <li class="page-item">
         <a class="page-link" aria-label="Next" (click)="nextPage()">
@@ -49,7 +63,7 @@
         </a>
       </li>
     </ul>
-</nav>
+  </nav>
   <div class="d-flex justify-content-center" *ngIf="!articles.length">
     <p>There are no posts yet</p>
   </div>

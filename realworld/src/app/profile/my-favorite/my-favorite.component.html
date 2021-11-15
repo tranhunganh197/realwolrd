@@ -25,12 +25,19 @@
       </div>
       <div class="body-item">
         <p>{{ article?.title }}</p>
-        <p [innerHTML]="article?.body | safe"></p>
+        <div [innerHTML]="article?.body | safe" class="status"></div>
+      </div>
+      <div class="footer-item">
         <a
           routerLink="/article/detail/{{ article?.slug }}"
-          matTooltip="Click to view detail this article!"
+          matTooltip="Click to view detail article!"
           >Read more...</a
         >
+        <div class="list_tags">
+          <span class="tag_item" *ngFor="let tag of article?.tagList"
+            >#{{ tag }}</span
+          >
+        </div>
       </div>
     </div>
   </div>

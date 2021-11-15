@@ -74,7 +74,6 @@
     }
 }
 .body-item {
-    padding-bottom: 10px;
     p {
         width: 100%;
         font-weight: 500;
@@ -82,15 +81,33 @@
         margin: 0;
         word-wrap: break-word;
     }
+}
+.footer-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 5px;
     a {
         color: black;
         font-size: 12px;
         padding: 0 0 0 20px;
     }
+    .list_tags {
+        padding-right: 43px;
+        user-select: none;
+        .tag_item {
+            color: white;
+            font-size: 13px;
+            border-radius: 10px;
+            background-color: rgba(140, 70, 221, 0.8);
+            padding: 1px 8px;
+        }
+    }
 }
 .icon-like-red {
-    color:red;
- }
+    color: red;
+}
 .item-feed {
     padding: 10px;
 }
@@ -98,7 +115,7 @@
     padding: 20px;
     word-wrap: break-word;
     border-bottom: 1px solid rgba(219, 219, 219, 1);
-    max-height: 150px;
+    max-height: 130px;
     margin-bottom: 5px;
     overflow: hidden;
 }

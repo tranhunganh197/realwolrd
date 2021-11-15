@@ -22,16 +22,16 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
     private articleService: ArticleService,
     private route: Router,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
   ngOnDestroy(): void {
     this.ob.unsubscribe();
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(paramHome => {
+    this.activatedRoute.params.subscribe((paramHome) => {
       this.articleService?.dataHome.next(paramHome);
-    })
-    this.ob = this.articleService.getArticles(5, 0).subscribe((data:any) => {
+    });
+    this.ob = this.articleService.getArticles(5, 0).subscribe((data: any) => {
       this.dataArticles = data;
       this.articles = data?.articles;
       for (let i = 0; i < this.dataArticles?.articlesCount; i += 5) {
@@ -46,12 +46,14 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
   }
   getPage(i: number) {
     this.currentPage = i;
-    this.articleService.getArticles(5, this.skipPage[i - 1]).subscribe((data: any) => {
-      console.log(data);
-      this.dataArticles = data;
-      this.articles = this.dataArticles.articles;
-      this.route.navigateByUrl(`/home/global-feed/${i}`)
-    })
+    this.articleService
+      .getArticles(5, this.skipPage[i - 1])
+      .subscribe((data: any) => {
+        console.log(data);
+        this.dataArticles = data;
+        this.articles = this.dataArticles.articles;
+        this.route.navigateByUrl(`/home/global-feed/${i}`);
+      });
   }
 
   prePage() {
@@ -68,25 +70,25 @@ export class FeedGlobalComponent implements OnInit, OnDestroy {
 
   toggleLike(isFavoried: boolean | undefined, slug: string | undefined) {
     if (!localStorage.getItem('token')) {
-      this.route.navigateByUrl('/signin')
+      this.route.navigateByUrl('/signin');
     }
     if (isFavoried) {
-      this.articleService.unFavorite(slug).subscribe((data:any) => {
+      this.articleService.unFavorite(slug).subscribe((data: any) => {
         this.articles.map((article: Article, index: any) => {
           if (article?.slug === data?.article?.slug) {
             this.articles[index] = data?.article;
           }
         });
-      })
+      });
     } else {
-      console.log(isFavoried)
+      console.log(isFavoried);
       this.articleService.favorite(slug).subscribe((data: any) => {
         this.articles.map((article: any, index: any) => {
           if (article?.slug === data?.article?.slug) {
             this.articles[index] = data?.article;
           }
         });
-      })
+      });
     }
   }
 }
