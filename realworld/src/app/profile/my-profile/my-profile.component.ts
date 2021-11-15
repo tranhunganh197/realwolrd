@@ -34,6 +34,9 @@ export class MyProfileComponent implements OnInit {
             this.name = this.dataProfile?.profile?.username;
           }
         })
+      },err => {
+        this.route.navigateByUrl('/notfound');
+        console.log(err);
       })
     })
   }
