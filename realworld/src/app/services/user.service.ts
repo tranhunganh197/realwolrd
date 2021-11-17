@@ -14,8 +14,9 @@ export class UserService {
   currentUser: Observable<any> = this.userData.asObservable();
   tokenData: any = new ReplaySubject(1);
   currentToken: Observable<any> = this.tokenData.asObservable();
-  dataParam:any = new ReplaySubject(1);
-  currentParam:any = this.dataParam.asObservable();
+  dataParam: any = new ReplaySubject(1);
+  currentParam: any = this.dataParam.asObservable();
+  urlBase = 'http://localhost:3000'
 
   getHttpOptions() {
     return {
@@ -28,7 +29,7 @@ export class UserService {
 
   signup(user: any) {
     return this.http
-      .post('http://localhost:3000/api/users', user)
+      .post(`${this.urlBase}/api/users`, user)
 
   }
 
@@ -38,37 +39,37 @@ export class UserService {
 
   signin(user: any) {
     return this.http
-      .post('http://localhost:3000/api/users/login', user)
+      .post(`${this.urlBase}/api/users/login`, user)
 
   }
 
   settingsUser(user: any) {
-    return this.http.put('http://localhost:3000/api/user', user, this.getHttpOptions());
+    return this.http.put(`${this.urlBase}/api/user`, user, this.getHttpOptions());
   }
 
   getUser() {
     if (localStorage.getItem('token')) {
-      return this.http.get('http://localhost:3000/api/user', this.getHttpOptions());
+      return this.http.get(`${this.urlBase}/api/user`, this.getHttpOptions());
     } else {
       return this.currentUser;
     }
   }
 
-  getProfile(username:string) {
+  getProfile(username: string) {
     return this.http.get(
-      `http://localhost:3000/api/profiles/` + username,this.getHttpOptions()
+      `${this.urlBase}/api/profiles/` + username, this.getHttpOptions()
     );
   }
 
-  pushParam(param:string) {
+  pushParam(param: string) {
     this.dataParam.next(param);
   }
 
-  follow(username:string) {
-    return this.http.post(`http://localhost:3000/api/profiles/${username}/follow`,{},this.getHttpOptions())
+  follow(username: string) {
+    return this.http.post(`${this.urlBase}/api/profiles/${username}/follow`, {}, this.getHttpOptions())
   }
 
-  unfollow(username:string) {
-    return this.http.delete(`http://localhost:3000/api/profiles/${username}/follow`,this.getHttpOptions())
+  unfollow(username: string) {
+    return this.http.delete(`${this.urlBase}/api/profiles/${username}/follow`, this.getHttpOptions())
   }
 }
